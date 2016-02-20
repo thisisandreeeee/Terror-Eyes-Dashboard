@@ -62,10 +62,9 @@ def multipleAttacks(name):
 	value = round(float(df2[df2['gname']==name]['prob_mult']),3)
 	if value > 0.5:
 		print('MULTIPLE ATTACKS LIKELY with probability: '+str(value))
-		return True
 	else:
 		print('Multiple attacks are unlikely with probability: '+str(1-value))
-		return False
+	return value
 
 def typeFreqPlaceAttacked(name):
 	dic= pickle.load(open('dics/typeOfPlace','rb'))

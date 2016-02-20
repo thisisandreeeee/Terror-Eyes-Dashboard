@@ -24,7 +24,7 @@ def main():
 	return render_template('dashboard.html',
     	prediction=pred,
     	location=location,
-    	mult_bool=mult,
+    	mult=mult,
     	casualties_num=casualties,
     	weaptype=weaptype,
     	propdmg_prob=propdmg,
