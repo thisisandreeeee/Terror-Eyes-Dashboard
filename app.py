@@ -14,13 +14,15 @@ app = Flask(__name__)
 
 @app.route("/")
 def main():
+
 	pred = cp.predictTerroristGroup()
-	mult = cp.multipleAttacks(pred)
+	mult = float(cp.multipleAttacks(pred))*100
 	location = cp.typeFreqPlaceAttacked(pred)
 	casualties = cp.numOfCasualties(pred)
 	weaptype = cp.findTypeOfWeapon(pred)
-	propdmg = cp.findPropertyDamage(pred)
+	propdmg = float(cp.findPropertyDamage(pred))*100
 	nperps = cp.numPerps(pred)
+
 	return render_template('dashboard.html',
     	prediction=pred,
     	location=location,
