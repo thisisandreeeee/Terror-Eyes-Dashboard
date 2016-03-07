@@ -13,6 +13,7 @@ from TrainClassifier import labelHash, separate_column_by_type, process_nontext
 from scipy import stats
 from geopy.geocoders import Nominatim
 import operator
+from HTMLText import *
 
 """
 Input: Features of attack, from file input.csv
@@ -131,6 +132,7 @@ def findPropertyDamage(name):
 		print(name + 'will likely NOT have property damage with probability '+str(round(probability,3)))
 	return probability
 	
+ ##Modified for dashboard --> return data instead of plotting it in gmaps.
 def plotRiskyLocations(name,country):
 	if name == None:
 		return
@@ -173,9 +175,29 @@ def plotRiskyLocations(name,country):
 	data=[]
 	for entry in location:
 		data.append([entry.latitude,entry.longitude])
-	maps = gmaps.heatmap(data)
-	gmaps.display(maps)    
-
+  
+	convertGpsToHTML(data)
+ 
+#Writes GPS coordinates into a HTML file.
+def convertGpsToHTML(data):
+    #taken from HTMLText
+    global message1,message2
+    #new google.maps.LatLng(-6.9742784,109.122315),
+    FORMAT = 'new google.maps.LatLng('
+    addToHTML=''
+    for i in range(len(data)):
+        lat = data[i][0]
+        long = data[i][1]
+        add = FORMAT + str(lat) + ','+str(long)+'),'
+        addToHTML+=add
+        
+    addToHTML=addToHTML[:-1] #remove last comma
+    
+    f = open('heatmap.html','w')
+    f.write(message1+addToHTML+message2)
+    f.close()
+    
+        
 
 def crowdSourceInformation():
 	#Create twitter streamer class
