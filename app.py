@@ -14,15 +14,21 @@ app = Flask(__name__)
 
 @app.route("/")
 def main():
-    pred = cp.predictTerroristGroup()
-    mult = float(cp.multipleAttacks(pred))*100
-    location = cp.typeFreqPlaceAttacked(pred)
-    casualties = cp.numOfCasualties(pred)
-    weaptype = cp.findTypeOfWeapon(pred)
-    propdmg = float(cp.findPropertyDamage(pred))*100
-    nperps = cp.numPerps(pred)
+    return render_template('index.html')
+
+@app.route("/dashboard")
+def dashboard():
+
+    pred,location,mult,casualties,weaptype,propdmg,nperps="ISIS","Police",9.4,2.3,"Explosives",52.8,3
+    # pred = cp.predictTerroristGroup()
+    # mult = float(cp.multipleAttacks(pred))*100
+    # location = cp.typeFreqPlaceAttacked(pred)
+    # casualties = cp.numOfCasualties(pred)
+    # weaptype = cp.findTypeOfWeapon(pred)
+    # propdmg = float(cp.findPropertyDamage(pred))*100
+    # nperps = cp.numPerps(pred)
     #Need to find a way to replace 'singapore' with target input.
-    cp.plotRiskyLocations(location,'Singapore')
+    # cp.plotRiskyLocations(location,'Singapore')
     
     return render_template('dashboard.html',
     	prediction=pred,
@@ -31,8 +37,7 @@ def main():
     	casualties_num=casualties,
     	weaptype=weaptype,
     	propdmg_prob=propdmg,
-    	numperps_arr=nperps)
-     
+    	numperps_arr=nperps)    
 
 
 if __name__ == "__main__":

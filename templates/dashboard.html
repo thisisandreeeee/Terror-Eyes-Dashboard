@@ -72,12 +72,19 @@
 				<li><a href="#">Graph 2</a></li>
 			</ul>
 		</div>
-		<div class="bs-component">
-			<div class="jumbotron">
-				<h1>Placeholder for graph plots</h1>
-				<p>Lorem Ipsum Allahu Akbar</p>
-				<p>Yo thiru, go <a class="btn btn-primary btn-lg" href="https://bootswatch.com/flatly/">here</a> for the theme we're using.</p>
+		<div id="heatmap-container">
+			<div id="floating-panel">
+				<button onclick="toggleHeatmap()">Toggle Heatmap</button>
+				<button onclick="changeGradient()">Change gradient</button>
+				<button onclick="changeRadius()">Change radius</button>
+				<button onclick="changeOpacity()">Change opacity</button>
 			</div>
+			<div id="map"></div>
+
+			<!-- HEATMAP SCRIPTS -->
+			<script src="{{ url_for('static', filename='js/heatmap.js') }}"></script>
+			<script async defer
+			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCWC988fyeewFRL_xQPNaV0xHX3T_MKgRk&signed_in=true&libraries=visualization&callback=initMap"></script>
 		</div>
 	</div>
 </div>
