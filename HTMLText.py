@@ -51,17 +51,28 @@ message1 = """
 
 var map, heatmap;
 
+// Heatmap data: 500 Points
+
 function initMap() {
+var bounds = new google.maps.LatLngBounds();
+
   map = new google.maps.Map(document.getElementById('map'), {
     zoom: 3,
-    center: {lat: 0, lng: 0},
-    mapTypeId: google.maps.MapTypeId.SATELLITE
+    center: {lat:0,lng:0},
+    mapTypeId: google.maps.MapTypeId.ROADMAP
   });
-
+  function fitForBounds(data){
+	for (var i = 0; i < data.length; i++) {
+		bounds.extend(data[i]);
+	}
+}
+  fitForBounds(getPoints());
+  map.setCenter(bounds.getCenter());
   heatmap = new google.maps.visualization.HeatmapLayer({
     data: getPoints(),
     map: map
   });
+  map.fitBounds(bounds);
 }
 
 function toggleHeatmap() {
@@ -96,9 +107,8 @@ function changeOpacity() {
   heatmap.set('opacity', heatmap.get('opacity') ? null : 0.2);
 }
 
-// Heatmap data: 500 Points
 function getPoints() {
-  return ["""
+    return ["""
 
 message2="""
 ];

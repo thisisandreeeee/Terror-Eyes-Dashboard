@@ -22,7 +22,7 @@ def main():
     propdmg = float(cp.findPropertyDamage(pred))*100
     nperps = cp.numPerps(pred)
     #Need to find a way to replace 'singapore' with target input.
-    gps = cp.plotRiskyLocations(pred,'Singapore')
+    cp.plotRiskyLocations(location,'Singapore')
     
     return render_template('dashboard.html',
     	prediction=pred,
