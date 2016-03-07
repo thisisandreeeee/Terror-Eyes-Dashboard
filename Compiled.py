@@ -176,7 +176,7 @@ def plotRiskyLocations(name,country):
 	for entry in location:
 		data.append([entry.latitude,entry.longitude])
   
-	convertGpsToHTML(data)
+	return convertGpsToHTML(data)
  
 #Writes GPS coordinates into a HTML file.
 def convertGpsToHTML(data):
@@ -193,9 +193,7 @@ def convertGpsToHTML(data):
         
     addToHTML=addToHTML[:-1] #remove last comma
     
-    f = open('heatmap.html','w')
-    f.write(message1+addToHTML+message2)
-    f.close()
+    return addToHTML
     
         
 

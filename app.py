@@ -28,7 +28,7 @@ def dashboard():
     # propdmg = float(cp.findPropertyDamage(pred))*100
     # nperps = cp.numPerps(pred)
     #Need to find a way to replace 'singapore' with target input.
-    # cp.plotRiskyLocations(location,'Singapore')
+    gpsCoords = cp.plotRiskyLocations(location,'singapore')
     
     return render_template('dashboard.html',
     	prediction=pred,
@@ -37,7 +37,8 @@ def dashboard():
     	casualties_num=casualties,
     	weaptype=weaptype,
     	propdmg_prob=propdmg,
-    	numperps_arr=nperps)    
+    	numperps_arr=nperps,
+        gps_coords=gpsCoords)
 
 
 if __name__ == "__main__":
