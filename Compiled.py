@@ -19,25 +19,28 @@ from HTMLText import *
 Input: Features of attack, from file input.csv
 Output: [String] Terrorist Group name
 """
-def predictTerroristGroup():
-	def format_inputs():
-		df = pd.read_csv('input.csv')
-		nontext_df,text_df,labels = separate_column_by_type(df)
-		nontext_df = process_nontext(nontext_df)
-		return nontext_df
+country = None
 
-	def predict_group(features):
-		classifier = joblib.load('extratrees/Extra Trees.pkl')
-		pred = classifier.predict(features)[0]
-		res = "Unknown"
-		for entry in labelHash:
-			if labelHash[entry] == pred:
-				res = entry
-		return res
-		
-	prediction = predict_group(format_inputs())
-	print('Likely terrorist group: '+prediction)
-	return prediction
+def predictTerroristGroup():
+    def format_inputs():
+        df = pd.read_csv('input.csv')
+        global country
+        country = df['country_txt'][0]
+        nontext_df,text_df,labels = separate_column_by_type(df)
+        nontext_df = process_nontext(nontext_df)
+        return nontext_df
+        
+    def predict_group(features):
+        classifier = joblib.load('extratrees/Extra Trees.pkl')
+        pred = classifier.predict(features)[0]
+        res = "Unknown"
+        for entry in labelHash:
+            if labelHash[entry] == pred:
+                res = entry
+        return res
+    prediction = predict_group(format_inputs())
+    print('Likely terrorist group: '+prediction)
+    return prediction
 
 """
 Input: [String] Terrorist Group name
@@ -133,7 +136,7 @@ def findPropertyDamage(name):
 	return probability
 	
  ##Modified for dashboard --> return data instead of plotting it in gmaps.
-def plotRiskyLocations(name,country):
+def plotRiskyLocations(name):
 	if name == None:
 		return
 	#Consider saving this to pickle file.
@@ -256,7 +259,6 @@ def crowdSourceInformation():
 
 def run():
 	print('***Welcome to the Integrated Terrorism Response Solution done by Andre, Eddy, and Thiru***')
-	country = input("What is your Country?: ")
 	print("\n")
 	predictedGroup = predictTerroristGroup()
 	location = printTerroristDetails(predictedGroup)
