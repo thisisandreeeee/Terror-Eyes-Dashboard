@@ -19,15 +19,15 @@ def main():
 @app.route("/dashboard")
 def dashboard():
 
-    pred,location,mult,casualties,weaptype,propdmg,nperps="ISIS","Police",9.4,2.3,"Explosives",52.8,3
+ #   pred,location,mult,casualties,weaptype,propdmg,nperps="ISIS","Police",9.4,2.3,"Explosives",52.8,3
     pred = cp.predictTerroristGroup()
-    # mult = float(cp.multipleAttacks(pred))*100
-    # location = cp.typeFreqPlaceAttacked(pred)
-    # casualties = cp.numOfCasualties(pred)
-    # weaptype = cp.findTypeOfWeapon(pred)
-    # propdmg = float(cp.findPropertyDamage(pred))*100
-    # nperps = cp.numPerps(pred)
-    # cp.plotRiskyLocations(location)
+    mult = float(cp.multipleAttacks(pred))*100
+    location = cp.typeFreqPlaceAttacked(pred)
+    casualties = cp.numOfCasualties(pred)
+    weaptype = cp.findTypeOfWeapon(pred)
+    propdmg = float(cp.findPropertyDamage(pred))*100
+    nperps = cp.numPerps(pred)
+    cp.plotRiskyLocations(location)
     
     return render_template('dashboard.html',
     	prediction=pred,
@@ -40,7 +40,7 @@ def dashboard():
 
 @app.route("/heatmap")
 def heatmap():
-    return render_template('heatmap.html')
+    return render_template('predictionHeatmap.html')
 
 
 if __name__ == "__main__":
