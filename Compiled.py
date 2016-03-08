@@ -134,7 +134,7 @@ def findPropertyDamage(name):
 		print(name +' will likely have property damage of estimated < $1 Millon with probability '+str(round(probability,3)))
 	else:
 		print(name + 'will likely NOT have property damage with probability '+str(round(probability,3)))
-	return round(probability,3)
+	return round(probability,2)
 	
  ##Modified for dashboard --> return data instead of plotting it in gmaps.
 def plotRiskyLocations(name):
