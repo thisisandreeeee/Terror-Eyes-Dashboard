@@ -3,7 +3,7 @@ from flask import Flask, render_template, url_for
 #internal libraries
 import itertools,csv,sys,os,pickle
 #External libraries
-import gmaps,tweepy,wgetter,numpy as np,pandas as pd
+import tweepy,wgetter,numpy as np,pandas as pd
 from sklearn.externals import joblib
 from TrainClassifier import labelHash, separate_column_by_type, process_nontext
 import Compiled as cp
