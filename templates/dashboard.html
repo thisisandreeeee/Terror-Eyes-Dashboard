@@ -1,12 +1,12 @@
 {% extends "layout.html" %}
 {% block body %}
-<div class="col-md-4 info-container gridlines">
-	<div class="gridlines" style="margin-bottom:25px">CSV file upload here</div>
+<div class="col-md-4 info-container">
+	<div style="margin-bottom:25px; text-align:center; color:red;"><b>CSV file upload here</b></div>
 	<div class="row">
-		<div class="col-md-4 col-sm-4 gridlines" style="text-align:center;">
+		<div class="col-md-4 col-sm-4" style="text-align:center;">
 			<img src="{{ url_for('static', filename='images/culprit.svg') }}" />
 		</div>
-		<div class="col-md-8 col-sm-8 gridlines">
+		<div class="col-md-8 col-sm-8">
 			<p>The most likely perpetrator is</p>
 			<h3>{{ prediction }}</h3>
 		</div>
@@ -16,7 +16,7 @@
 		<h1>Attack Statistics</h1>
 	</div>
 	<div>
-  		<table class="table">
+		<table class="table">
 			<tbody>
 				<tr>
 					<td>Probability of Multiple Attacks</td>
@@ -40,11 +40,34 @@
 	
 			</tbody>
 		</table>
-
-
+	</div>
+	<div class="info-header">
+		<h1>Plot Settings</h1>
+	</div>
+	<div class="row">
+		<div class="col-md-4 toggle-container">
+			<h4>Locations</h4>
+			<div class="toggle-button">
+    			<button></button>
+    		</div>
+    	</div>
+    	<div class="col-md-4 toggle-container">
+    		<h4>Twitter</h4>
+			<div class="toggle-button">
+    			<button></button>
+    		</div>
+    	</div>
+    	<div class="col-md-4 toggle-container">
+    		<h4>Both</h4>
+			<div class="toggle-button">
+    			<button></button>
+    		</div>
+    	</div>
+    </div>
+</div>
 	</div>
 </div>
 <div class="col-md-8 gmaps-container">
-	<!-- <iframe width="100%" height="100%" scrolling="no" frameborder="0" src="/heatmap"></iframe> -->
+	<iframe width="100%" height="100%" scrolling="no" frameborder="0" src="/heatmap"></iframe>
 </div>
 {% endblock %}

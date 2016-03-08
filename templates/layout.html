@@ -14,20 +14,21 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
 	<script src="{{ url_for('static', filename='js/navbar.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/toggle.js') }}"></script>
 
 </head>
 <body>
 	<div id="navbar-wrap">
 		<nav id="navbar">
 			<ul>
-				<li id="menuitem"><a href="/">Home<a/></li>
-				<li id="menuitem"><a href="/">Visualize<a/></li>
-				<li id="menuitem"><a href="/dashboard">Dashboard<a/></li>
+				<li id="menuitem"><a href="/">Home</a></li>
+				<li id="menuitem"><a href="/">Visualize</a></li>
+				<li id="menuitem"><a href="/dashboard">Dashboard</a></li>
 			</ul>
 		</nav>
 	</div>
 
-	<div id="wrapper">
+	<div id="wrapper gridlines">
 		{% block body %}{% endblock %}
 	</div>
 </body>
