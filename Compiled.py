@@ -16,6 +16,7 @@ import operator
 from HTMLText import *
 
 country = None
+heatmapVariable=None
 """
 Input: Features of attack, from file input.csv
 Output: [String] Terrorist Group name
@@ -179,13 +180,16 @@ def plotRiskyLocations(name):
 	data=[]
 	for entry in location:
 		data.append([entry.latitude,entry.longitude])
-  
-	convertGpsToHTML(data)
+	convertGpsToHTML(data,0)
  
 #Writes GPS coordinates into a HTML file.
-def convertGpsToHTML(data):
+"""
+ Input: List of lists of GPS coordinates.
+ Output: HTML file of the heatmap.
+"""
+def convertGpsToHTML(data,state):
     #taken from HTMLText
-    global message1,message2
+    global initial1,initial2,twitter1,endTwitter,heatmapVariable
     #new google.maps.LatLng(-6.9742784,109.122315),
     FORMAT = 'new google.maps.LatLng('
     addToHTML=''
@@ -194,14 +198,19 @@ def convertGpsToHTML(data):
         long = data[i][1]
         add = FORMAT + str(lat) + ','+str(long)+'),'
         addToHTML+=add
-        
     addToHTML=addToHTML[:-1] #remove last comma
+    if state==0:
+        heatmapVariable = initial1+addToHTML+twitter1 #set var for future rewrites to add twitter
+        f = open('templates/predictionHeatmap.html','w')
+        f.write(initial1+addToHTML+initial2) #INITIAL HEATMAP WITH NO TWITTER POINTS
+        f.close()
+    elif state == 1:
+        f = open('templates/predictionHeatmap.html','w')
+        f.write(heatmapVariable+addToHTML+endTwitter) #INITIAL HEATMAP WITH NO TWITTER POINTS
+        f.close()
+    else:
+        print('That is not a valid state')
     
-    f = open('templates/heatmap.html','w')
-    f.write(message1+addToHTML+message2)
-    f.close()
-    
-        
 
 def crowdSourceInformation():
 	#Create twitter streamer class
