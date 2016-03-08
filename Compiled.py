@@ -88,7 +88,7 @@ def numOfCasualties(name):
 		print("Estimated number of casualties: " + str(round(dic[name],3)))
 	else:
 		print('Number of Casualties Unknown')
-	return dic[name]
+	return round(dic[name],2)
 
 def conditionalPlaceAttacked(name):
 	##TO BE DONE WHEN I CAN BE BOTHERED TO
@@ -134,7 +134,7 @@ def findPropertyDamage(name):
 		print(name +' will likely have property damage of estimated < $1 Millon with probability '+str(round(probability,3)))
 	else:
 		print(name + 'will likely NOT have property damage with probability '+str(round(probability,3)))
-	return probability
+	return round(probability,3)
 	
  ##Modified for dashboard --> return data instead of plotting it in gmaps.
 def plotRiskyLocations(name):
