@@ -27,7 +27,7 @@ def dashboard():
     # weaptype = cp.findTypeOfWeapon(pred)
     # propdmg = float(cp.findPropertyDamage(pred))*100
     # nperps = cp.numPerps(pred)
-    cp.plotRiskyLocations(location)
+    # cp.plotRiskyLocations(location)
     
     return render_template('dashboard.html',
     	prediction=pred,

@@ -198,7 +198,7 @@ def convertGpsToHTML(data):
     addToHTML=addToHTML[:-1] #remove last comma
     
     f = open('templates/heatmap.html','w')
-    f.write("test"+message1+addToHTML+message2)
+    f.write(message1+addToHTML+message2)
     f.close()
     
         

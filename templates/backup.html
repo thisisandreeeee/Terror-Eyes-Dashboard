@@ -1,0 +1,77 @@
+<div class="row" style="margin-top:50px;">
+	<div class="col-md-6">
+		<div class="bs-component">
+			<div class="alert alert-success">
+				<p>The most likely perpetrator behind the attack is:</p>
+				<h1>{{ prediction }}</h1>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-3">
+		<div class="panel panel-success">
+			<div class="panel-heading">
+				<h3 class="panel-title">Probability of Multiple Attack</h3>
+			</div>
+			<div class="panel-body">
+				<h1>{{ mult }}%</h1>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-3">
+		<div class="panel panel-success">
+			<div class="panel-heading">
+				<h3 class="panel-title">Most Likely to be Attacked</h3>
+			</div>
+			<div class="panel-body">
+				<h1>{{ location }}</h1>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-4">
+		<div class="panel panel-success">
+			<div class="panel-heading">
+				<h3 class="panel-title">Estimated casualty count</h3>
+			</div>
+			<div class="panel-body">
+				<h1>{{ casualties_num }}</h1>
+			</div>
+		</div>
+		<div class="panel panel-success">
+			<div class="panel-heading">
+				<h3 class="panel-title">Preferred Choice of Weapon</h3>
+			</div>
+			<div class="panel-body">
+				<h1>{{ weaptype }}</h1>
+			</div>
+		</div>
+		<div class="panel panel-success">
+			<div class="panel-heading">
+				<h3 class="panel-title">Probability that Property Damage Exceeds $1 million</h3>
+			</div>
+			<div class="panel-body">
+				<h1>{{ propdmg_prob }}</h1>
+			</div>
+		</div>
+		<div class="panel panel-success">
+			<div class="panel-heading">
+				<h3 class="panel-title">Expected Number of Perpetrators</h3>
+			</div>
+			<div class="panel-body">
+				<h1>{{ numperps_arr }}</h1>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-8">
+		<div class="bs-component">
+			<ul class="pager">
+				<li><a href="#">Graph 1</a></li>
+				<li><a href="#">Graph 2</a></li>
+			</ul>
+		</div>
+		<div id="heatmap-container">
+			<iframe width="100%" height="100%" scrolling="no" frameborder="0" src="/heatmap"></iframe>
+		</div>
+	</div>
+</div>
