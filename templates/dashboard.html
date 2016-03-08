@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% block body %}
-<div class="col-md-4 info-container">
+<div class="col-md-4 info-container gridlines">
 	<div class="gridlines" style="margin-bottom:25px">CSV file upload here</div>
 	<div class="row">
 		<div class="col-md-4 col-sm-4 gridlines" style="text-align:center;">
@@ -21,10 +21,27 @@
 				<tr>
 					<td>Probability of Multiple Attacks</td>
 					<td>{{ mult }}%</td>
+				</tr><tr>
+					<td>Most Likely Place to be Attacked Next</td>
+					<td>{{ location }}</td>
+				</tr><tr>
+					<td>Estimated Casualty Count</td>
+					<td>{{ casualties_num }}</td>
+				</tr><tr>
+					<td>Preferred Choice of Weapon</td>
+					<td>{{ weaptype }}</td>
+				</tr><tr>
+					<td>Probability of Property Damage > $1m</td>
+					<td>{{ propdmg_prob }}</td>
+				</tr><tr>
+					<td>Expected Number of Perpetrators</td>
+					<td>{{ numperps }}</td>
 				</tr>
 	
 			</tbody>
 		</table>
+
+
 	</div>
 </div>
 <div class="col-md-8 gmaps-container">

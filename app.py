@@ -36,7 +36,7 @@ def dashboard():
     	casualties_num=casualties,
     	weaptype=weaptype,
     	propdmg_prob=propdmg,
-    	numperps_arr=nperps)
+    	numperps=nperps)
 
 @app.route("/heatmap")
 def heatmap():
