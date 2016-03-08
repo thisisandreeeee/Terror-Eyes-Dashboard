@@ -7,35 +7,35 @@
 			<img src="{{ url_for('static', filename='images/culprit.svg') }}" />
 		</div>
 		<div class="col-md-8 col-sm-8">
-			<p>The most likely perpetrator is</p>
-			<h3>{{ prediction }}</h3>
+			<p style="color:white" >The most likely perpetrator is</p>
+			<h3 style="color:white">{{ prediction }}</h3>
 		</div>
 	</div>
 	<div class="clear"></div>
 	<div class="info-header">
-		<h1>Attack Statistics</h1>
+		<h1 style="color:white">Attack Statistics</h1>
 	</div>
 	<div>
 		<table class="table">
 			<tbody>
 				<tr>
-					<td>Probability of Multiple Attacks</td>
-					<td>{{ mult }}%</td>
+					<td style="color:white">Probability of Multiple Attacks</td>
+					<td style="color:white">{{ mult }}%</td>
 				</tr><tr>
-					<td>Most Likely Place to be Attacked Next</td>
-					<td>{{ location }}</td>
+					<td style="color:white">Most Likely Place to be Attacked Next</td>
+					<td style="color:white">{{ location }}</td>
 				</tr><tr>
-					<td>Estimated Casualty Count</td>
-					<td>{{ casualties_num }}</td>
+					<td style="color:white">Estimated Casualty Count</td>
+					<td style="color:white">{{ casualties_num }}</td>
 				</tr><tr>
-					<td>Preferred Choice of Weapon</td>
-					<td>{{ weaptype }}</td>
+					<td style="color:white">Preferred Choice of Weapon</td>
+					<td style="color:white">{{ weaptype }}</td>
 				</tr><tr>
-					<td>Probability of Property Damage > $1m</td>
-					<td>{{ propdmg_prob }}</td>
+					<td style="color:white">Probability of Property Damage > $1m</td>
+					<td style="color:white">{{ propdmg_prob }}</td>
 				</tr><tr>
-					<td>Expected Number of Perpetrators</td>
-					<td>{{ numperps }}</td>
+					<td style="color:white">Expected Number of Perpetrators</td>
+					<td style="color:white">{{ numperps }}</td>
 				</tr>
 	
 			</tbody>
