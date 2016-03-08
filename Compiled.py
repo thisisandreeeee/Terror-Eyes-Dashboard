@@ -7,7 +7,7 @@ Created on Wed Feb 17 10:25:43 2016
 #internal libraries
 import itertools,csv,sys,os,pickle
 #External libraries
-import gmaps,tweepy,wgetter,numpy as np,pandas as pd
+import tweepy,wgetter,numpy as np,pandas as pd
 from sklearn.externals import joblib
 from TrainClassifier import labelHash, separate_column_by_type, process_nontext
 from scipy import stats
