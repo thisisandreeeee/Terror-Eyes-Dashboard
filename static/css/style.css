@@ -27,6 +27,7 @@ html, body {
 	height: 100vh;
 	padding-left: 0;
 	padding-right: 0;
+	border-right:2px solid #FF9900;
 }
 
 .info-container * {
@@ -89,5 +90,23 @@ html, body {
 	box-shadow: 0 0 4px rgba(0,0,0,0.1); }
 
 .toggle-container {
+	text-align:center;
+}
+
+#cover-img {
+	width:100%;height:auto;
+	border-bottom: 4px solid #FF9900;
+	margin: 0;
+}
+
+.landing-body {
+	background-color: #434343;
+	color: white;
+	margin: 0;
+	padding: 0;
+}
+
+.content {
+	margin: 2em 8em 0 8em;
 	text-align:center;
 }
