@@ -23,11 +23,14 @@ html, body {
 }
 
 .info-container {
-	color: white;
 	background-color: #434343;
 	height: 100vh;
 	padding-left: 0;
 	padding-right: 0;
+}
+
+.info-container * {
+	color: white;
 }
 
 .gridlines {

@@ -7,35 +7,35 @@
 			<img src="{{ url_for('static', filename='images/culprit.svg') }}" />
 		</div>
 		<div class="col-md-8 col-sm-8">
-			<p style="color:white" >The most likely perpetrator is</p>
-			<h3 style="color:white">{{ prediction }}</h3>
+			<p>The most likely perpetrator is</p>
+			<h3>{{ prediction }}</h3>
 		</div>
 	</div>
 	<div class="clear"></div>
 	<div class="info-header">
-		<h1 style="color:white">Attack Statistics</h1>
+		<h1>Attack Statistics</h1>
 	</div>
 	<div>
 		<table class="table">
 			<tbody>
 				<tr>
-					<td style="color:white">Probability of Multiple Attacks</td>
-					<td style="color:white">{{ mult }}%</td>
+					<td>Probability of Multiple Attacks</td>
+					<td>{{ mult }}%</td>
 				</tr><tr>
-					<td style="color:white">Most Likely Place to be Attacked Next</td>
-					<td style="color:white">{{ location }}</td>
+					<td>Most Likely Place to be Attacked Next</td>
+					<td>{{ location }}</td>
 				</tr><tr>
-					<td style="color:white">Estimated Casualty Count</td>
-					<td style="color:white">{{ casualties_num }}</td>
+					<td>Estimated Casualty Count</td>
+					<td>{{ casualties_num }}</td>
 				</tr><tr>
-					<td style="color:white">Preferred Choice of Weapon</td>
-					<td style="color:white">{{ weaptype }}</td>
+					<td>Preferred Choice of Weapon</td>
+					<td>{{ weaptype }}</td>
 				</tr><tr>
-					<td style="color:white">Probability of Property Damage > $1m</td>
-					<td style="color:white">{{ propdmg_prob }}</td>
+					<td>Probability of Property Damage > $1m</td>
+					<td>{{ propdmg_prob }}</td>
 				</tr><tr>
-					<td style="color:white">Expected Number of Perpetrators</td>
-					<td style="color:white">{{ numperps }}</td>
+					<td>Expected Number of Perpetrators</td>
+					<td>{{ numperps }}</td>
 				</tr>
 	
 			</tbody>
@@ -45,27 +45,19 @@
 		<h1>Plot Settings</h1>
 	</div>
 	<div class="row">
-		<div class="col-md-4 toggle-container">
-			<h4>Locations</h4>
+		<div class="col-md-6 toggle-container">
+			Location<br />
 			<div class="toggle-button">
     			<button></button>
     		</div>
     	</div>
-    	<div class="col-md-4 toggle-container">
-    		<h4>Twitter</h4>
-			<div class="toggle-button">
-    			<button></button>
-    		</div>
-    	</div>
-    	<div class="col-md-4 toggle-container">
-    		<h4>Both</h4>
+    	<div class="col-md-6 toggle-container">
+    		Twitter<br />
 			<div class="toggle-button">
     			<button></button>
     		</div>
     	</div>
     </div>
-</div>
-	</div>
 </div>
 <div class="col-md-8 gmaps-container">
 	<iframe width="100%" height="100%" scrolling="no" frameborder="0" src="/heatmap"></iframe>
