@@ -1,0 +1,51 @@
+.twisted h1 {
+  color: white;
+  font-family: 'Megrim';
+}
+
+.cover {
+  background: #434343;
+  background-size: cover;
+  display: table;
+  width: 100%;
+  height: 100%; /* For at least Firefox */
+  min-height: 100%;
+  text-align: center;
+}
+
+.cover-inner {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.inner {
+  padding: 30px;
+}
+
+header {
+  margin: 0 auto;
+  max-width: 800px;
+}
+
+.twisted{
+  /*  transform  */
+  transform: skew(-16deg, 1deg) ;
+  -webkit-transform: skew(-16deg, 1deg) ;
+  -moz-transform: skew(-16deg, 1deg) ;
+  -o-transform: skew(-16deg, 1deg) ;
+  -ms-transform: skew(-16deg, 1deg) ;
+}
+
+/* Fonts */
+.headline {
+  font: 500 100px 'Megrim';
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* Lines  */
+.border-line {
+  border-top: 2px solid white;
+  margin: 15px auto;
+  max-width: 350px;
+}
