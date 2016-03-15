@@ -1,7 +1,12 @@
 {% extends "layout.html" %}
 {% block body %}
 <div class="col-md-4 info-container">
-	<div style="margin-bottom:25px; text-align:center; color:red;"><b>CSV file upload here</b></div>
+	<div style="margin-bottom:25px; text-align:center; color:red;"><b></b>
+    <span class="file-input btn btn-primary btn-file">
+            Upload CSV File..&hellip; <input type="file" accept=".csv" multiple>
+    </span>
+    </div>
+
 	<div class="row">
 		<div class="col-md-4 col-sm-4" style="text-align:center;">
 			<img src="{{ url_for('static', filename='images/culprit.svg') }}" />
