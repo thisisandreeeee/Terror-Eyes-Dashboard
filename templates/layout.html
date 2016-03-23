@@ -16,7 +16,7 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
 	<script src="{{ url_for('static', filename='js/navbar.js') }}"></script>
-	<script src="{{ url_for('static', filename='js/toggle.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/custom.js') }}"></script>
     <script src="{{ url_for('static', filename='js/input.js') }}"></script>
 </head>
 <body>
@@ -25,7 +25,7 @@
 			<ul>
 				<li id="menuitem"><a href="/">Home</a></li>
 				<li id="menuitem"><a href="/">Visualize</a></li>
-				<li id="menuitem"><a href="/dashboard">Dashboard</a></li>
+				<li id="menuitem"><a href="/dashboard" id="modal-display">Dashboard</a></li>
 			</ul>
 		</nav>
 	</div>
@@ -33,5 +33,6 @@
 	<div id="wrapper">
 		{% block body %}{% endblock %}
 	</div>
+	<div class="loading-modal"></div>
 </body>
 </html>

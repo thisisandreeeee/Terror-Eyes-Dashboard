@@ -33,10 +33,12 @@ def predictTerroristGroup():
 	def predict_group(features):
 		classifier = joblib.load('extratrees/Extra Trees.pkl')
 		pred = classifier.predict(features)[0]
+		pred_proba = classifier.predict_proba(features)[0]
 		res = "Unknown"
 		for entry in labelHash:
 			if labelHash[entry] == pred:
 				res = entry
+		print(pred_proba)
 		return res
 		
 	prediction = predict_group(format_inputs())
