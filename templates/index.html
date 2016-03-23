@@ -1,22 +1,52 @@
 {% extends "layout.html" %}
 {% block body %}
 <img src="{{ url_for('static', filename='images/background.jpg') }}" id="cover-img" />
-<div class="landing-body">
-	<div class="clear"></div>
+<div class="clear"></div>
+<div class="problem-body" style="border:2px solid #434343;">
 	<div class="content">
 		
-		<div class="cover">
-			<div class="cover-inner">
-				<header class="inner">
-					<div class="twisted">
-						<div class="border-line"></div>
-						<h1 class="headline">coming soon</h1>
-						<div class="border-line">
-						</div>
-					</div>
-				</header>
-			</div>
+		<div class="section-title">
+			<h1>The Problem</h1>
 		</div>
+		<div class="col-md-3 intro-block gridlines">
+			hello world
+		</div>
+		<div class="col-md-3 intro-block gridlines">
+			hello world
+		</div>
+		<div class="col-md-3 intro-block gridlines">
+			hello world
+		</div>
+		<div class="col-md-3 intro-block gridlines">
+			hello world
+		</div>
+		<div>test </div>
+		
 	</div>
+</div>
+<div class="solution-body">
+	<div class="content">
+		
+		<div class="section-title">
+			<h1>Our Solution</h1>
+		</div>
+		<div class="col-md-3 intro-block gridlines">
+			hello world
+		</div>
+		<div class="col-md-3 intro-block gridlines">
+			hello world
+		</div>
+		<div class="col-md-3 intro-block gridlines">
+			hello world
+		</div>
+		<div class="col-md-3 intro-block gridlines">
+			hello world
+		</div>
+		<div> test bug </div>
+		
+	</div>
+</div>
+<div class="cta-body">
+	<a href="#" class="cta-button">Let Me Try!</a>
 </div>
 {% endblock %}

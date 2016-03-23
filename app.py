@@ -27,6 +27,8 @@ def dashboard():
     weaptype = cp.findTypeOfWeapon(pred)
     propdmg = float(cp.findPropertyDamage(pred))*100
     nperps = cp.numPerps(pred)
+    if not nperps:
+        nperps = "Unknown"
     cp.plotRiskyLocations(location)
     
     return render_template('dashboard.html',
@@ -42,6 +44,9 @@ def dashboard():
 def heatmap():
     return render_template('predictionHeatmap.html')
 
+@app.route("/visualize")
+def visualize():
+    return render_template('visualizations.html')
 
 if __name__ == "__main__":
 	app.run(debug=True)
