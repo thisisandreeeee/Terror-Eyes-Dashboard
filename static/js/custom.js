@@ -4,7 +4,10 @@ $(document).on('click', '.toggle-button', function() {
 
 $(document).ready(function() {
     $body = $("body");
-    $("#modal-display").click(function(e) {
+    $("#modal-display").click(function() {
         $body.addClass("loading");
+    });
+    $(".cta-button").click(function() {
+    	$body.addClass("loading");
     });
 });
