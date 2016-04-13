@@ -16,8 +16,8 @@ labelHash = {}
 
 algo_list = [
 	# ("Extra Trees", ExtraTreesClassifier(n_estimators=100))
-	("Random Forest", RandomForestClassifier(n_estimators=500)),
-	("Extra Trees", ExtraTreesClassifier(n_estimators=300)),
+	("Random Forest", RandomForestClassifier(max_depth=10,n_jobs=8,n_estimators=400)),
+	("Extra Trees", ExtraTreesClassifier(max_depth=10,n_jobs=8,n_estimators=300)),
 	# ("Logistic Regression", LogisticRegression()),
 	# ("SGD Classifier",SGDClassifier()),
 	("KNeighbors",KNeighborsClassifier())
@@ -30,7 +30,7 @@ def run():
 	warnings.filterwarnings("ignore")
 	features,labels = separate_column_by_type(gtd)
 	features = process_nontext(features)
-	# classifiers = train_classifier(algo_list,features,labels)
+	classifiers = train_classifier(algo_list,features,labels)
 	# compare_classifiers(classifiers,features,labels,folds=5)
 	# ensemble = build_ensemble(features,labels)
 	ensemble(algo_list,features,labels,False)
@@ -53,7 +53,7 @@ def ensemble(clfs,features,labels,prev_save):
 	print('Beginnning ensemble')
 	dataset = df.drop('target',axis=1)
 	target = df['target']
-	clf= RandomForestClassifier(n_jobs=8,max_depth=9,n_estimators=100)
+	clf= RandomForestClassifier(n_jobs=8,max_depth=10,n_estimators=100)
 	preds = cross_val_predict(clf,dataset,target,cv=5)
 	score = accuracy_score(target,preds)
 	print('Ensemble accuracy is '+str(score) +'%')
@@ -103,7 +103,7 @@ def separate_column_by_type(df):
 # Description: removes undesired columns as specified by the user and separates text-based data
 # Output: non-text and text based dataframes
 def remove_unwanted_columns(df):
-	unwantedColumns = ['approxdate','resolution','alternative','country','latitude','longitude','specificity','location','attacktype2','attacktype3','attacktype1_txt','attacktype2_txt','attacktype3_txt','weaptype2','weaptype3','weaptype4','weapsubtype2','weapsubtype3','weapsubtype4','weapdetail','targtype2','targtype3','targsubtype2','targsubtype3','corp2','corp3','target2','target3','natlty2','natlty3','gsubname','gname2','gname3','gsubname2','gsubname3','guncertain2','guncertain3','claim2','claim3','claimmode2','claimmode3','propextent_txt','propvalue','propcomment','nhostkid','nhostkidus','nhours','ndays','divert','kidhijcountry','ransom','ransomamt','ransomamtus','ransompaid','ransompaidus','ransomnote','hostkidoutcome','nreleased','addnotes','scite1','scite2','scite3','dbsource','targtype1_txt','targtype2_txt','targtype3_txt','targsubtype1_txt','targsubtype2_txt','targsubtype3_txt','natlty1_txt','natlty2_txt','natlty3_txt','claimmode_txt','claimmode2_txt','claimmode3_txt','weaptype1_txt','weaptype2_txt','weapsubtype2_txt','weapsubtype1_txt','weaptype3_txt','weaptype4_txt','weapsubtype4_txt','weapsubtype3_txt','hostkidoutcome_txt','Unnamed: 134','Unnamed: 135','Unnamed: 136','country_txt','region_txt','alternative_txt','eventid','related','summary','motive']
+	unwantedColumns = ['approxdate','resolution','alternative','country','latitude','longitude','specificity','location','attacktype2','attacktype3','attacktype1_txt','attacktype2_txt','attacktype3_txt','weaptype2','weaptype3','weaptype4','weapsubtype2','weapsubtype3','weapsubtype4','weapdetail','targtype2','targtype3','targsubtype2','targsubtype3','corp2','corp3','target2','target3','natlty2','natlty3','gsubname','gname2','gname3','gsubname2','gsubname3','guncertain2','guncertain3','claim2','claim3','claimmode2','claimmode3','propextent_txt','propvalue','propcomment','nhostkid','nhostkidus','nhours','ndays','divert','kidhijcountry','ransom','ransomamt','ransomamtus','ransompaid','ransompaidus','ransomnote','hostkidoutcome','nreleased','addnotes','scite1','scite2','scite3','dbsource','targtype1_txt','targtype2_txt','targtype3_txt','targsubtype1_txt','targsubtype2_txt','targsubtype3_txt','natlty1_txt','natlty2_txt','natlty3_txt','claimmode_txt','claimmode2_txt','claimmode3_txt','weaptype1_txt','weaptype2_txt','weapsubtype2_txt','weapsubtype1_txt','weaptype3_txt','weaptype4_txt','weapsubtype4_txt','weapsubtype3_txt','hostkidoutcome_txt','country_txt','region_txt','alternative_txt','eventid','related','summary','motive']
 	df.drop(unwantedColumns, axis=1, inplace=True)
 	return df
 

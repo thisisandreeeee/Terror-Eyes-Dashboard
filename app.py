@@ -5,8 +5,8 @@ import itertools,csv,sys,os,pickle
 #External libraries
 import tweepy,wgetter,numpy as np,pandas as pd
 from sklearn.externals import joblib
-from TrainClassifier import labelHash, separate_column_by_type, process_nontext
-import Compiled as cp
+from Classifier_v2 import labelHash, separate_column_by_type, process_nontext
+import Compiled2 as cp
 from scipy import stats
 from geopy.geocoders import Nominatim
 import operator
@@ -19,17 +19,17 @@ def main():
 @app.route("/dashboard")
 def dashboard():
 
- #   pred,location,mult,casualties,weaptype,propdmg,nperps="ISIS","Police",9.4,2.3,"Explosives",52.8,3
-    pred = cp.predictTerroristGroup()
-    mult = float(cp.multipleAttacks(pred))*100
-    location = cp.typeFreqPlaceAttacked(pred)
-    casualties = cp.numOfCasualties(pred)
-    weaptype = cp.findTypeOfWeapon(pred)
-    propdmg = float(cp.findPropertyDamage(pred))*100
-    nperps = cp.numPerps(pred)
-    if not nperps:
-        nperps = "Unknown"
-    cp.plotRiskyLocations(location)
+    pred,location,mult,casualties,weaptype,propdmg,nperps="ISIS","Police",9.4,2.3,"Explosives",52.8,3
+#    pred = cp.predictTerroristGroup()
+#    mult = float(cp.multipleAttacks(pred))*100
+#    location = cp.typeFreqPlaceAttacked(pred)
+#    casualties = cp.numOfCasualties(pred)
+#    weaptype = cp.findTypeOfWeapon(pred)
+#    propdmg = float(cp.findPropertyDamage(pred))*100
+#    nperps = cp.numPerps(pred)
+#    if not nperps:
+#        nperps = "Unknown"
+   # cp.plotRiskyLocations(location)
     
     return render_template('dashboard.html',
     	prediction=pred,
