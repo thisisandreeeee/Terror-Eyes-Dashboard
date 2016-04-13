@@ -4,9 +4,9 @@ from nltk.corpus import stopwords
 from nltk.stem.porter import PorterStemmer
 # Scikit Learn components
 from sklearn.linear_model import SGDClassifier, LogisticRegression
-from sklearn.cross_validation import KFold, cross_val_score
+from sklearn.cross_validation import KFold, cross_val_score,cross_val_predict
 from sklearn.feature_selection import SelectKBest, f_classif
-from sklearn.metrics import f1_score
+from sklearn.metrics import f1_score,accuracy_score
 from sklearn.ensemble import ExtraTreesClassifier, RandomForestClassifier
 from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
 from sklearn.neighbors import KNeighborsClassifier
@@ -16,6 +16,8 @@ from sklearn.externals import joblib
 gtd = pd.read_csv('csv-files/gtd_2011to2014.csv', encoding='Latin-1',low_memory=False)
 
 labelHash,Count_Vectorizer,Tfidf_Transformer,cachedStopwords,porter,selector = {},None,None,None,None,None
+
+
 
 algo_list = [
 	# ("Extra Trees", ExtraTreesClassifier(n_estimators=100))
@@ -28,6 +30,51 @@ algo_list = [
     ("Gaussian NB",GaussianNB())
 ]
 
+"""
+Input:
+1) <List> clfs: list containing classifiers.
+2) <numpy matrix> features: input features (no change)
+3) <numpy matrix> labels:  input labels (no change)
+4) <Boolean> prev_save: If True, load existing dataset (ensemble dataset.csv) else, create it
+
+Output:
+1) <String> Completed.
+"""
+def ensemble(clfs,features,labels,prev_save):
+    if prev_save == False:
+        df = pd.DataFrame()
+        for clf in clfs:
+            name = getName(clf)
+            preds = cross_val_predict(clf,features,labels,cv=5)
+            print('5 fold cross val accuracy of '+name+': %0.2f ' % accuracy_score(labels,preds))
+            df[name] = preds
+        df['target']=labels
+        #save file
+        df.to_csv('csv-files/ensemble dataset.csv',index=False)
+        print('File saved to directory')
+    else:
+        df = pd.read_csv('csv-files/ensemble dataset.csv')
+    print('Beginnning ensemble')
+    dataset = df.drop('target',axis=1)
+    target = df['target']
+    clf= RandomForestClassifier(n_jobs=8,max_depth=9,n_estimators=100)
+    preds = cross_val_predict(clf,dataset,target,cv=5)
+    score = accuracy_score(target,preds)
+    print('Ensemble accuracy is '+str(score) +'%')
+    return 'Completed'
+   
+"""
+Input:
+1) <sklearn model> clf
+
+Output:
+1) <String> clf name
+"""
+def getName(clf):
+    name = str(type(clf))
+    name = name[name.rfind('.')+1:name.rfind("'")] #subset from last . to last '
+    return name
+    
 def run():
 	start = time.time()
 	initialize()
