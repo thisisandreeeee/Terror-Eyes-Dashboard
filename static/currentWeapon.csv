@@ -1,0 +1,21 @@
+Chemical-Poisoning,8
+"Melee-Hands, Feet, Fists",2
+Melee-Knife or Other Sharp Object,20
+Melee-Unknown Weapon Type,1
+Melee-Rope or Other Strangling Device,7
+Firearms-Automatic Weapon,28
+Firearms-Rifle/Shotgun (non-automatic),2
+Firearms-Unknown Gun Type,888
+Firearms-Handgun,3
+Explosives/Bombs/Dynamite-Other Explosive Type,31
+Explosives/Bombs/Dynamite-Grenade,22
+Explosives/Bombs/Dynamite-Remote Trigger,52
+Explosives/Bombs/Dynamite-Unknown Explosive Type,475
+"Explosives/Bombs/Dynamite-Projectile (rockets, mortars, RPGs, etc.)",193
+Explosives/Bombs/Dynamite-Pressure Trigger,15
+Explosives/Bombs/Dynamite-Vehicle,237
+Explosives/Bombs/Dynamite-Land Mine,304
+Explosives/Bombs/Dynamite-Suicide (carried bodily by human being),167
+Explosives/Bombs/Dynamite-Sticky Bomb,25
+Incendiary-Arson/Fire,50
+Incendiary-Gasoline or Alcohol,2

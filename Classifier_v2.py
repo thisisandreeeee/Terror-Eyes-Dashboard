@@ -24,7 +24,7 @@ algo_list = [
 	# ("Multinomial NB",MultinomialNB()),
 	# ("Gaussian NB",GaussianNB())
 ]
-
+    
 def run():
 	start = time.time()
 	warnings.filterwarnings("ignore")

@@ -1,4 +1,9 @@
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, url_for, send_from_directory
+from flask.ext.cors import CORS
+from datetime import timedelta  
+from flask import make_response, request, current_app  
+from functools import update_wrapper
+
 
 #internal libraries
 import itertools,csv,sys,os,pickle
@@ -11,6 +16,7 @@ from scipy import stats
 from geopy.geocoders import Nominatim
 import operator
 app = Flask(__name__)
+CORS(app)
 
 @app.route("/")
 def main():
@@ -40,12 +46,18 @@ def dashboard():
     	propdmg_prob=propdmg,
     	numperps=nperps)
 
+@app.route("/weapon.csv", methods=['GET', 'OPTIONS'])
+def send_file():  
+    return send_from_directory('static', 'currentWeapon.csv',as_attachment=True)
+
 @app.route("/heatmap")
 def heatmap():
     return render_template('predictionHeatmap.html')
 
 @app.route("/visualize")
 def visualize():
+    name='Taliban' # set name
+    cp.makeWeapVisual(name) #make csv to load.
     return render_template('visualizations.html')
 
 if __name__ == "__main__":
