@@ -4,12 +4,13 @@
 }
 
 #main {
-  /*float: left;*/
-  /*width: 50%;*/
+  float: left;
+  width: 50%;
 }
 
 #sidebar {
   float: right;
+  margin-right:150px;
   width: 100px;
 }
 
@@ -37,8 +38,8 @@
 
 #explanation {
   position: absolute;
-  top: 260px;
-  left: 305px;
+  top: 160px;
+  left: 205px;
   width: 140px;
   text-align: center;
   color: #434343;
