@@ -1,16 +1,11 @@
-body {
-  font-family: 'Open Sans', sans-serif;
-  font-size: 12px;
-  font-weight: 400;
+.problem-body {
   background-color: #fff;
-  width: 960px;
-  height: 700px;
-  margin-top: 10px;
+  color: #434343;
 }
 
 #main {
-  float: left;
-  width: 750px;
+  /*float: left;*/
+  /*width: 50%;*/
 }
 
 #sidebar {
@@ -46,8 +41,8 @@ body {
   left: 305px;
   width: 140px;
   text-align: center;
-  color: #666;
-  z-index: -1;
+  color: #434343;
+  z-index: 1;
 }
 
 #percentage {

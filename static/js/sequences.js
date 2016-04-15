@@ -97,7 +97,7 @@ function mouseover(d) {
       .text(percentageString);
 
   d3.select("#explanation")
-      .style("visibility", "");
+      .style("visibility", "visible");
 
   var sequenceArray = getAncestors(d);
   updateBreadcrumbs(sequenceArray, percentageString);

@@ -1,21 +1,35 @@
 {% extends "layout.html" %}
 {% block body %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.16/d3.min.js" type="text/javascript"></script>
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/sequences.css') }}">
 <div class="problem-body">
 	<div class="clear"></div>
 	<div class="content">
-		
-		<div class="cover" style="height:80vh">
-			<div class="cover-inner">
-				<header class="inner">
-					<div class="twisted">
-						<div class="border-line"></div>
-						<h1 class="headline">{%extends "radialplot.html" %}</h1>
-						<div class="border-line">
+		<div class="row">
+			<div class="col-md-6 col-sm-6">
+				<div id="main">
+					<div id="sequence"></div>
+					<div id="chart">
+						<div id="explanation" style="visibility: hidden;">
+							<span id="percentage"></span><br/>
+							of attacks are this weapon type
 						</div>
 					</div>
-				</header>
+				</div>
+			</div>
+
+			<div class="col-md-6 col-sm-6">
+				<div id="sidebar">
+					<input type="checkbox" id="togglelegend"> Legend<br/>
+					<div id="legend" style="visibility: hidden;"></div>
+				</div>
 			</div>
 		</div>
+		<script src="{{ url_for('static', filename='js/sequences.js') }}"></script>
+	   <!--  <script type="text/javascript">
+	    	// Hack to make this example display correctly in an iframe on bl.ocks.org
+	    	d3.select(self.frameElement).style("height", "700px");
+    	</script>  -->
 	</div>
 </div>
 {% endblock %}
