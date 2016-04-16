@@ -20,45 +20,47 @@ CORS(app)
 
 @app.route("/")
 def main():
-    return render_template('index.html')
+	return render_template('index.html')
 
 @app.route("/dashboard")
 def dashboard():
 
-    pred,location,mult,casualties,weaptype,propdmg,nperps="ISIS","Police",9.4,2.3,"Explosives",52.8,3
-#    pred = cp.predictTerroristGroup()
-#    mult = float(cp.multipleAttacks(pred))*100
-#    location = cp.typeFreqPlaceAttacked(pred)
-#    casualties = cp.numOfCasualties(pred)
-#    weaptype = cp.findTypeOfWeapon(pred)
-#    propdmg = float(cp.findPropertyDamage(pred))*100
-#    nperps = cp.numPerps(pred)
-#    if not nperps:
-#        nperps = "Unknown"
-   # cp.plotRiskyLocations(location)
-    
-    return render_template('dashboard.html',
-    	prediction=pred,
-    	location=location,
-    	mult=mult,
-    	casualties_num=casualties,
-    	weaptype=weaptype,
-    	propdmg_prob=propdmg,
-    	numperps=nperps)
+	pred = cp.predictTerroristGroup()
+	if pred != 'Unknown':
+		mult = float(cp.multipleAttacks(pred))*100
+		location = cp.typeFreqPlaceAttacked(pred)
+		casualties = cp.numOfCasualties(pred)
+		weaptype = cp.findTypeOfWeapon(pred)
+		propdmg = float(cp.findPropertyDamage(pred))*100
+		nperps = cp.numPerps(pred)
+		if not nperps:
+			nperps = "Unknown"
+		cp.plotRiskyLocations(location)
+	else:
+		location,mult,casualties,weaptype,propdmg,nperps="Police",9.4,2.3,"Explosives",52.8,3
+	
+	return render_template('dashboard.html',
+		prediction=pred,
+		location=location,
+		mult=mult,
+		casualties_num=casualties,
+		weaptype=weaptype,
+		propdmg_prob=propdmg,
+		numperps=nperps)
 
 @app.route("/weapon.csv", methods=['GET', 'OPTIONS'])
 def send_file():  
-    return send_from_directory('static', 'currentWeapon.csv',as_attachment=True)
+	return send_from_directory('static', 'currentWeapon.csv',as_attachment=True)
 
 @app.route("/heatmap")
 def heatmap():
-    return render_template('predictionHeatmap.html')
+	return render_template('predictionHeatmap.html')
 
 @app.route("/visualize")
 def visualize():
-    name='Taliban' # set name
-    cp.makeWeapVisual(name) #make csv to load.
-    return render_template('visualizations.html')
+	name='Taliban' # set name
+	cp.makeWeapVisual(name) #make csv to load.
+	return render_template('visualizations.html')
 
 if __name__ == "__main__":
 	app.run(debug=True)
