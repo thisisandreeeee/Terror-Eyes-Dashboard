@@ -9,7 +9,7 @@ import itertools,csv,sys,os,pickle
 #External libraries
 import tweepy,wgetter,numpy as np,pandas as pd
 from sklearn.externals import joblib
-from Classifier_v2 import labelHash, separate_column_by_type, process_nontext
+from Classifier_v2 import separate_column_by_type, process_nontext
 from scipy import stats
 from geopy.geocoders import Nominatim
 import operator
@@ -17,6 +17,8 @@ from HTMLText import *
 
 country = None
 heatmapVariable=None
+
+
 """
 Input: Features of attack, from file input.csv
 Output: [String] Terrorist Group name
@@ -31,15 +33,15 @@ def predictTerroristGroup():
 		return nontext_df
 
 	def predict_group(features):
-		classifier = joblib.load('classifiers/randomforest.pkl')
-		pred = classifier.predict(features)[0]
-		pred_proba = classifier.predict_proba(features)[0]
-		res = "Unknown"
-		for entry in labelHash:
-			if labelHash[entry] == pred:
-				res = entry
-		print(pred_proba)
-		return res
+         classifier = joblib.load('classifiers/randomforest.pkl')
+         labelHash = joblib.load('classifiers/labelhash.pkl') #temporary hack to get this shit working
+         pred = classifier.predict(features)[0]
+         pred_proba = classifier.predict_proba(features)[0]
+         res = "Unknown"
+         for entry in labelHash:
+             if labelHash[entry] == pred:
+                 res = entry
+         return res
 		
 	prediction = predict_group(format_inputs())
 	print('Likely terrorist group: '+prediction)

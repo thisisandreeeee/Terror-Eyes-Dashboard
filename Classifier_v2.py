@@ -90,7 +90,7 @@ def separate_column_by_type(df):
 	for label in temp_list_of_labels:
 		if counts[label] < 10:
 			label = "Others"
-		if label in labelHash:
+		if label in labelHash: 
 			final_labels.append(labelHash[label])
 		else:
 			labelHash[label] = label_id
