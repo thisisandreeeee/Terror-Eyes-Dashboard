@@ -9,6 +9,7 @@ from sklearn.ensemble import ExtraTreesClassifier, RandomForestClassifier
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.naive_bayes import GaussianNB,MultinomialNB
 from sklearn.externals import joblib
+import xgboost as xgb
 
 gtd = pd.read_csv('csv-files/gtd_2011to2014.csv', encoding='Latin-1',low_memory=False)
 
@@ -26,16 +27,21 @@ algo_list = [
 ]
     
 def run():
-	start = time.time()
-	warnings.filterwarnings("ignore")
-	features,labels = separate_column_by_type(gtd)
-	features = process_nontext(features)
-	classifiers = train_classifier(algo_list,features,labels)
+    start = time.time()
+    warnings.filterwarnings("ignore")
+    features,labels = separate_column_by_type(gtd)
+    features = process_nontext(features)
+    features = convertDType(features)
+    classifiers = train_classifier(algo_list,features,labels)
 	# compare_classifiers(classifiers,features,labels,folds=5)
 	# ensemble = build_ensemble(features,labels)
-	ensemble(algo_list,features,labels,False)
-	print("\nTotal elapsed time: %.2f secs" % (time.time()-start))
-
+    ensemble(algo_list,features,labels,False)
+    print("\nTotal elapsed time: %.2f secs" % (time.time()-start))
+ 
+def convertDType(df):
+    df = df.apply(lambda x: pd.to_numeric(x, errors='coerce'))
+    return df
+    
 def ensemble(clfs,features,labels,prev_save):
 	if prev_save == False:
 		df = pd.DataFrame()
