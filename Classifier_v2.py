@@ -197,5 +197,5 @@ def compare_classifiers(classifiers,features,labels,folds):
 		print(str(model[0]) + " F1 score: %0.2f" % (f1score))
 
 # RUN THE MAIN PROGRAM
-if __name__ == "__main__":
-	run()
+#if __name__ == "__main__":
+#	run()
