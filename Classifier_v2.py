@@ -220,7 +220,7 @@ def compare_classifiers(classifiers,features,labels,folds):
 		print(str(model[0]) + " accuracy: %0.3f (+/- %0.3f)" % (kfold_score.mean(), kfold_score.std() * 2))
 		print(str(model[0]) + " F1 score: %0.2f" % (f1score))
 
-# RUN THE MAIN PROGRAM
+ #RUN THE MAIN PROGRAM
 if __name__ == "__main__":
 	semi_supervised()
 	run()
