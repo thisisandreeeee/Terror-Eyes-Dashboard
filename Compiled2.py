@@ -34,7 +34,7 @@ def predictTerroristGroup():
 
 	def predict_group(features):
          classifier = joblib.load('classifiers/randomforest.pkl')
-         labelHash = joblib.load('classifiers/labelhash.pkl') #temporary hack to get this shit working
+         labelHash = joblib.load('dics/labelHash.pkl') #temporary hack to get this shit working
          pred = classifier.predict(features)[0]
          pred_proba = classifier.predict_proba(features)[0]
          res = "Unknown"
