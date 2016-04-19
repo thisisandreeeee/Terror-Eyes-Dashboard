@@ -11,6 +11,8 @@ from sklearn.naive_bayes import GaussianNB,MultinomialNB
 from sklearn.externals import joblib
 import xgboost as xgb
 
+from sklearn.semi_supervised import LabelPropagation, LabelSpreading
+
 gtd = pd.read_csv('csv-files/gtd_2011to2014.csv', encoding='Latin-1',low_memory=False)
 
 labelHash = {}
@@ -25,23 +27,59 @@ algo_list = [
 	# ("Multinomial NB",MultinomialNB()),
 	# ("Gaussian NB",GaussianNB())
 ]
-    
+	
 def run():
-    start = time.time()
-    warnings.filterwarnings("ignore")
-    features,labels = separate_column_by_type(gtd)
-    features = process_nontext(features)
-    features = convertDType(features)
-    classifiers = train_classifier(algo_list,features,labels)
+	start = time.time()
+	warnings.filterwarnings("ignore")
+	features,labels = separate_column_by_type(gtd)
+	features = process_nontext(features)
+	features = convertDType(features)
+	classifiers = train_classifier(algo_list,features,labels)
 	# compare_classifiers(classifiers,features,labels,folds=5)
-	# ensemble = build_ensemble(features,labels)
-    ensemble(algo_list,features,labels,False)
-    print("\nTotal elapsed time: %.2f secs" % (time.time()-start))
+	ensemble(algo_list,features,labels,False)
+	print("\nTotal elapsed time: %.2f secs" % (time.time()-start))
+
+def semi_supervised():
+	features,labels = separate_cols_with_unknown(gtd)
+	features = process_nontext(features)
+	features = convertDType(features)
+	model = LabelPropagation(kernel="knn")
+	model2 = LabelSpreading(kernel="knn")
+	model2.fit(features,labels)
+	preds = cross_val_predict(model2,features,labels,cv=5)
+	print('5 fold cross val accuracy of model: %0.2f ' % accuracy_score(labels,preds))
+
+def separate_cols_with_unknown(df):
+	global labelHashz
+	features = remove_unwanted_columns(df)
+	nontext_cols = [i for i in features.columns.values if i != 'gname']
+	labels = df['gname']
+	temp_list_of_labels=[i for i in labels]
+	counts = Counter(temp_list_of_labels)
+	label_id = 0
+	UNKNOWN_ID = -1
+	final_labels = []
+	for label in temp_list_of_labels:
+		if counts[label] < 10:
+			label = "Others"
+		if label != "Unknown":
+			if label in labelHash: 
+				final_labels.append(labelHash[label])
+			else:
+				labelHash[label] = label_id
+				final_labels.append(labelHash[label])
+				label_id += 1
+		else:
+			labelHash["Unknown"] = UNKNOWN_ID
+			final_labels.append(UNKNOWN_ID)
+	final_labels = pd.Series(final_labels).astype('category')
+	return features[nontext_cols], final_labels
+
  
 def convertDType(df):
-    df = df.apply(lambda x: pd.to_numeric(x, errors='coerce'))
-    return df
-    
+	df = df.apply(lambda x: pd.to_numeric(x, errors='coerce'))
+	return df
+	
 def ensemble(clfs,features,labels,prev_save):
 	if prev_save == False:
 		df = pd.DataFrame()
@@ -65,22 +103,6 @@ def ensemble(clfs,features,labels,prev_save):
 	print('Ensemble accuracy is '+str(score) +'%')
 	return 'Completed'
 
-def build_ensemble(features,labels):
-	file_locs = ['Extra Trees','Random Forest','KNeighbors']
-	train_log = pd.DataFrame()
-	for loc in file_locs:
-		print("Processing: " + loc)
-		clf = joblib.load('classifiers/' + loc + '.pkl')
-		pred = clf.predict(features)
-		df = pd.DataFrame([pred])
-		if train_log.empty:
-			train_log = df
-		else:
-			train_log = pd.concat([train_log,df], axis=1, join_axes=[train_log.index])
-	
-	ensemble = LogisticRegression().fit(train_log,labels)
-	return ensemble
-
 # Input: original pandas dataframe read directly from the csv file
 # Description: separates the dataframe into non-text and text types
 # Output: dataframe of non-text variables, dataframe of text variables, and a list of labels
@@ -103,6 +125,7 @@ def separate_column_by_type(df):
 			final_labels.append(labelHash[label])
 			label_id += 1
 	final_labels = pd.Series(final_labels).astype('category')
+	joblib.dump(labelHash,'dics/labelHash.pkl')
 	return features[features['gname'] != 'Unknown'][nontext_cols], final_labels
 
 # Input: original pandas dataframe read directly from the csv file
@@ -110,8 +133,9 @@ def separate_column_by_type(df):
 # Output: non-text and text based dataframes
 def remove_unwanted_columns(df):
 	unwantedColumns = ['approxdate','resolution','alternative','country','latitude','longitude','specificity','location','attacktype2','attacktype3','attacktype1_txt','attacktype2_txt','attacktype3_txt','weaptype2','weaptype3','weaptype4','weapsubtype2','weapsubtype3','weapsubtype4','weapdetail','targtype2','targtype3','targsubtype2','targsubtype3','corp2','corp3','target2','target3','natlty2','natlty3','gsubname','gname2','gname3','gsubname2','gsubname3','guncertain2','guncertain3','claim2','claim3','claimmode2','claimmode3','propextent_txt','propvalue','propcomment','nhostkid','nhostkidus','nhours','ndays','divert','kidhijcountry','ransom','ransomamt','ransomamtus','ransompaid','ransompaidus','ransomnote','hostkidoutcome','nreleased','addnotes','scite1','scite2','scite3','dbsource','targtype1_txt','targtype2_txt','targtype3_txt','targsubtype1_txt','targsubtype2_txt','targsubtype3_txt','natlty1_txt','natlty2_txt','natlty3_txt','claimmode_txt','claimmode2_txt','claimmode3_txt','weaptype1_txt','weaptype2_txt','weapsubtype2_txt','weapsubtype1_txt','weaptype3_txt','weaptype4_txt','weapsubtype4_txt','weapsubtype3_txt','hostkidoutcome_txt','country_txt','region_txt','alternative_txt','eventid','related','summary','motive']
-	df.drop(unwantedColumns, axis=1, inplace=True)
-	return df
+	clean = df.copy()
+	clean.drop(unwantedColumns, axis=1, inplace=True)
+	return clean
 
 # processes the non-text dataframe, and ensures the columns (or missing values) are of appropriate data type (or value)
 def process_nontext(df):
@@ -181,7 +205,7 @@ def train_classifier(algo_list,features,labels):
 		name = algo[0]
 		classifiers.append((name,model))
 		print(str(name) + " training time: %.2f secs" % (time.time() - start))
-		joblib.dump(model,'classifiers/'+ str(name) +'.pkl')
+		# joblib.dump(model,'classifiers/'+ str(name) +'.pkl')
 	return classifiers
 
 # Input: list of trained classifiers
@@ -198,4 +222,5 @@ def compare_classifiers(classifiers,features,labels,folds):
 
 # RUN THE MAIN PROGRAM
 if __name__ == "__main__":
+	# semi_supervised()
 	run()
