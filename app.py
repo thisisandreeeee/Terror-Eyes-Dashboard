@@ -10,7 +10,6 @@ import itertools,csv,sys,os,pickle
 #External libraries
 import tweepy,wgetter,numpy as np,pandas as pd
 from sklearn.externals import joblib
-from Classifier_v2 import labelHash, separate_column_by_type, process_nontext
 import Compiled2 as cp
 from scipy import stats
 from geopy.geocoders import Nominatim

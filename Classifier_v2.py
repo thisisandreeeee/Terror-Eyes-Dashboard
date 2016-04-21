@@ -125,7 +125,6 @@ def separate_column_by_type(df):
 			final_labels.append(labelHash[label])
 			label_id += 1
 	final_labels = pd.Series(final_labels).astype('category')
-	joblib.dump(labelHash,'dics/labelHash.pkl')
 	return features[features['gname'] != 'Unknown'][nontext_cols], final_labels
 
 # Input: original pandas dataframe read directly from the csv file
@@ -221,7 +220,7 @@ def compare_classifiers(classifiers,features,labels,folds):
 		print(str(model[0]) + " F1 score: %0.2f" % (f1score))
 
  #RUN THE MAIN PROGRAM
-if __name__ == "__main__":
-	semi_supervised()
-	run()
+#if __name__ == "__main__":
+	#semi_supervised()
+	#run()
 

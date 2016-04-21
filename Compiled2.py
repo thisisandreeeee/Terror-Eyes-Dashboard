@@ -36,7 +36,7 @@ def predictTerroristGroup():
          classifier = joblib.load('classifiers/randomforest.pkl')
          labelHash = joblib.load('dics/labelHash.pkl') #temporary hack to get this shit working
          pred = classifier.predict(features)[0]
-         pred_proba = classifier.predict_proba(features)[0]
+         #pred_proba = classifier.predict_proba(features)[0]
          res = "Unknown"
          for entry in labelHash:
              if labelHash[entry] == pred:
