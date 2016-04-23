@@ -47,9 +47,9 @@ def dashboard():
 		propdmg_prob=propdmg,
 		numperps=nperps)
 
-@app.route("/weapon.csv", methods=['GET', 'OPTIONS'])
+@app.route("/coffeewheel.csv", methods=['GET', 'OPTIONS'])
 def send_file():  
-	return send_from_directory('static', 'currentWeapon.csv',as_attachment=True)
+	return send_from_directory('static', 'coffeewheel.csv',as_attachment=True)
 
 @app.route("/heatmap")
 def heatmap():

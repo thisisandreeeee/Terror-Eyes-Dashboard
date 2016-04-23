@@ -5,7 +5,7 @@ var radius = Math.min(width, height) / 2;
 
 // Breadcrumb dimensions: width, height, spacing, width of tip/tail.
 var b = {
-  w: 150, h: 30, s: 3, t: 10
+  w: 200, h: 30, s: 4, t: 10
 };
 
 // Mapping of step names to colors.
@@ -41,7 +41,7 @@ var arc = d3.svg.arc()
 
 // Use d3.text and d3.csv.parseRows so that we do not need to have a header
 // row, and can receive the csv as an array of arrays.
-d3.text("http://localhost:5000/weapon.csv", function(text) {
+d3.text("http://localhost:5000/coffeewheel.csv", function(text) {
   var csv = d3.csv.parseRows(text);
   var json = buildHierarchy(csv);
   createVisualization(json);
