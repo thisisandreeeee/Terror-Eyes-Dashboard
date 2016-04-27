@@ -20,7 +20,7 @@ CORS(app)
 @app.route("/")
 def main():
 	# return render_template('index.html')
-	return "Coming soon!"
+	return render_template('landing.html')
 
 @app.route("/dashboard")
 def dashboard():
