@@ -10,4 +10,5 @@ $(document).ready(function() {
     $(".cta-button").click(function() {
     	$body.addClass("loading");
     });
+    changeRadius();
 });
