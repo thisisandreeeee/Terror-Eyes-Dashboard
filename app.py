@@ -19,7 +19,8 @@ CORS(app)
 
 @app.route("/")
 def main():
-	return render_template('index.html')
+	# return render_template('index.html')
+	return "Coming soon!"
 
 @app.route("/dashboard")
 def dashboard():
@@ -57,9 +58,10 @@ def heatmap():
 
 @app.route("/visualize")
 def visualize():
-	name='Taliban' # set name
-	cp.makeWeapVisual(name) #make csv to load.
-	return render_template('visualizations.html')
+	# name='Taliban' # set name
+	# cp.makeWeapVisual(name) #make csv to load.
+	# return render_template('visualizations.html')
+	return "Coming soon!"
 
 if __name__ == "__main__":
 	app.run(debug=True)
