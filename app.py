@@ -1,9 +1,9 @@
 from flask import Flask, render_template, url_for, send_from_directory
 from flask.ext.cors import CORS
-from datetime import timedelta  
-from flask import make_response, request, current_app  
+from datetime import timedelta
+from flask import make_response, request, current_app
 from functools import update_wrapper
-
+from gevent.wsgi import WSGIServer
 
 #internal libraries
 import itertools,csv,sys,os,pickle
@@ -24,7 +24,6 @@ def main():
 
 @app.route("/dashboard")
 def dashboard():
-
 	pred = cp.predictTerroristGroup()
 	if pred != 'Unknown':
 		mult = float(cp.multipleAttacks(pred))*100
@@ -38,7 +37,7 @@ def dashboard():
 		cp.plotRiskyLocations(location)
 	else:
 		location,mult,casualties,weaptype,propdmg,nperps="Police",9.4,2.3,"Explosives",52.8,3
-	
+
 	return render_template('dashboard.html',
 		prediction=pred,
 		location=location,
@@ -49,7 +48,7 @@ def dashboard():
 		numperps=nperps)
 
 @app.route("/coffeewheel.csv", methods=['GET', 'OPTIONS'])
-def send_file():  
+def send_file():
 	return send_from_directory('static', 'coffeewheel.csv',as_attachment=True)
 
 @app.route("/heatmap")
@@ -64,4 +63,5 @@ def visualize():
 	return "Coming soon!"
 
 if __name__ == "__main__":
-	app.run(debug=True)
+	server = WSGIServer(("",3000), app)
+	server.serve_forever()
