@@ -1,3 +1,5 @@
 __pycache__
+.ftpconfig
+.DS_Store
 backup
 csv-files

@@ -33,8 +33,8 @@ def predictTerroristGroup():
 		return nontext_df
 
 	def predict_group(features):
-         classifier = joblib.load('classifiers/randomforest.pkl')
          labelHash = joblib.load('dics/labelHash.pkl') #temporary hack to get this shit working
+         classifier = joblib.load('classifiers/randomforest.pkl')
          pred = classifier.predict(features)[0]
          #pred_proba = classifier.predict_proba(features)[0]
          res = "Unknown"
@@ -42,8 +42,9 @@ def predictTerroristGroup():
              if labelHash[entry] == pred:
                  res = entry
          return res
-		
-	prediction = predict_group(format_inputs())
+
+	inputs = format_inputs()
+	prediction = predict_group(inputs)
 	print('Likely terrorist group: '+prediction)
 	return prediction
 
@@ -90,7 +91,7 @@ def typeFreqPlaceAttacked(name):
 		print("\n")
 		print('Most Frequent Place attacked: '+likelyPlaceAttacked+' consisting of '+str(confidence*100)+'% of all attacks')
 	return likelyPlaceAttacked
-	
+
 def numOfCasualties(name):
 	print('\n')
 	dic = pickle.load(open('dics/numOfCasualties','rb'))
@@ -103,7 +104,7 @@ def numOfCasualties(name):
 def conditionalPlaceAttacked(name):
 	##TO BE DONE WHEN I CAN BE BOTHERED TO
 	return
-	
+
 def findTypeOfWeapon(name):
 	dic= pickle.load(open('dics/typeOfWeapon','rb'))
 	if name in dic.keys():
@@ -116,7 +117,7 @@ def findTypeOfWeapon(name):
 		print("\n")
 		print('Likely type of weapon unknown')
 	return likelyAttackWeapon
-	  
+
 
 def numPerps(name):
 	dic = pickle.load(open('dics/numPerps','rb'))
@@ -130,7 +131,7 @@ def numPerps(name):
 	print("\n")
 	print('Likely size of attackers unknown.')
 	return False
-	
+
 def findPropertyDamage(name):
 	dic = pickle.load(open('dics/propertyDamage','rb'))
 	try:
@@ -145,7 +146,7 @@ def findPropertyDamage(name):
 	else:
 		print(name + 'will likely NOT have property damage with probability '+str(round(probability,3)))
 	return round(probability,2)
-	
+
  ##Modified for dashboard --> return data instead of plotting it in gmaps.
 def plotRiskyLocations(name):
 	global country
@@ -174,7 +175,7 @@ def plotRiskyLocations(name):
 			'Telecommunications':['Radio station','TV station','Internet provider'],
 			'Violent Political Party': 'political party' #and this
 	}
-	name = dic[name]    
+	name = dic[name]
 	geolocator = Nominatim()
 	location=[]
 	if type(name) != list:
@@ -191,7 +192,7 @@ def plotRiskyLocations(name):
 	for entry in location:
 		data.append([entry.latitude,entry.longitude])
 	convertGpsToHTML(data,0)
- 
+
 #Writes GPS coordinates into a HTML file.
 """
  Input: List of lists of GPS coordinates.
@@ -220,20 +221,20 @@ def convertGpsToHTML(data,state):
         f.close()
     else:
         print('That is not a valid state')
-    
+
 
 def crowdSourceInformation():
 	#Create twitter streamer class
 	print('Beginning Twitter Crowdsource Bot')
 	class CustomStreamListener(tweepy.StreamListener):
-		def on_status(self, status): 
+		def on_status(self, status):
 			#Check if CSV exists. Else, create it.
 			if os.path.isfile('csv-files/terrortracking.csv') == False:
 				with open('csv-files/terrortracking.csv','w',newline='',encoding='utf-8') as f:
 					writer=csv.writer(f)
 					writer.writerow(['Screen name','Created At','Location','Lat','Long','Media link'])
-					
-			with open('csv-files/terrortracking.csv', 'a',newline="") as f: 
+
+			with open('csv-files/terrortracking.csv', 'a',newline="") as f:
 				writer = csv.writer(f)
 				try:
 					lat=status.coordinates['coordinates'][0]
@@ -251,25 +252,25 @@ def crowdSourceInformation():
 					#name=str(status.created_at)+'_'+status.author.screen_name
 					#name += self.extensionFinder(media)
 					wgetter.download(media,outdir="TerrorAttachment")
-					
+
 				writer.writerow([status.author.screen_name, status.created_at, status.text,geo,lat,long,media])
 		def on_error(self, status_code):
 			print ( sys.stderr, 'Encountered error with status code:', status_code)
 			return True # Don't kill the stream
-	
+
 		def on_timeout(self):
 			print ( sys.stderr, 'Timeout...')
 			return True # Don't kill the stream
 	"""
 	Main twitter function. Creates the customstream listener class and begins streaming tweets.
-	"""      
+	"""
 	def twitterCatcherStream():
 		#remove 3 lines below and replace client ID and stuff before submission
 		accesstokenlist=[]
 		accesstokenlist.append(['2FLlfrbBb2ldxHDs4ulwTbwAF','lWcdpSPt1kNjQp12HXoKFl8YhuEDMlEoZJU2OZkljMLZcVVPeY','464726631-wf0YX3qpxFcX583TNdRetYkHctwwJYdlQOohMSvQ','c3PK4xGIZUZK93GpkGTzFN3RaSFZvXZ78hJ8FaEig8741'])
 		currentKey = accesstokenlist[0]
 		### end removal
-		
+
 		auth = tweepy.auth.OAuthHandler(currentKey[0], currentKey[1])
 		auth.set_access_token(currentKey[2], currentKey[3])
 		api = tweepy.API(auth)
@@ -287,6 +288,6 @@ def run():
 	location = printTerroristDetails(predictedGroup)
 	plotRiskyLocations(location,country)
 	#crowdSourceInformation()
-	
+
 if __name__ == '__main__':
 	run()

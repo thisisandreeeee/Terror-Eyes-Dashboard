@@ -9,7 +9,7 @@ from sklearn.ensemble import ExtraTreesClassifier, RandomForestClassifier
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.naive_bayes import GaussianNB,MultinomialNB
 from sklearn.externals import joblib
-import xgboost as xgb
+#import xgboost as xgb
 
 from sklearn.semi_supervised import LabelPropagation, LabelSpreading
 
@@ -20,14 +20,14 @@ labelHash = {}
 algo_list = [
 	# ("Extra Trees", ExtraTreesClassifier(n_estimators=100))
 	("Random Forest", RandomForestClassifier(max_depth=10,n_jobs=8,n_estimators=400)),
-	("Extra Trees", ExtraTreesClassifier(max_depth=10,n_jobs=8,n_estimators=300)),
+	# ("Extra Trees", ExtraTreesClassifier(max_depth=10,n_jobs=8,n_estimators=300)),
 	# ("Logistic Regression", LogisticRegression()),
 	# ("SGD Classifier",SGDClassifier()),
-	("KNeighbors",KNeighborsClassifier())
+	# ("KNeighbors",KNeighborsClassifier())
 	# ("Multinomial NB",MultinomialNB()),
 	# ("Gaussian NB",GaussianNB())
 ]
-	
+
 def run():
 	start = time.time()
 	warnings.filterwarnings("ignore")
@@ -63,7 +63,7 @@ def separate_cols_with_unknown(df):
 		if counts[label] < 10:
 			label = "Others"
 		if label != "Unknown":
-			if label in labelHash: 
+			if label in labelHash:
 				final_labels.append(labelHash[label])
 			else:
 				labelHash[label] = label_id
@@ -75,11 +75,11 @@ def separate_cols_with_unknown(df):
 	final_labels = pd.Series(final_labels).astype('category')
 	return features[nontext_cols], final_labels
 
- 
+
 def convertDType(df):
 	df = df.apply(lambda x: pd.to_numeric(x, errors='coerce'))
 	return df
-	
+
 def ensemble(clfs,features,labels,prev_save):
 	if prev_save == False:
 		df = pd.DataFrame()
@@ -118,7 +118,7 @@ def separate_column_by_type(df):
 	for label in temp_list_of_labels:
 		if counts[label] < 10:
 			label = "Others"
-		if label in labelHash: 
+		if label in labelHash:
 			final_labels.append(labelHash[label])
 		else:
 			labelHash[label] = label_id
@@ -204,7 +204,7 @@ def train_classifier(algo_list,features,labels):
 		name = algo[0]
 		classifiers.append((name,model))
 		print(str(name) + " training time: %.2f secs" % (time.time() - start))
-		# joblib.dump(model,'classifiers/'+ str(name) +'.pkl')
+		joblib.dump(model,'classifiers/'+ str(name) +'.pkl')
 	return classifiers
 
 # Input: list of trained classifiers
@@ -220,7 +220,6 @@ def compare_classifiers(classifiers,features,labels,folds):
 		print(str(model[0]) + " F1 score: %0.2f" % (f1score))
 
  #RUN THE MAIN PROGRAM
-#if __name__ == "__main__":
+if __name__ == "__main__":
 	#semi_supervised()
-	#run()
-
+	run()
