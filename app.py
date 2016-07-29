@@ -62,6 +62,11 @@ def visualize():
 	# return render_template('visualizations.html')
 	return "Coming soon!"
 
+@app.route("/input")
+def input():
+    print("input")
+    return render_template('input.html')
+
 if __name__ == "__main__":
 	server = WSGIServer(("",5000), app)
 	server.serve_forever()
