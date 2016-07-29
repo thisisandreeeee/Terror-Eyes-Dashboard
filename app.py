@@ -1,5 +1,5 @@
 from flask import Flask, render_template, url_for, send_from_directory
-from flask.ext.cors import CORS
+from flask_cors import CORS
 from datetime import timedelta
 from flask import make_response, request, current_app
 from functools import update_wrapper
@@ -63,5 +63,5 @@ def visualize():
 	return "Coming soon!"
 
 if __name__ == "__main__":
-	server = WSGIServer(("",3000), app)
+	server = WSGIServer(("",5000), app)
 	server.serve_forever()
