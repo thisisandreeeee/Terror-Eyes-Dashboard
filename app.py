@@ -13,7 +13,7 @@ from sklearn.externals import joblib
 import Compiled2 as cp
 from scipy import stats
 from geopy.geocoders import Nominatim
-import operator
+import operator,threading,twitterbot
 app = Flask(__name__)
 CORS(app)
 
@@ -46,6 +46,7 @@ def dashboard():
 		weaptype=weaptype,
 		propdmg_prob=propdmg,
 		numperps=nperps)
+  
 
 @app.route("/coffeewheel.csv", methods=['GET', 'OPTIONS'])
 def send_file():
@@ -66,7 +67,15 @@ def visualize():
 def input():
     print("input")
     return render_template('input.html')
+    
+
+def beginTwitterBot():
+    thread = threading.Thread(target = twitterbot.twitterCatcherStream)
+    thread.daemon = True   # Daemonize thread
+    thread.start() 
 
 if __name__ == "__main__":
-	server = WSGIServer(("",5000), app)
-	server.serve_forever()
+    server = WSGIServer(("",5000), app)
+    beginTwitterBot()
+    print('Server is up')
+    server.serve_forever()

@@ -9,7 +9,9 @@ from sklearn.ensemble import ExtraTreesClassifier, RandomForestClassifier
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.naive_bayes import GaussianNB,MultinomialNB
 from sklearn.externals import joblib
-#import xgboost as xgb
+import xgboost as xgb
+from sklearn.cross_validation import train_test_split
+from sklearn.metrics import accuracy_score
 
 from sklearn.semi_supervised import LabelPropagation, LabelSpreading
 
@@ -19,7 +21,8 @@ labelHash = {}
 
 algo_list = [
 	# ("Extra Trees", ExtraTreesClassifier(n_estimators=100))
-	("Random Forest", RandomForestClassifier(max_depth=10,n_jobs=8,n_estimators=400)),
+     ("Xgboost" , xgb.XGBClassifier(max_depth=6,nthread=8,silent=False,objective = 'multi:softmax')),
+	#("Random Forest", RandomForestClassifier(max_depth=10,n_jobs=8,n_estimators=400)),
 	# ("Extra Trees", ExtraTreesClassifier(max_depth=10,n_jobs=8,n_estimators=300)),
 	# ("Logistic Regression", LogisticRegression()),
 	# ("SGD Classifier",SGDClassifier()),
@@ -28,16 +31,25 @@ algo_list = [
 	# ("Gaussian NB",GaussianNB())
 ]
 
+remove =['extended','nperps','crit1','crit2','crit3','multiple','nperpcap','claimed','claimmode','compclaim']
+keep = ['natlty1','targsubtype1','region','weapsubtype1','nwound','nkill','property','attacktype1','targtype1','guncertain1','nkillter','weaptype1','suicide']#,'iday','imonth','iyear']
+def runxgb(features,labels):
+    trainx,testx,trainy,testy = train_test_split(features,labels)
+    clf = xgb.XGBClassifier(max_depth=6,nthread=8,silent=False,objective = 'multi:softmax')
+    clf.fit(trainx,trainy)
+    print(accuracy_score(testy,clf.predict(testx)))
+    
 def run():
-	start = time.time()
-	warnings.filterwarnings("ignore")
-	features,labels = separate_column_by_type(gtd)
-	features = process_nontext(features)
-	features = convertDType(features)
-	classifiers = train_classifier(algo_list,features,labels)
+     start = time.time()
+     warnings.filterwarnings("ignore")
+     features,labels = separate_column_by_type(gtd)
+     features = process_nontext(features)
+     features = convertDType(features)
+     features = features[keep]
+	#classifiers = train_classifier(algo_list,features,labels)
 	# compare_classifiers(classifiers,features,labels,folds=5)
-	ensemble(algo_list,features,labels,False)
-	print("\nTotal elapsed time: %.2f secs" % (time.time()-start))
+     ensemble(algo_list,features,labels,False)
+     print("\nTotal elapsed time: %.2f secs" % (time.time()-start))
 
 def semi_supervised():
 	features,labels = separate_cols_with_unknown(gtd)
@@ -221,5 +233,4 @@ def compare_classifiers(classifiers,features,labels,folds):
 
  #RUN THE MAIN PROGRAM
 if __name__ == "__main__":
-	#semi_supervised()
 	run()
