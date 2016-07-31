@@ -191,13 +191,13 @@ def plotRiskyLocations(name):
     data=[]
     for entry in location:
         data.append([entry.latitude,entry.longitude])
-    convertGpsToHTML(data,0)
+    convertGpsToHTML(data,0,'templates/predictionHeatmap.html')
 #Writes GPS coordinates into a HTML file.
 """
  Input: List of lists of GPS coordinates.
  Output: HTML file of the heatmap.
 """
-def convertGpsToHTML(data,state):
+def convertGpsToHTML(data,state,csvloc):
     #taken from HTMLText
     global initial1,initial2,twitter1,endTwitter,heatmapVariable
     #new google.maps.LatLng(-6.9742784,109.122315),
@@ -211,7 +211,7 @@ def convertGpsToHTML(data,state):
     addToHTML=addToHTML[:-1] #remove last comma
     if state==0:
         heatmapVariable = initial1+addToHTML+twitter1 #set var for future rewrites to add twitter
-        f = open('templates/predictionHeatmap.html','w')
+        f = open(csvloc,'w')
         f.write(initial1+addToHTML+initial2) #INITIAL HEATMAP WITH NO TWITTER POINTS
         f.close()
     elif state == 1:

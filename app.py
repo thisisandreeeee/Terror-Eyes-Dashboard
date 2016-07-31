@@ -55,6 +55,10 @@ def send_file():
 @app.route("/heatmap")
 def heatmap():
 	return render_template('predictionHeatmap.html')
+ 
+@app.route("/twitterheatmap")
+def twitterheatmap():
+	return render_template('twitterheatmap.html')
 
 @app.route("/visualize")
 def visualize():
@@ -62,7 +66,22 @@ def visualize():
 	# cp.makeWeapVisual(name) #make csv to load.
 	# return render_template('visualizations.html')
 	return "Coming soon!"
-
+ 
+@app.route('/twitter')
+def twitter_map():
+    generateTwitterMap()
+    return render_template('twitterpage.html')
+    
+def generateTwitterMap():
+    try:
+        with open('csv-files/terrortracking.csv','r') as f:
+            reader = csv.reader(f)
+            lst = list(reader)
+    except:
+        return
+    
+    coords = [[x[3],x[4]] for x in lst[1:]]
+    cp.convertGpsToHTML(coords,0,'templates/twitterheatmap.html')
 @app.route("/input")
 def input():
     print("input")

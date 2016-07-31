@@ -3,9 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="f22d564e-4bb0-49d5-a5e5-e827a2f560cf" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Compiled2.py" afterPath="$PROJECT_DIR$/Compiled2.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.py" afterPath="$PROJECT_DIR$/app.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/input.html" afterPath="$PROJECT_DIR$/templates/input.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/predictionHeatmap.html" afterPath="$PROJECT_DIR$/templates/predictionHeatmap.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/layout.html" afterPath="$PROJECT_DIR$/templates/layout.html" />
     </list>
     <ignored path="TUN-dashboard.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -26,21 +26,31 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="layout.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="layout.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/layout.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="54">
-              <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+            <state relative-caret-position="360">
+              <caret line="28" column="84" selection-start-line="28" selection-start-column="84" selection-end-line="28" selection-end-column="84" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="input.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="input.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/input.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="86">
+            <state relative-caret-position="-76">
               <caret line="113" column="34" selection-start-line="113" selection-start-column="34" selection-end-line="113" selection-end-column="34" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -61,12 +71,32 @@
       <file leaf-file-name="dashboard.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/dashboard.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="198">
-              <caret line="11" column="32" selection-start-line="11" selection-start-column="32" selection-end-line="11" selection-end-column="32" />
+            <state relative-caret-position="554">
+              <caret line="69" column="14" selection-start-line="69" selection-start-column="0" selection-end-line="69" selection-end-column="14" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="twitterpage.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/twitterpage.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="126">
+              <caret line="7" column="14" selection-start-line="7" selection-start-column="14" selection-end-line="7" selection-end-column="14" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="predictionHeatmap.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/predictionHeatmap.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1858">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -77,6 +107,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="JavaScript File" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -88,8 +119,9 @@
       <list>
         <option value="$PROJECT_DIR$/static/js/button.js" />
         <option value="$PROJECT_DIR$/templates/dashboard.html" />
-        <option value="$PROJECT_DIR$/templates/layout.html" />
         <option value="$PROJECT_DIR$/templates/input.html" />
+        <option value="$PROJECT_DIR$/templates/twitterpage.html" />
+        <option value="$PROJECT_DIR$/templates/layout.html" />
       </list>
     </option>
   </component>
@@ -100,10 +132,10 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="2258" />
-    <option name="y" value="1249" />
+    <option name="x" value="2161" />
+    <option name="y" value="1264" />
     <option name="width" value="1440" />
-    <option name="height" value="810" />
+    <option name="height" value="792" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -204,6 +236,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="HbShouldOpenHtmlAsHb" value="" />
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -279,14 +312,15 @@
       <option name="presentableId" value="Default" />
       <updated>1457633246242</updated>
       <workItem from="1469868271502" duration="2350000" />
+      <workItem from="1469969757614" duration="1307000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2350000" />
+    <option name="totallyTimeSpent" value="3657000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="2258" y="1249" width="1440" height="810" extended-state="0" />
+    <frame x="2161" y="1264" width="1440" height="792" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19027779" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -331,35 +365,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/static/js/button.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="7" column="1" selection-start-line="7" selection-start-column="1" selection-end-line="7" selection-end-column="1" />
-          <folding>
-            <element signature="n#!!doc;n#upload#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/dashboard.html">
+    <entry file="file://$PROJECT_DIR$/templates/input.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/js/toggle.js" />
     <entry file="file://$PROJECT_DIR$/static/js/button.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
@@ -383,16 +396,99 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/layout.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
+        <state relative-caret-position="180">
           <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/js/button.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="7" column="1" selection-start-line="7" selection-start-column="1" selection-end-line="7" selection-end-column="1" />
+          <folding>
+            <element signature="n#!!doc;n#upload#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/dashboard.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/js/toggle.js" />
+    <entry file="file://$PROJECT_DIR$/static/js/button.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="7" column="1" selection-start-line="7" selection-start-column="1" selection-end-line="7" selection-end-column="1" />
+          <folding>
+            <element signature="n#!!doc;n#upload#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/heatmap.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1458">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/predictionHeatmap.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1858">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/dashboard.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="554">
+          <caret line="69" column="14" selection-start-line="69" selection-start-column="0" selection-end-line="69" selection-end-column="14" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/twitterpage.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="7" column="14" selection-start-line="7" selection-start-column="14" selection-end-line="7" selection-end-column="14" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/input.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="86">
+        <state relative-caret-position="-76">
           <caret line="113" column="34" selection-start-line="113" selection-start-column="34" selection-end-line="113" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/layout.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="28" column="84" selection-start-line="28" selection-start-column="84" selection-end-line="28" selection-end-column="84" />
           <folding />
         </state>
       </provider>
