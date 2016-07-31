@@ -113,12 +113,9 @@
 <div class="form-style-5">
     <form action="/dashboard_input" method="post" name="input">
         <fieldset>
-            <legend><span class="number">1</span> Candidate Info</legend>
-            <input type="text" name="field1" placeholder="Your Name *">
-            <input type="email" name="field2" placeholder="Your Email *">
-            <textarea name="field3" placeholder="About yourself"></textarea>
-            <label for="job">Interests:</label>
-            <select id="job" name="field4">
+            <legend><span class="number">1</span> Inputs for Terror-Eyes</legend>
+            <label for="natlty1">Nationality of Terrorist</label>
+            <select id="natlty1" name="field4">
                 <optgroup label="Indoors">
                     <option value="fishkeeping">Fishkeeping</option>
                     <option value="reading">Reading</option>
@@ -137,12 +134,71 @@
                     <option value="other_outdoor">Other</option>
                 </optgroup>
             </select>
+            <label for="region">Region of Attack</label>
+            <select id="region" name="field4">
+                <optgroup label="Indoors">
+                    <option value="fishkeeping">Fishkeeping</option>
+                    <option value="reading">Reading</option>
+                    <option value="boxing">Boxing</option>
+                    <option value="debate">Debate</option>
+                    <option value="gaming">Gaming</option>
+                    <option value="snooker">Snooker</option>
+                    <option value="other_indoor">Other</option>
+                </optgroup>
+            </select>
+            <label for="weapsubtype1">Type of Weapon Used</label>
+            <select id="weapsubtype1" name="field4">
+                <optgroup label="Indoors">
+                    <option value="fishkeeping">Fishkeeping</option>
+                    <option value="reading">Reading</option>
+                    <option value="boxing">Boxing</option>
+                    <option value="debate">Debate</option>
+                    <option value="gaming">Gaming</option>
+                    <option value="snooker">Snooker</option>
+                    <option value="other_indoor">Other</option>
+                </optgroup>
+            </select>
+            <label for="targsubtype1">Type of Target</label>
+            <select id="targsubtype1" name="field4">
+                <optgroup label="Indoors">
+                    <option value="fishkeeping">Fishkeeping</option>
+                    <option value="reading">Reading</option>
+                    <option value="boxing">Boxing</option>
+                    <option value="debate">Debate</option>
+                    <option value="gaming">Gaming</option>
+                    <option value="snooker">Snooker</option>
+                    <option value="other_indoor">Other</option>
+                </optgroup>
+            </select>
+            <label for="killed"> Number of people Killed</label>
+            <input type="number" name="field1" placeholder="Number of people killed">
+            <label for="wounded"> Number of people Wounded</label>
+            <input type="number" name="field1" placeholder="Number of people injured">
+            <label for="fatalities"> Number of terrorist fatalities</label>
+            <input type="number" name="field1" placeholder="Number of terrorist fatalities">
+            <label for="property">Has there been Property Damage?</label>
+            <select id="property" name="field4">
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+                <option value="Unknown">Unknown</option>
+            </select>
+            <label for="attacktype1">Attack Type </label>
+            <select id="attacktype1" name="field4">
+                <option value="Hijacking">Hijacking</option>
+                <option value="Kidnapping">Kidnapping</option>
+            </select>
+            <label for="guncertain1">Has there been Speculation of perpetrators?</label>
+            <select id="guncertain1" name="field4">
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+            </select>
+            <label for="suicide"> Was this a Suicide Attack?</label>
+            <select id="suicide" name="field4">
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+            </select>
         </fieldset>
-        <fieldset>
-            <legend><span class="number">2</span> Additional Info</legend>
-            <textarea name="field3" placeholder="About Your School"></textarea>
-        </fieldset>
-        <input type="submit" value="Apply"/>
+        <input type="submit" value="Predict!"/>
     </form>
 </div>
 {% endblock %}

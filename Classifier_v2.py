@@ -12,7 +12,6 @@ from sklearn.externals import joblib
 import xgboost as xgb
 from sklearn.cross_validation import train_test_split
 from sklearn.metrics import accuracy_score
-
 from sklearn.semi_supervised import LabelPropagation, LabelSpreading
 
 gtd = pd.read_csv('csv-files/gtd_2011to2014.csv', encoding='Latin-1',low_memory=False)
@@ -32,7 +31,7 @@ algo_list = [
 ]
 
 remove =['extended','nperps','crit1','crit2','crit3','multiple','nperpcap','claimed','claimmode','compclaim']
-keep = ['natlty1','targsubtype1','region','weapsubtype1','nwound','nkill','property','attacktype1','targtype1','guncertain1','nkillter','weaptype1','suicide']#,'iday','imonth','iyear']
+keep = ['natlty1','targsubtype1','region','weapsubtype1','nwound','nkill','property','attacktype1','guncertain1','nkillter','suicide']#,'iday','imonth','iyear']
 def runxgb(features,labels):
     trainx,testx,trainy,testy = train_test_split(features,labels)
     clf = xgb.XGBClassifier(max_depth=6,nthread=8,silent=False,objective = 'multi:softmax')

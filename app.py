@@ -79,9 +79,9 @@ def generateTwitterMap():
             lst = list(reader)
     except:
         return
-    
     coords = [[x[3],x[4]] for x in lst[1:]]
     cp.convertGpsToHTML(coords,0,'templates/twitterheatmap.html')
+    
 @app.route("/input")
 def input():
     print("input")
