@@ -82,12 +82,27 @@ def generateTwitterMap():
     coords = [[x[3],x[4]] for x in lst[1:]]
     cp.convertGpsToHTML(coords,0,'templates/twitterheatmap.html')
     
-@app.route("/input")
-def input():
-    print("input")
+@app.route("/input", methods=['POST'])
+def inputFunc():
+    if request.method == 'POST':
+        mapperDic = {} #add maps here.
+        dic = {}
+        dic['gname'] = request.form('gname')
+        dic['natlty1'] = request.form('natlty1')
+        dic['targsubtype1'] = request.form('targsubtype1')
+        dic['region'] = request.form('region')
+        dic['weapsubtype1'] = request.form('weapsubtype1')
+        dic['nwound'] = request.form('nwound')
+        dic['nkill'] = request.form('nkill')
+        dic['property'] = request.form('property')
+        dic['attacktype1'] = request.form('attacktype1')
+        dic['guncertain1'] = request.form('guncertain1')
+        dic['nkillter'] = request.form('nkillter')
+        dic['suicide'] = request.form('suicide')
+        return render_template('dashboard.html',dic=dic)
     return render_template('input.html')
-    
-
+#for entry in keep:
+#    print(x1+"'"+entry+"'"+x2+"'"+entry+"'"+x3)
 def beginTwitterBot():
     thread = threading.Thread(target = twitterbot.twitterCatcherStream)
     thread.daemon = True   # Daemonize thread

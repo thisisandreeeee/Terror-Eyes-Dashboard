@@ -23,7 +23,8 @@ heatmapVariable=None
 Input: Features of attack, from file input.csv
 Output: [String] Terrorist Group name
 """
-def predictTerroristGroup():
+def predictTerroristGroup(dic = {}):
+    keep = ['targsubtype1','region','weapsubtype1','nwound','nkill','property','attacktype1','guncertain1','nkillter','suicide']
     def format_inputs():
         df = pd.read_csv('input.csv')
         global country
@@ -41,9 +42,11 @@ def predictTerroristGroup():
          for entry in labelHash:
              if labelHash[entry] == pred:
                  res = entry
-         return res
-
-    inputs = format_inputs()
+         return res        
+    if dic:
+        inputs = [dic[x] for x in keep]
+    else:
+        inputs = format_inputs()
     prediction = predict_group(inputs)
     print('Likely terrorist group: '+prediction)
     return prediction
