@@ -30,7 +30,7 @@ class CustomStreamListener(tweepy.StreamListener):
                     #name=str(status.created_at)+'_'+status.author.screen_name
                     #name += self.extensionFinder(media)
                     wgetter.download(media,outdir="TerrorAttachment")
-    
+
                 writer.writerow([status.author.screen_name, status.created_at, status.text,geo,lat,long,media])
     def on_error(self, status_code):
         print ( sys.stderr, 'Encountered error with status code:', status_code)
@@ -39,13 +39,13 @@ class CustomStreamListener(tweepy.StreamListener):
     def on_timeout(self):
         print ( sys.stderr, 'Timeout...')
         return True # Don't kill the stream
-        
+
 """
 Main twitter function. Creates the customstream listener class and begins streaming tweets.
 """
 def twitterCatcherStream():
      print('Beginning Twitter Crowdsource Bot')
-     global accesstokenlist         
+     global accesstokenlist
      currentKey = accesstokenlist
      auth = tweepy.auth.OAuthHandler(currentKey[0], currentKey[1])
      auth.set_access_token(currentKey[2], currentKey[3])
@@ -54,4 +54,3 @@ def twitterCatcherStream():
      stream = tweepy.Stream(api.auth, l)
      stream.userstream('terrorBgone')
      stream.filter(track=['@terrorBgone'],async=True)
-
