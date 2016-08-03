@@ -111,91 +111,464 @@
     }
 </style>
 <div class="form-style-5">
-    <form action="/dashboard_input" method="post" name="input">
+    <form action="/dashboard" method="post" name="input">
         <fieldset>
-            <legend><span class="number">1</span> Inputs for Terror-Eyes</legend>
+            <legend><span class="number">?</span> Inputs for Terror-Eyes</legend>
             <label for="natlty1">Nationality of Terrorist</label>
-            <select id="natlty1" name="field4">
-                <optgroup label="Indoors">
-                    <option value="fishkeeping">Fishkeeping</option>
-                    <option value="reading">Reading</option>
-                    <option value="boxing">Boxing</option>
-                    <option value="debate">Debate</option>
-                    <option value="gaming">Gaming</option>
-                    <option value="snooker">Snooker</option>
-                    <option value="other_indoor">Other</option>
-                </optgroup>
-                <optgroup label="Outdoors">
-                    <option value="football">Football</option>
-                    <option value="swimming">Swimming</option>
-                    <option value="fishing">Fishing</option>
-                    <option value="climbing">Climbing</option>
-                    <option value="cycling">Cycling</option>
-                    <option value="other_outdoor">Other</option>
-                </optgroup>
+            <select id="natlty1" name="natlty1">
+                <option value="">-- Select Nationality --</option>
+                <option value='4'>Afghanistan</option>
+                <option value='5'>Albania</option>
+                <option value='6'>Algeria</option>
+                <option value='7'>Andorra</option>
+                <option value='8'>Angola</option>
+                <option value='10'>Antigua and Barbuda</option>
+                <option value='11'>Argentina</option>
+                <option value='12'>Armenia</option>
+                <option value='14'>Australia</option>
+                <option value='15'>Austria</option>
+                <option value='16'>Azerbaijan</option>
+                <option value='17'>Bahamas</option>
+                <option value='18'>Bahrain</option>
+                <option value='19'>Bangladesh</option>
+                <option value='20'>Barbados</option>
+                <option value='21'>Belgium</option>
+                <option value='22'>Belize</option>
+                <option value='23'>Benin</option>
+                <option value='24'>Bermuda</option>
+                <option value='25'>Bhutan</option>
+                <option value='26'>Bolivia</option>
+                <option value='28'>Bosnia‐Herzegovina</option>
+                <option value='29'>Botswana</option>
+                <option value='30'>Brazil</option>
+                <option value='31'>Brunei</option>
+                <option value='32'>Bulgaria</option>
+                <option value='33'>Burkina Faso</option>
+                <option value='34'>Burundi</option>
+                <option value='35'>Belarus</option>
+                <option value='36'>Cambodia</option>
+                <option value='37'>Cameroon</option>
+                <option value='38'>Canada</option>
+                <option value='40'>Cayman Islands</option>
+                <option value='41'>Central African Republic</option>
+                <option value='42'>Chad</option>
+                <option value='43'>Chile</option>
+                <option value='44'>China</option>
+                <option value='45'>Colombia</option>
+                <option value='46'>Comoros</option>
+                <option value='47'>Republic of the Congo</option>
+                <option value='49'>Costa Rica</option>
+                <option value='50'>Croatia</option>
+                <option value='51'>Cuba</option>
+                <option value='53'>Cyprus</option>
+                <option value='54'>Czech Republic</option>
+                <option value='55'>Denmark</option>
+                <option value='56'>Djibouti</option>
+                <option value='57'>Dominica</option>
+                <option value='58'>Dominican Republic</option>
+                <option value='59'>Ecuador</option>
+                <option value='60'>Egypt</option>
+                <option value='61'>El Salvador</option>
+                <option value='62'>Equatorial Guinea</option>
+                <option value='63'>Eritrea</option>
+                <option value='64'>Estonia</option>
+                <option value='65'>Ethiopia</option>
+                <option value='66'>Falkland Islands</option>
+                <option value='67'>Fiji</option>
+                <option value='68'>Finland</option>
+                <option value='69'>France</option>
+                <option value='70'>French Guiana</option>
+                <option value='71'>French Polynesia</option>
+                <option value='72'>Gabon</option>
+                <option value='73'>Gambia</option>
+                <option value='74'>Georgia</option>
+                <option value='75'>Germany</option>
+                <option value='76'>Ghana</option>
+                <option value='77'>Gibraltar</option>
+                <option value='78'>Greece</option>
+                <option value='79'>Greenland</option>
+                <option value='80'>Grenada</option>
+                <option value='81'>Guadeloupe</option>
+                <option value='83'>Guatemala</option>
+                <option value='84'>Guinea</option>
+                <option value='85'>Guinea‐Bissau</option>
+                <option value='86'>Guyana</option>
+                <option value='87'>Haiti</option>
+                <option value='88'>Honduras</option>
+                <option value='89'>Hong Kong</option>
+                <option value='90'>Hungary</option>
+                <option value='91'>Iceland</option>
+                <option value='92'>India</option>
+                <option value='93'>Indonesia</option>
+                <option value='94'>Iran</option>
+                <option value='95'>Iraq</option>
+                <option value='96'>Ireland</option>
+                <option value='97'>Israel</option>
+                <option value='98'>Italy</option>
+                <option value='99'>Ivory Coast</option>
+                <option value='100'>Jamaica</option>
+                <option value='101'>Japan</option>
+                <option value='102'>Jordan</option>
+                <option value='103'>Kazakhstan</option>
+                <option value='104'>Kenya</option>
+                <option value='106'>Kuwait</option>
+                <option value='107'>Kyrgyzstan</option>
+                <option value='108'>Laos</option>
+                <option value='109'>Latvia</option>
+                <option value='110'>Lebanon</option>
+                <option value='111'>Lesotho</option>
+                <option value='112'>Liberia</option>
+                <option value='113'>Libya</option>
+                <option value='114'>Liechtenstein</option>
+                <option value='115'>Lithuania</option>
+                <option value='116'>Luxembourg</option>
+                <option value='117'>Macau</option>
+                <option value='118'>Macedonia</option>
+                <option value='119'>Madagascar</option>
+                <option value='120'>Malawi</option>
+                <option value='121'>Malaysia</option>
+                <option value='122'>Maldives</option>
+                <option value='123'>Mali</option>
+                <option value='124'>Malta</option>
+                <option value='125'>Man, Isle of</option>
+                <option value='127'>Martinique</option>
+                <option value='128'>Mauritania</option>
+                <option value='129'>Mauritius</option>
+                <option value='130'>Mexico</option>
+                <option value='132'>Moldova</option>
+                <option value='134'>Mongolia</option>
+                <option value='136'>Morocco</option>
+                <option value='137'>Mozambique</option>
+                <option value='138'>Myanmar</option>
+                <option value='139'>Namibia</option>
+                <option value='141'>Nepal</option>
+                <option value='142'>Netherlands</option>
+                <option value='143'>New Caledonia</option>
+                <option value='144'>New Zealand</option>
+                <option value='145'>Nicaragua</option>
+                <option value='146'>Niger</option>
+                <option value='147'>Nigeria</option>
+                <option value='149'>North Korea</option>
+                <option value='151'>Norway</option>
+                <option value='152'>Oman</option>
+                <option value='153'>Pakistan</option>
+                <option value='155'>West Bank and Gaza Strip</option>
+                <option value='156'>Panama</option>
+                <option value='157'>Papua New Guinea</option>
+                <option value='158'>Paraguay</option>
+                <option value='159'>Peru</option>
+                <option value='160'>Philippines</option>
+                <option value='161'>Poland</option>
+                <option value='162'>Portugal</option>
+                <option value='163'>Puerto Rico</option>
+                <option value='164'>Qatar</option>
+                <option value='166'>Romania</option>
+                <option value='167'>Russia</option>
+                <option value='168'>Rwanda</option>
+                <option value='173'>Saudi Arabia</option>
+                <option value='174'>Senegal</option>
+                <option value='175'>Serbia‐Montenegro</option>
+                <option value='176'>Seychelles</option>
+                <option value='177'>Sierra Leone</option>
+                <option value='178'>Singapore</option>
+                <option value='179'>Slovak Republic</option>
+                <option value='180'>Slovenia</option>
+                <option value='181'>Solomon Islands</option>
+                <option value='182'>Somalia</option>
+                <option value='183'>South Africa</option>
+                <option value='184'>South Korea</option>
+                <option value='185'>Spain</option>
+                <option value='186'>Sri Lanka</option>
+                <option value='189'>St. Kitts and Nevis</option>
+                <option value='190'>St. Lucia</option>
+                <option value='192'>St. Martin</option>
+                <option value='195'>Sudan</option>
+                <option value='196'>Suriname</option>
+                <option value='197'>Swaziland</option>
+                <option value='198'>Sweden</option>
+                <option value='199'>Switzerland</option>
+                <option value='200'>Syria</option>
+                <option value='201'>Taiwan</option>
+                <option value='202'>Tajikistan</option>
+                <option value='203'>Tanzania</option>
+                <option value='204'>Togo</option>
+                <option value='205'>Thailand</option>
+                <option value='206'>Tonga</option>
+                <option value='207'>Trinidad and Tobago</option>
+                <option value='208'>Tunisia</option>
+                <option value='209'>Turkey</option>
+                <option value='210'>Turkmenistan</option>
+                <option value='213'>Uganda</option>
+                <option value='214'>Ukraine</option>
+                <option value='215'>United Arab Emirates</option>
+                <option value='216'>Great Britain</option>
+                <option value='217'>United States</option>
+                <option value='218'>Uruguay</option>
+                <option value='219'>Uzbekistan</option>
+                <option value='220'>Vanuatu</option>
+                <option value='221'>Vatican City</option>
+                <option value='222'>Venezuela</option>
+                <option value='223'>Vietnam</option>
+                <option value='226'>Wallis and Futuna</option>
+                <option value='228'>Yemen</option>
+                <option value='229'>Democratic Republic of the Congo</option>
+                <option value='230'>Zambia</option>
+                <option value='231'>Zimbabwe</option>
+                <option value='233'>Northern Ireland</option>
+                <option value='235'>Yugoslavia</option>
+                <option value='236'>Czechoslovakia</option>
+                <option value='238'>Corsica</option>
+                <option value='334'>Asian</option>
+                <option value='347'>East Timor</option>
+                <option value='349'>Western Sahara</option>
+                <option value='351'>Commonwealth of Independent States</option>
+                <option value='359'>Soviet Union</option>
+                <option value='362'>West Germany (FRG)</option>
+                <option value='377'>North Yemen</option>
+                <option value='403'>Rhodesia</option>
+                <option value='406'>South Yemen</option>
+                <option value='422'>International</option>
+                <option value='428'>South Vietnam</option>
+                <option value='499'>East Germany (GDR)</option>
+                <option value='520'>Sinhalese</option>
+                <option value='532'>New Hebrides</option>
+                <option value='603'>United Kingdom</option>
+                <option value='604'>Zaire</option>
+                <option value='605'>People's Republic of the Congo</option>
+                <option value='999'>Multinational</option>
+                <option value='1001'>Serbia</option>
+                <option value='1002'>Montenegro</option>
+                <option value='1003'>Kosovo</option>
+                <option value='1004'>South Sudan</option>
             </select>
             <label for="region">Region of Attack</label>
-            <select id="region" name="field4">
-                <optgroup label="Indoors">
-                    <option value="fishkeeping">Fishkeeping</option>
-                    <option value="reading">Reading</option>
-                    <option value="boxing">Boxing</option>
-                    <option value="debate">Debate</option>
-                    <option value="gaming">Gaming</option>
-                    <option value="snooker">Snooker</option>
-                    <option value="other_indoor">Other</option>
-                </optgroup>
+            <select id="region" name="region">
+                <option value="">-- Select Region --</option>
+                <option value="1">North America</option>
+                <option value="2">Central America &amp; Caribbean</option>
+                <option value="3">South America</option>
+                <option value="4">East Asia</option>
+                <option value="5">Southeast Asia</option>
+                <option value="6">South Asia</option>
+                <option value="7">Central Asia</option>
+                <option value="8">Western Europe</option>
+                <option value="9">Eastern Europe</option>
+                <option value="10">Middle East &amp; North Africa</option>
+                <option value="11">Sub-Saharan Africa</option>
+                <option value="12">Australasia &amp; oceania</option>
             </select>
             <label for="weapsubtype1">Type of Weapon Used</label>
-            <select id="weapsubtype1" name="field4">
-                <optgroup label="Indoors">
-                    <option value="fishkeeping">Fishkeeping</option>
-                    <option value="reading">Reading</option>
-                    <option value="boxing">Boxing</option>
-                    <option value="debate">Debate</option>
-                    <option value="gaming">Gaming</option>
-                    <option value="snooker">Snooker</option>
-                    <option value="other_indoor">Other</option>
+            <select id="weapsubtype1" name="weapsubtype1">
+                <option value="">-- Select Weapon Used --</option>
+                <option value="1">Poisoning</option>
+                <optgroup label="Firearms">
+                    <option value="2">Automatic Weapon</option>
+                    <option value="3">Handgun</option>
+                    <option value="4">Rifle/Shotgun</option>
+                    <option value="5">Unknown Gun Type</option>
+                    <option value="6">Other Gun Type</option>
+                </optgroup>
+                <optgroup label="Explosives/Bombs/Dynamite">
+                    <option value="7">Grenade (not RPGs)</option>
+                    <option value="8">Mine</option>
+                    <option value="9">Mail Bomb</option>
+                    <option value="10">Pressure Trigger</option>
+                    <option value="11">Projectile</option>
+                    <option value="12">Remote Device</option>
+                    <option value="13">Suicide</option>
+                    <option value="14">Time Fuse</option>
+                    <option value="15">Vehicle</option>
+                    <option value="16">Unknown Explosive Type</option>
+                    <option value="17">Other Explosive Type</option>
+                    <option value="18">Dynamite/TNT</option>
+                    <option value="19">Sticky Bomb</option>
+                </optgroup>
+                <optgroup label="Incendiary">
+                    <option value="20">Arson/Fire</option>
+                    <option value="21">Molotov Cocktail/Petrol Bomb</option>
+                    <option value="22">Gasoline or Alcohol</option>
+                </optgroup>
+                <optgroup label="Melee">
+                    <option value="23">Blunt Object</option>
+                    <option value="24">Hands, Feet, Fists</option>
+                    <option value="25">Knife or Sharp Object</option>
+                    <option value="26">Rope or Strangling Device</option>
+                    <option value="27">Suffocation</option>
+                    <option value="28">Unknown Weapon Type</option>
                 </optgroup>
             </select>
             <label for="targsubtype1">Type of Target</label>
-            <select id="targsubtype1" name="field4">
-                <optgroup label="Indoors">
-                    <option value="fishkeeping">Fishkeeping</option>
-                    <option value="reading">Reading</option>
-                    <option value="boxing">Boxing</option>
-                    <option value="debate">Debate</option>
-                    <option value="gaming">Gaming</option>
-                    <option value="snooker">Snooker</option>
-                    <option value="other_indoor">Other</option>
+            <select id="targsubtype1" name="targsubtype1">
+                <option value="">-- Select Target Type --</option>
+                <optgroup label='Business'><option value='1'>Gas/Oil</option>
+                    <option value='2'>Restaurant/Bar/Café</option>
+                    <option value='3'>Bank/Commerce  </option>
+                    <option value='4'>Multinational Corporation</option>
+                    <option value='5'>Industrial/Textiles/Factory</option>
+                    <option value='6'>Medical/Pharmaceutical</option>
+                    <option value='7'>Retail/Grocery/Bakery (including cell phone shops and generic shops)</option>
+                    <option value='8'>Hotel/Resort</option>
+                    <option value='9'>Farm/Ranch</option>
+                    <option value='10'>Mining</option>
+                    <option value='11'>Entertainment/Cultural/Stadium/Casino</option>
+                    <option value='12'>Construction</option>
+                    <option value='13'>Private Security Company/Firm</option>
+                </optgroup>
+                <optgroup label='Government (General)'><option value='14'>Judges/Attorneys/Courts</option>
+                    <option value='15'>Politician or Political Party Movement/Meeting/Rally</option>
+                    <option value='16'>Royalty</option>
+                    <option value='17'>Head of State</option>
+                    <option value='18'>Government Personnel (excluding police, military)</option>
+                    <option value='19'>Election‐related</option>
+                    <option value='20'>Intelligence</option>
+                    <option value='21'>Government Buildings/Facility/Office</option>
+                </optgroup>
+                <optgroup label='Police'><option value='22'>Police Buildings (Headquarters/Stations/School)</option>
+                    <option value='23'>Police Patrol (including vehicles and convoys)</option>
+                    <option value='24'>Police Checkpoint</option>
+                    <option value='25'>Police Security Forces/Officers</option>
+                    <option value='26'>Prison/Jail</option>
+                </optgroup>
+                <optgroup label='Military'><option value='27'>Military Barracks/Base/Headquarters/Checkpost</option>
+                    <option value='28'>Military Recruiting Station/Academy</option>
+                    <option value='29'>Military Unit/Patrol/Convoy</option>
+                    <option value='30'>Military Weaponry</option>
+                    <option value='31'>Military Aircraft</option>
+                    <option value='32'>Military Maritime  </option>
+                    <option value='33'>Non‐combatant Personnel</option>
+                    <option value='34'>Military Personnel (soldiers, troops, officers, forces)</option>
+                    <option value='35'>Military Transportation/Vehicle (excluding convoys)</option>
+                    <option value='36'>Military Checkpoint</option>
+                    <option value='37'>North Atlantic Treaty Organization (NATO) Related  </option>
+                    <option value='38'>Marine  </option>
+                    <option value='39'>Paramilitary  </option>
+                </optgroup>
+                <optgroup label='Abortion Related'><option value='40'>Clinics</option>
+                    <option value='41'>Personnel</option>
+                </optgroup>
+                <optgroup label='Airports &amp; Aircraft  '><option value='42'>Aircraft (not at an airport)</option>
+                    <option value='43'>Airline Officer/Personnel</option>
+                    <option value='44'>Airport</option>
+                </optgroup>
+                <optgroup label='Government (Diplomatic)'><option value='45'>Diplomatic Personnel (outside of embassy, consulate)</option>
+                    <option value='46'>Embassy/Consulate</option>
+                    <option value='47'>International Organization (peacekeeper, aid agency, compound)</option>
+                </optgroup>
+                <optgroup label='Educational Institution  '><option value='48'>Teacher/Professor/Instructor</option>
+                    <option value='49'>School/University/Educational Building</option>
+                    <option value='50'>Other Personnel</option>
+                </optgroup>
+                <optgroup label='Food and Water Supply'><option value='51'>Food Supply</option>
+                    <option value='52'>Water Supply</option>
+                </optgroup>
+                <optgroup label='Journalists & Media'><option value='53'>Newspaper Journalist/Staff/Facility</option>
+                    <option value='54'>Radio Journalist/Staff/Facility</option>
+                    <option value='55'>Television Journalist/Staff/Facility</option>
+                    <option value='56'>Other (including online news agencies)</option>
+                </optgroup>
+                <optgroup label='Maritime'><option value='57'>Civilian Maritime</option>
+                    <option value='58'>Commercial Maritime</option>
+                    <option value='59'>Oil Tanker</option>
+                    <option value='60'>Port</option>
+                </optgroup>
+                <optgroup label='NGO'><option value='61'>Domestic NGO</option>
+                    <option value='62'>International NGO  </option>
+                </optgroup>
+                <optgroup label='Other'><option value='63'>Ambulance</option>
+                    <option value='64'>Fire Fighter/Truck</option>
+                    <option value='65'>Refugee Camp</option>
+                    <option value='66'>Demilitarized Zone (including Green Zone) Private Citizens & Property</option>
+                    <option value='67'>Unnamed Civilian/Unspecified</option>
+                    <option value='68'>Named Civilian</option>
+                    <option value='69'>Religion Identified</option>
+                    <option value='70'>Student</option>
+                    <option value='71'>Race/Ethnicity Identified</option>
+                    <option value='72'>Farmer  </option>
+                    <option value='73'>Vehicles/Transportation</option>
+                    <option value='74'>Marketplace/Plaza/Square</option>
+                    <option value='75'>Village/City/Town/Suburb</option>
+                    <option value='76'>House/Apartment/Residence</option>
+                    <option value='77'>Laborer (General)/Occupation Identified</option>
+                    <option value='78'>Procession/Gathering (funeral, wedding, birthday, religious)</option>
+                    <option value='79'>Public Areas (e.g., Public garden, parking lot, garage, beach, public buildings, camps)</option>
+                    <option value='80'>Memorial/Cemetery/Monument</option>
+                    <option value='81'>Museum/Cultural Center/Cultural House</option>
+                    <option value='82'>Labor Union Related  </option>
+                    <option value='83'>Protester</option>
+                    <option value='84'>Political Party Member/Rally</option>
+                </optgroup>
+                <optgroup label="Religious Figures/Institutions">
+                    <option value='85'>Religious Figure</option>
+                    <option value='86'>Place of Worship</option>
+                    <option value='87'>Affiliated Institution Telecommunication</option>
+                    <option value='88'>Radio</option>
+                    <option value='89'>Television</option>
+                    <option value='90'>Telephone/Telegraph</option>
+                    <option value='91'>Internet Infrastructure</option>
+                    <option value='92'>Multiple Telecommunication Targets</option>
+                </optgroup>
+                <optgroup label='Terrorist/Non‐State Militia'><option value='93'>Terrorist Organization</option>
+                    <option value='94'>Non‐State Militia</option>
+                    </optgroup>
+                    <optgroup label='Tourists  '><option value='95'>Tourism Travel Agency</option>
+                    <option value='96'>Tour Bus/Van/Vehicle</option>
+                    <option value='97'>Tourist</option>
+                    <option value='98'>Other Facility</option>
+                </optgroup>
+                <optgroup label='Transportation'><option value='99'>Bus (excluding tourist)</option>
+                    <option value='100'>Train/Train Tracks/ Trolley</option>
+                    <option value='101'>Bus Station/Stop</option>
+                    <option value='102'>Subway</option>
+                    <option value='103'>Bridge/Car Tunnel</option>
+                    <option value='104'>Highway/Road/Toll/Traffic Signal</option>
+                    <option value='105'>Taxi/Rickshaw</option>
+                </optgroup>
+                <optgroup label='Utilities  '><option value='106'>Gas</option>
+                    <option value='107'>Electricity  </option>
+                    <option value='108'>Oil</option>
+                </optgroup>
+                <optgroup label='Violent Political Parties'><option value='109'>Party Official/Candidate/Other Personnel</option>
+                    <option value='110'>Party Office/Facility</option>
+                    <option value='111'>Rally</option>
                 </optgroup>
             </select>
             <label for="killed"> Number of people Killed</label>
-            <input type="number" name="field1" placeholder="Number of people killed">
+            <input type="number" name="nkill" placeholder="Only integers allowed">
             <label for="wounded"> Number of people Wounded</label>
-            <input type="number" name="field1" placeholder="Number of people injured">
+            <input type="number" name="nwound" placeholder="Only integers allowed">
             <label for="fatalities"> Number of terrorist fatalities</label>
-            <input type="number" name="field1" placeholder="Number of terrorist fatalities">
+            <input type="number" name="nkillter" placeholder="Only integers allowed">
             <label for="property">Has there been Property Damage?</label>
-            <select id="property" name="field4">
-                <option value="Yes">Yes</option>
-                <option value="No">No</option>
-                <option value="Unknown">Unknown</option>
+            <select id="property" name="property">
+                <option value="">-- Select Property Damage --</option>
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+                <option value="-9">Unknown</option>
             </select>
             <label for="attacktype1">Attack Type </label>
-            <select id="attacktype1" name="field4">
-                <option value="Hijacking">Hijacking</option>
-                <option value="Kidnapping">Kidnapping</option>
+            <select id="attacktype1" name="attacktype1">
+                <option value="">-- Select Attack Type --</option>
+                <option value="1">Assassination</option>
+                <option value="2">Armed Assault</option>
+                <option value="3">Bombing/Explosion</option>
+                <option value="4">Hijacking</option>
+                <option value="5">Hostage Taking (Barricade)</option>
+                <option value="6">Hostage Taking (Kidnapping)</option>
+                <option value="7">Facility/Infrastructure Attack</option>
+                <option value="8">Unarmed Assault</option>
+                <option value="9">Unknown</option>
             </select>
             <label for="guncertain1">Has there been Speculation of perpetrators?</label>
-            <select id="guncertain1" name="field4">
-                <option value="Yes">Yes</option>
-                <option value="No">No</option>
+            <select id="guncertain1" name="guncertain1">
+                <option value="">-- Select Uncertain Perpetrators --</option>
+                <option value="1">Yes</option>
+                <option value="0">No</option>
             </select>
             <label for="suicide"> Was this a Suicide Attack?</label>
-            <select id="suicide" name="field4">
-                <option value="Yes">Yes</option>
-                <option value="No">No</option>
+            <select id="suicide" name="suicide">
+                <option value="">-- Select if Suicide Attack --</option>
+                <option value="1">Yes</option>
+                <option value="0">No</option>
             </select>
         </fieldset>
         <input type="submit" value="Predict!"/>
