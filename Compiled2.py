@@ -24,7 +24,7 @@ Input: Features of attack, from file input.csv
 Output: [String] Terrorist Group name
 """
 def predictTerroristGroup(dic = {}):
-    keep = ['targsubtype1','region','weapsubtype1','nwound','nkill','property','attacktype1','guncertain1','nkillter','suicide']
+    keep = ['natlty1','targsubtype1','region','weapsubtype1','nwound','nkill','property','attacktype1','guncertain1','nkillter','suicide']
     def format_inputs():
         df = pd.read_csv('input.csv')
         global country
@@ -34,9 +34,11 @@ def predictTerroristGroup(dic = {}):
         return nontext_df
 
     def predict_group(features):
-         labelHash = joblib.load('dics/labelHash.pkl') #temporary hack to get this shit working
-         classifier = joblib.load('classifiers/randomforest.pkl')
-         pred = classifier.predict(features)[0]
+         labelHash = joblib.load('labelHashxgb.pkl')
+         classifier = joblib.load('xgboost67.pkl')
+#         labelHash = joblib.load('dics/labelHashRF.pkl') #temporary hack to get this shit working
+#         classifier = joblib.load('classifiers/randomforest.pkl')
+         pred = classifier.predict(features)#[0]
          #pred_proba = classifier.predict_proba(features)[0]
          res = "Unknown"
          for entry in labelHash:
@@ -44,7 +46,12 @@ def predictTerroristGroup(dic = {}):
                  res = entry
          return res
     if dic:
-        inputs = [dic[x] for x in keep]
+        global country
+        country = dic['country']
+        del dic['country']
+        dic = {k:int(v) for k,v in dic.items()}
+        inputs = np.array([dic[x] for x in keep]).reshape((1,11))
+        inputs = pd.DataFrame(inputs,columns=keep)
     else:
         inputs = format_inputs()
     prediction = predict_group(inputs)
@@ -234,3 +241,5 @@ def run():
 
 if __name__ == '__main__':
     run()
+    
+    

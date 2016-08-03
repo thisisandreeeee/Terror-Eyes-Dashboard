@@ -90,6 +90,7 @@ def ensembleFinalLayer(clf,preds,labels):
 def fitAndPredict(clf,trainx,testx,trainy,testy):
     clf.fit(trainx,trainy)
     preds = clf.predict(testx)
+    preds = preds.astype(int)
     return preds
     
 if __name__ in '__main__':
@@ -99,6 +100,11 @@ if __name__ in '__main__':
     df = oneHotEncode(df,labelHash)
     dataset,target = splitDatasetTarget(df)
     trainx,testx,trainy,testy = splitTrainTest(dataset,target)
+    testy = testy.astype(int)
+    clf = xgboost()
+    preds = fitAndPredict(clf,trainx,testx,trainy,testy)
+    print(accuracy_score(testy,preds))
+    
     clfs = [xgboost(),randomForest()]
     preds = ensemblePreds(clfs,trainx,testx,trainy,testy)
     

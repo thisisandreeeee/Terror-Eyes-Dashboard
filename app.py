@@ -85,8 +85,8 @@ def generateTwitterMap():
 @app.route("/dashboard", methods=['GET','POST'])
 def inputFunc():
     if request.method == 'POST':
-        mapperDic = {} #add maps here.
         dic = {}
+        dic['country'] = request.form.get('country')
         dic['natlty1'] = request.form.get('natlty1')
         dic['targsubtype1'] = request.form.get('targsubtype1')
         dic['region'] = request.form.get('region')
@@ -101,10 +101,7 @@ def inputFunc():
         if not any([dic[i] != "" for i in dic]): #TODO: remove 'not'
             print("error, handle form validation here") #TODO: add form validation
         else:
-            converted_dic = {}
-            for key, value in dic.items():
-                converted_dic[key] = int(value)
-            pred = cp.predictTerroristGroup(converted_dic)
+            pred = cp.predictTerroristGroup(dic)
             if pred != 'Unknown':
                 mult = float(cp.multipleAttacks(pred))*100
                 location = cp.typeFreqPlaceAttacked(pred)
@@ -137,6 +134,6 @@ def beginTwitterBot():
 
 if __name__ == "__main__":
     server = WSGIServer(("",5000), app)
-    beginTwitterBot()
+    #beginTwitterBot()
     print('Server is up')
     server.serve_forever()
