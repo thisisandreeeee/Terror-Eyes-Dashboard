@@ -42,7 +42,7 @@ def predictTerroristGroup(dic = {}):
          for entry in labelHash:
              if labelHash[entry] == pred:
                  res = entry
-         return res        
+         return res
     if dic:
         inputs = [dic[x] for x in keep]
     else:

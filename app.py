@@ -22,31 +22,31 @@ def main():
 	# return render_template('index.html')
 	return render_template('landing.html')
 
-@app.route("/dashboard")
-def dashboard():
-	pred = cp.predictTerroristGroup()
-	if pred != 'Unknown':
-		mult = float(cp.multipleAttacks(pred))*100
-		location = cp.typeFreqPlaceAttacked(pred)
-		casualties = cp.numOfCasualties(pred)
-		weaptype = cp.findTypeOfWeapon(pred)
-		propdmg = float(cp.findPropertyDamage(pred))*100
-		nperps = cp.numPerps(pred)
-		if not nperps:
-			nperps = "Unknown"
-		cp.plotRiskyLocations(location)
-	else:
-		location,mult,casualties,weaptype,propdmg,nperps="Police",9.4,2.3,"Explosives",52.8,3
+# @app.route("/dashboard")
+# def dashboard():
+# 	pred = cp.predictTerroristGroup()
+# 	if pred != 'Unknown':
+# 		mult = float(cp.multipleAttacks(pred))*100
+# 		location = cp.typeFreqPlaceAttacked(pred)
+# 		casualties = cp.numOfCasualties(pred)
+# 		weaptype = cp.findTypeOfWeapon(pred)
+# 		propdmg = float(cp.findPropertyDamage(pred))*100
+# 		nperps = cp.numPerps(pred)
+# 		if not nperps:
+# 			nperps = "Unknown"
+# 		cp.plotRiskyLocations(location)
+# 	else:
+# 		location,mult,casualties,weaptype,propdmg,nperps="Police",9.4,2.3,"Explosives",52.8,3
+#
+# 	return render_template('dashboard.html',
+# 		prediction=pred,
+# 		location=location,
+# 		mult=mult,
+# 		casualties_num=casualties,
+# 		weaptype=weaptype,
+# 		propdmg_prob=propdmg,
+# 		numperps=nperps)
 
-	return render_template('dashboard.html',
-		prediction=pred,
-		location=location,
-		mult=mult,
-		casualties_num=casualties,
-		weaptype=weaptype,
-		propdmg_prob=propdmg,
-		numperps=nperps)
-  
 
 @app.route("/coffeewheel.csv", methods=['GET', 'OPTIONS'])
 def send_file():
@@ -55,7 +55,7 @@ def send_file():
 @app.route("/heatmap")
 def heatmap():
 	return render_template('predictionHeatmap.html')
- 
+
 @app.route("/twitterheatmap")
 def twitterheatmap():
 	return render_template('twitterheatmap.html')
@@ -66,12 +66,12 @@ def visualize():
 	# cp.makeWeapVisual(name) #make csv to load.
 	# return render_template('visualizations.html')
 	return "Coming soon!"
- 
+
 @app.route('/twitter')
 def twitter_map():
     generateTwitterMap()
     return render_template('twitterpage.html')
-    
+
 def generateTwitterMap():
     try:
         with open('csv-files/terrortracking.csv','r') as f:
@@ -81,32 +81,59 @@ def generateTwitterMap():
         return
     coords = [[x[3],x[4]] for x in lst[1:]]
     cp.convertGpsToHTML(coords,0,'templates/twitterheatmap.html')
-    
-@app.route("/input", methods=['POST'])
+
+@app.route("/dashboard", methods=['GET','POST'])
 def inputFunc():
     if request.method == 'POST':
         mapperDic = {} #add maps here.
         dic = {}
-        dic['gname'] = request.form('gname')
-        dic['natlty1'] = request.form('natlty1')
-        dic['targsubtype1'] = request.form('targsubtype1')
-        dic['region'] = request.form('region')
-        dic['weapsubtype1'] = request.form('weapsubtype1')
-        dic['nwound'] = request.form('nwound')
-        dic['nkill'] = request.form('nkill')
-        dic['property'] = request.form('property')
-        dic['attacktype1'] = request.form('attacktype1')
-        dic['guncertain1'] = request.form('guncertain1')
-        dic['nkillter'] = request.form('nkillter')
-        dic['suicide'] = request.form('suicide')
-        return render_template('dashboard.html',dic=dic)
+        dic['natlty1'] = request.form.get('natlty1')
+        dic['targsubtype1'] = request.form.get('targsubtype1')
+        dic['region'] = request.form.get('region')
+        dic['weapsubtype1'] = request.form.get('weapsubtype1')
+        dic['nwound'] = request.form.get('nwound')
+        dic['nkill'] = request.form.get('nkill')
+        dic['property'] = request.form.get('property')
+        dic['attacktype1'] = request.form.get('attacktype1')
+        dic['guncertain1'] = request.form.get('guncertain1')
+        dic['nkillter'] = request.form.get('nkillter')
+        dic['suicide'] = request.form.get('suicide')
+        if not any([dic[i] != "" for i in dic]): #TODO: remove 'not'
+            print("error, handle form validation here") #TODO: add form validation
+        else:
+            converted_dic = {}
+            for key, value in dic.items():
+                converted_dic[key] = int(value)
+            pred = cp.predictTerroristGroup(converted_dic)
+            if pred != 'Unknown':
+                mult = float(cp.multipleAttacks(pred))*100
+                location = cp.typeFreqPlaceAttacked(pred)
+                casualties = cp.numOfCasualties(pred)
+                weaptype = cp.findTypeOfWeapon(pred)
+                propdmg = float(cp.findPropertyDamage(pred))*100
+                nperps = cp.numPerps(pred)
+                if not nperps:
+                    nperps = "Unknown"
+                cp.plotRiskyLocations(location)
+            else:
+                location,mult,casualties,weaptype,propdmg,nperps="Police",9.4,2.3,"Explosives",52.8,3
+            return render_template('dashboard.html',
+        		prediction=pred,
+        		location=location,
+        		mult=mult,
+        		casualties_num=casualties,
+        		weaptype=weaptype,
+        		propdmg_prob=propdmg,
+        		numperps=nperps)
     return render_template('input.html')
+
 #for entry in keep:
 #    print(x1+"'"+entry+"'"+x2+"'"+entry+"'"+x3)
+
 def beginTwitterBot():
     thread = threading.Thread(target = twitterbot.twitterCatcherStream)
     thread.daemon = True   # Daemonize thread
-    thread.start() 
+    thread.start()
 
 if __name__ == "__main__":
     server = WSGIServer(("",5000), app)
