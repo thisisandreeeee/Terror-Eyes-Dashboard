@@ -134,6 +134,6 @@ def beginTwitterBot():
 
 if __name__ == "__main__":
     server = WSGIServer(("",5000), app)
-    #beginTwitterBot()
+    beginTwitterBot()
     print('Server is up')
     server.serve_forever()
