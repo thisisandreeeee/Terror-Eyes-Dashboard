@@ -47,8 +47,11 @@ def predictTerroristGroup(dic = {}):
          return res
     if dic:
         global country
-        country = dic['country']
-        del dic['country']
+        try:
+            country = dic['country']
+            del dic['country']
+        except:
+            country='Afghanistan'
         dic = {k:int(v) for k,v in dic.items()}
         inputs = np.array([dic[x] for x in keep]).reshape((1,11))
         inputs = pd.DataFrame(inputs,columns=keep)
