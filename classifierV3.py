@@ -12,36 +12,36 @@ keep = ['gname','natlty1','targsubtype1','region','weapsubtype1','nwound','nkill
 labelHash = {}
 #labelHashReversed = {k:v for v,k in labelHash.items()}
 
-def findGroupsWithMoreThanXAttacks(df,x=5):
-    value = df['gname'].value_counts() > x
+def findGroupsWithMoreThanXAttacks(df,x=5,target = 'gname'):
+    value = df[target].value_counts() > x
     names_to_keep = [value.index[i] for i in range(len(value)) if value[i] == True]
     return names_to_keep
     
-def removeGroups(df,names_to_keep):
-    return df[df['gname'].isin(names_to_keep)].reset_index(drop=True)
+def removeGroups(df,names_to_keep,target='gname'):
+    return df[df[target].isin(names_to_keep)].reset_index(drop=True)
     
-def substituteWitUnknown(df,names_to_keep):
-    df['gname'][~df['gname'].isin(names_to_keep)] = 'Unknown'
+def substituteWitUnknown(df,names_to_keep,target='gname'):
+    df[target][~df[target].isin(names_to_keep)] = 'Unknown'
     return df
 
 def subNAwith99(df):
     df = df.fillna(-99)
     return df
     
-def makeLabelHash(df):
-    gname = df['gname'].unique()
+def makeLabelHash(df,target='gname'):
+    gname = df[target].unique()
     dic = {}
     for i in range(len(gname)):
         entry = gname[i]
         dic[entry] = i
     return dic
         
-def oneHotEncode(df,dic):
-    ser = pd.Series('gname',index = df.index)
+def oneHotEncode(df,dic,target='gname'):
+    ser = pd.Series(target,index = df.index)
     for i in ser.index:
-        gname = df['gname'][i]
+        gname = df[target][i]
         ser.set_value(i,dic[gname])
-    df['gname'] = ser
+    df[target] = ser
     return df
 
 def subsetDF(df,keep):
@@ -51,9 +51,9 @@ def subsetDF(df,keep):
 #==============================================================================
 #                                Split
 #==============================================================================
-def splitDatasetTarget(df):
-    dataset = df.drop('gname',axis=1)
-    target = df['gname']
+def splitDatasetTarget(df,target='gname'):
+    dataset = df.drop(target,axis=1)
+    target = df[target]
     return dataset,target
 
 def splitTrainTest(dataset,target,test_size=0.2):
