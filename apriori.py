@@ -21,14 +21,19 @@ from optparse import OptionParser
 def make_csv_for_apriori():
     df = pd.read_csv('csv-files/gtd_2011to2014.csv', encoding='Latin-1',low_memory=False)
     df = df[df['multiple'] == '1']
-    df = make_network(df)
+    col = 'targtype1'
+    df[col] = df[col].apply(pd.to_numeric, args=('coerce',))
+    df = make_network(df) # adds another column called marker that tells us when a bunch of related attacks are well, related. we need to do this because the related column isn't able to act as an id cos it's a bitch
     with open('csv-files/apriori.csv', 'w') as f:
         w = csv.writer(f)
         for name, group in df.groupby('marker'):
-            row = list(set([i for i in group['targtype1']]))
+            row = list(set([i for i in group[col]]))
             w.writerow(row)
 
 def make_network(df):
+    '''
+    adds all the related points to a undirected graph, then finds all the connected components and gives them an id
+    '''
     G = nx.Graph()
     for i in df.index:
         _from = df['eventid'][i]
@@ -44,6 +49,7 @@ def make_network(df):
         for ind, comp in cc:
             if eventid in comp:
                 marker[i] = ind
+
     df['marker'] = marker
     return df
 
@@ -160,6 +166,7 @@ def printResults(items, rules):
         cond, res = rs
         if len(cond) == 1:
             d[cond[0]] = [i for i in res]
+    print(items, "\n\n##########\n\n", rules)
     open("dics/apriori.json",'w').write(json.dumps(d, indent=4))
     # for item, support in sorted(items, key=lambda (item, support): support):
     #     print "item: %s , %.3f" % (str(item), support)
@@ -179,7 +186,7 @@ def dataFromFile(fname):
 
 
 if __name__ == "__main__":
-    # make_csv_for_apriori()
+    make_csv_for_apriori()
     optparser = OptionParser()
     optparser.add_option('-f', '--inputFile',
                          dest='input',
