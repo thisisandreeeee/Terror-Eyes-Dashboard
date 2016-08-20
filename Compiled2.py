@@ -26,7 +26,7 @@ Output: [String] Terrorist Group name
 def predictTerroristGroup(dic = {}):
     keep = ['natlty1','targsubtype1','region','weapsubtype1','nwound','nkill','property','attacktype1','guncertain1','nkillter','suicide']#,'iday','imonth','iyear']
     def format_inputs():
-        df = pd.read_csv('ISISInput.csv')
+        df = pd.read_csv('input.csv')
         global country
         country = df['country_txt'][0]
         nontext_df,labels = separate_column_by_type(df)
