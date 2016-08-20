@@ -101,26 +101,28 @@ def inputFunc():
         if not any([dic[i] != "" for i in dic]): #TODO: remove 'not'
             print("error, handle form validation here") #TODO: add form validation
         else:
-            pred = cp.predictTerroristGroup(dic)
+            pred,inputs = cp.predictTerroristGroup(dic)
             if pred != 'Unknown':
-                mult = float(cp.multipleAttacks(pred))*100
-                location = cp.typeFreqPlaceAttacked(pred)
+                mult = cp.multipleAttacks(inputs)
+                #location = cp.typeFreqPlaceAttacked(pred)
+                location = cp.multipleAttackLocation(dic['country'],inputs)
                 casualties = cp.numOfCasualties(pred)
                 weaptype = cp.findTypeOfWeapon(pred)
-                propdmg = float(cp.findPropertyDamage(pred))*100
+                propdmg,probability = cp.findPropertyDamage(pred)
                 nperps = cp.numPerps(pred)
                 if not nperps:
                     nperps = "Unknown"
                 cp.plotRiskyLocations(location)
-            else:
-                location,mult,casualties,weaptype,propdmg,nperps="Police",9.4,2.3,"Explosives",52.8,3
-            return render_template('dashboard.html',
+    else:
+        pred,location,mult,casualties,weaptype,probability,propdmg,nperps="Taliban","Police",9.4,2.3,"Explosives",52.8,"Unknown",3
+        return render_template('dashboard.html',
         		prediction=pred,
         		location=location,
         		mult=mult,
         		casualties_num=casualties,
         		weaptype=weaptype,
-        		propdmg_prob=propdmg,
+                probdmg_value = propdmg,
+        		propdmg_prob=probability,
         		numperps=nperps)
     return render_template('input.html')
 

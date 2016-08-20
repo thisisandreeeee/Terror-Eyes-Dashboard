@@ -24,7 +24,7 @@ Input: Features of attack, from file input.csv
 Output: [String] Terrorist Group name
 """
 def predictTerroristGroup(dic = {}):
-    keep = ['natlty1','targsubtype1','region','weapsubtype1','nwound','nkill','property','attacktype1','guncertain1','nkillter','suicide']
+    keep = ['natlty1','targsubtype1','region','weapsubtype1','nwound','nkill','property','attacktype1','guncertain1','nkillter','suicide']#,'iday','imonth','iyear']
     def format_inputs():
         df = pd.read_csv('input.csv')
         global country
@@ -57,10 +57,19 @@ def predictTerroristGroup(dic = {}):
         inputs = pd.DataFrame(inputs,columns=keep)
     else:
         inputs = format_inputs()
+        inputs = inputs[keep]
+    
+    inputs = inputs.apply(pd.to_numeric)
     prediction = predict_group(inputs)
+    inputs = addPredToInputs(inputs,prediction)
     print('Likely terrorist group: '+prediction)
-    return prediction
-
+    return prediction,inputs
+    
+def addPredToInputs(inputs,prediction):
+    labelHash = joblib.load('labelHashxgb.pkl')
+    inputs['gname'] = labelHash[prediction]
+    return inputs
+    
 def makeWeapVisual(name):
     df = pd.read_csv('csv-files/weapons.csv',encoding='Latin-1')
     df = df[df['gname'] == name]
@@ -85,16 +94,40 @@ def printTerroristDetails(name):
     numPerps(name)
     return location #return risky location!
 
-def multipleAttacks(name):
-    locProb = "csv-files/prob_mult.csv"
-    df2 = pd.read_csv(locProb,encoding='Latin-1')
-    value = round(float(df2[df2['gname']==name]['prob_mult']),3)
-    if value > 0.5:
+## MODIFIED
+def multipleAttacks(inputs):
+    classifier = joblib.load('classifiers/multiple_attacksXgboost_88.pkl')
+    value = float(classifier.predict_proba(inputs)[0][0])
+    value*=100
+    value = round(value,2)
+    if value > 50:
         print('MULTIPLE ATTACKS LIKELY with probability: '+str(value))
     else:
-        print('Multiple attacks are unlikely with probability: '+str(1-value))
+        print('Multiple attacks are unlikely with probability: '+str(100-value))
     return value
 
+def multipleAttackLocation(country,inputs):
+    
+    #input is an INT. need to convert back and forth walao.
+    def convertToTargType(targsubtype1):
+        converter = joblib.load('dics/targsubtype_to_targsubtype_txt.pkl')
+        targsubtype1_txt = converter[targsubtype1]
+        dic = joblib.load('dics/targsubtype_to_targtype.pkl')
+        return dic[targsubtype1_txt]
+    
+    labelHash = joblib.load('labelHashxgb.pkl')
+    labelHash_invert = {v:k for k,v in labelHash.items()}
+    gname = labelHash_invert[inputs['gname'].iloc[0]]
+    targtype1 = convertToTargType(inputs['targsubtype1'].iloc[0])
+    dic = joblib.load('dics/other_place_attacked_association.pkl')
+    try:
+        places = dic[country][gname][targtype1] # should be a dictionary.
+        place = max(places, key = places.get)
+    except:
+        place = 'Unknown or NIL'
+    return place
+    
+## DEPRECATED. NOT IN USE.
 def typeFreqPlaceAttacked(name):
     dic= pickle.load(open('dics/typeOfPlace','rb'))
     if name in dic.keys():
@@ -145,20 +178,23 @@ def numPerps(name):
     print('Likely size of attackers unknown.')
     return False
 
-def findPropertyDamage(name):
-    dic = pickle.load(open('dics/propertyDamage','rb'))
+## MODIFIED
+def findPropertyDamage(inputs):
+    dic = {1 : 'Catastrophic (likely > $1 billion)',
+            2 : 'Major (likely > $1 million but < $1 billion)',
+            3 : 'Minor (likely < $1 million)',
+            4 : 'Unknown'}
+    classifier = joblib.load('classifiers/propertyDamageXgboost_87.pkl')
     try:
-        currGroup=dic[name]
+        value = classifier.predict(inputs)[0]
+        probability = classifier.predict_proba(inputs)[0]
+        probability = probability[probability.argmax()]
     except:
-        print(name + 'will likely NOT have property damage with probability 1')
-        return
-    probability=currGroup[0] / sum(currGroup)
+        value = 4
+        probability = 'NIL'
+    value = dic[value]
     print("\n")
-    if (probability) > 0.5:
-        print(name +' will likely have property damage of estimated < $1 Millon with probability '+str(round(probability,3)))
-    else:
-        print(name + 'will likely NOT have property damage with probability '+str(round(probability,3)))
-    return round(probability,2)
+    return value,probability
 
  ##Modified for dashboard --> return data instead of plotting it in gmaps.
 def plotRiskyLocations(name):
