@@ -26,7 +26,7 @@ Output: [String] Terrorist Group name
 def predictTerroristGroup(dic = {}):
     keep = ['natlty1','targsubtype1','region','weapsubtype1','nwound','nkill','property','attacktype1','guncertain1','nkillter','suicide']#,'iday','imonth','iyear']
     def format_inputs():
-        df = pd.read_csv('input.csv')
+        df = pd.read_csv('ISISInput.csv')
         global country
         country = df['country_txt'][0]
         nontext_df,labels = separate_column_by_type(df)
@@ -107,7 +107,7 @@ def multipleAttacks(inputs):
     return value
 
 def multipleAttackLocation(country,inputs):
-    
+    association = True
     #input is an INT. need to convert back and forth walao.
     def convertToTargType(targsubtype1):
         converter = joblib.load('dics/targsubtype_to_targsubtype_txt.pkl')
@@ -124,8 +124,10 @@ def multipleAttackLocation(country,inputs):
         places = dic[country][gname][targtype1] # should be a dictionary.
         place = max(places, key = places.get)
     except:
-        place = 'Unknown or NIL'
-    return place
+        association = False
+        place = typeFreqPlaceAttacked(gname)
+        print(place)
+    return place,association
     
 ## DEPRECATED. NOT IN USE.
 def typeFreqPlaceAttacked(name):
@@ -197,10 +199,13 @@ def findPropertyDamage(inputs):
     return value,probability
 
  ##Modified for dashboard --> return data instead of plotting it in gmaps.
-def plotRiskyLocations(name):
+def plotRiskyLocations(name,country_txt = ''):
     global country
     if name == None:
+        print('Location is None! check your code / location and try again')
         return
+    if country_txt == '':
+        country_txt = country
 	#Consider saving this to pickle file.
     dic={'Business':['Business','Gas','mall','restaurant','cafe','hotel'],
 		 'Government (General)':['Government buildings','Ministry'],
@@ -228,12 +233,12 @@ def plotRiskyLocations(name):
     geolocator = Nominatim() #swap for google.
     location=[]
     if type(name) != list:
-        loc=geolocator.geocode(name + ' '+country,exactly_one=False,timeout=10)
+        loc=geolocator.geocode(name + ' '+country_txt,exactly_one=False,timeout=10)
         if loc is not None:
             location.append(loc)
     else:
         for entry in name:
-            loc = geolocator.geocode(entry + ' '+country,exactly_one=False,timeout=10)
+            loc = geolocator.geocode(entry + ' '+country_txt,exactly_one=False,timeout=10)
             if loc is not None:
                 location.append(loc)
     location= list(itertools.chain(*location)) #flatten list

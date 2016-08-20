@@ -84,6 +84,7 @@ def generateTwitterMap():
 
 @app.route("/dashboard", methods=['GET','POST'])
 def inputFunc():
+    country_txt = None
     if request.method == 'POST':
         dic = {}
         dic['country'] = request.form.get('country')
@@ -98,32 +99,46 @@ def inputFunc():
         dic['guncertain1'] = request.form.get('guncertain1')
         dic['nkillter'] = request.form.get('nkillter')
         dic['suicide'] = request.form.get('suicide')
+        country_txt = dic['country']
         if not any([dic[i] != "" for i in dic]): #TODO: remove 'not'
             print("error, handle form validation here") #TODO: add form validation
         else:
             pred,inputs = cp.predictTerroristGroup(dic)
-            if pred != 'Unknown':
-                mult = cp.multipleAttacks(inputs)
-                #location = cp.typeFreqPlaceAttacked(pred)
-                location = cp.multipleAttackLocation(dic['country'],inputs)
-                casualties = cp.numOfCasualties(pred)
-                weaptype = cp.findTypeOfWeapon(pred)
-                propdmg,probability = cp.findPropertyDamage(pred)
-                nperps = cp.numPerps(pred)
-                if not nperps:
-                    nperps = "Unknown"
-                cp.plotRiskyLocations(location)
     else:
-        pred,location,mult,casualties,weaptype,probability,propdmg,nperps="Taliban","Police",9.4,2.3,"Explosives",52.8,"Unknown",3
-        return render_template('dashboard.html',
-        		prediction=pred,
-        		location=location,
-        		mult=mult,
-        		casualties_num=casualties,
-        		weaptype=weaptype,
-                probdmg_value = propdmg,
-        		propdmg_prob=probability,
-        		numperps=nperps)
+        # For manual override/ fast input via CSV.
+        pred,inputs = cp.predictTerroristGroup()
+        country_txt = 'Iraq' #change this
+        
+    if pred != 'Unknown':
+        mult = cp.multipleAttacks(inputs)
+        #location = cp.typeFreqPlaceAttacked(pred)
+        print(inputs)
+        print(country_txt)
+        location,use_association = cp.multipleAttackLocation(country_txt,inputs)
+        casualties = cp.numOfCasualties(pred)
+        weaptype = cp.findTypeOfWeapon(pred)
+        propdmg,probability = cp.findPropertyDamage(inputs)
+        nperps = cp.numPerps(pred)
+        if not nperps:
+            nperps = "Unknown"
+        cp.plotRiskyLocations(location,country_txt)
+    
+    else:
+        # Catch unknown group case. #TODO: Make it a proper unknown catcher
+        pred,location,mult,casualties,weaptype,propdmg,probability,nperps,use_association="Unknown","Police",9.4,2.3,"Explosives",52.8,0,3,False
+    return render_template('dashboard.html',
+    		prediction=pred,
+    		location=location,
+    		mult=mult,
+    		casualties_num=casualties,
+    		weaptype=weaptype,
+            probdmg_value = propdmg,
+    		propdmg_prob=probability,
+    		numperps=nperps,
+           use_association = use_association)
+      
+@app.route('/input')
+def inputz(): 
     return render_template('input.html')
 
 #for entry in keep:

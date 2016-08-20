@@ -12,7 +12,8 @@ df = pd.read_csv('../csv-files/gtd_2011to2014.csv', encoding='Latin-1',low_memor
 # filter out multiple and unknown
 df = df[df['multiple'] == 1]
 df = df[df['gname'] != 'Unknown']
-    
+
+## main. use assosication rule if have. if not, use frequency based.
 def associationRule(df):
     dic = {}
     global b
