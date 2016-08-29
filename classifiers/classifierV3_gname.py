@@ -7,7 +7,7 @@ from sklearn.externals import joblib
 import xgboost as xgb
 from sklearn.cross_validation import train_test_split
 
-df = pd.read_csv('../csv-files/gtd_2011to2014.csv', encoding='Latin-1',low_memory=False)
+df = pd.read_csv('csv-files/gtd_2011to2014_SITFINALS.csv', encoding='Latin-1',low_memory=False)
 keep = ['natlty1','targsubtype1','region','weapsubtype1','nwound','nkill','property','attacktype1','guncertain1','nkillter','suicide','gname']#,'iday','imonth','iyear']
 labelHash = {}
 #labelHashReversed = {k:v for v,k in labelHash.items()}
