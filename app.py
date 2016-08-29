@@ -108,10 +108,10 @@ def inputFunc():
         # For manual override/ fast input via CSV.
         pred,inputs = cp.predictTerroristGroup()
         country_txt = 'Iraq' #change this
-        
+
     if pred != 'Unknown':
         mult = cp.multipleAttacks(inputs)
-        #location = cp.typeFreqPlaceAttacked(pred)
+        #location = cp.typeFreqPlaceAttacked(pred) # TODO: assoc rules here
         print(inputs)
         print(country_txt)
         location,use_association = cp.multipleAttackLocation(country_txt,inputs)
@@ -122,7 +122,7 @@ def inputFunc():
         if not nperps:
             nperps = "Unknown"
         cp.plotRiskyLocations(location,country_txt)
-    
+
     else:
         # Catch unknown group case. #TODO: Make it a proper unknown catcher
         pred,location,mult,casualties,weaptype,propdmg,probability,nperps,use_association="Unknown","Police",9.4,2.3,"Explosives",52.8,0,3,False
@@ -136,9 +136,9 @@ def inputFunc():
     		propdmg_prob=probability,
     		numperps=nperps,
            use_association = use_association)
-      
+
 @app.route('/input')
-def inputz(): 
+def inputz():
     return render_template('input.html')
 
 #for entry in keep:

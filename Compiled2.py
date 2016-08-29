@@ -12,7 +12,10 @@ from sklearn.externals import joblib
 from Classifier_v2 import separate_column_by_type, process_nontext
 from scipy import stats
 from geopy.geocoders import Nominatim
+from gmaps_creds import gmaps_key
 import operator
+import requests
+import urllib
 from HTMLText import *
 
 country = None
@@ -58,18 +61,18 @@ def predictTerroristGroup(dic = {}):
     else:
         inputs = format_inputs()
         inputs = inputs[keep]
-    
+
     inputs = inputs.apply(pd.to_numeric)
     prediction = predict_group(inputs)
     inputs = addPredToInputs(inputs,prediction)
     print('Likely terrorist group: '+prediction)
     return prediction,inputs
-    
+
 def addPredToInputs(inputs,prediction):
     labelHash = joblib.load('labelHashxgb.pkl')
     inputs['gname'] = labelHash[prediction]
     return inputs
-    
+
 def makeWeapVisual(name):
     df = pd.read_csv('csv-files/weapons.csv',encoding='Latin-1')
     df = df[df['gname'] == name]
@@ -114,7 +117,7 @@ def multipleAttackLocation(country,inputs):
         targsubtype1_txt = converter[targsubtype1]
         dic = joblib.load('dics/targsubtype_to_targtype.pkl')
         return dic[targsubtype1_txt]
-    
+
     labelHash = joblib.load('labelHashxgb.pkl')
     labelHash_invert = {v:k for k,v in labelHash.items()}
     gname = labelHash_invert[inputs['gname'].iloc[0]]
@@ -128,7 +131,7 @@ def multipleAttackLocation(country,inputs):
         place = typeFreqPlaceAttacked(gname)
         print(place)
     return place,association
-    
+
 ## DEPRECATED. NOT IN USE.
 def typeFreqPlaceAttacked(name):
     dic= pickle.load(open('dics/typeOfPlace','rb'))
@@ -230,22 +233,22 @@ def plotRiskyLocations(name,country_txt = ''):
 			'Violent Political Party': 'political party' #and this
 	}
     name = dic[name]
-    geolocator = Nominatim() #swap for google.
+    gmaps_url = "https://maps.googleapis.com/maps/api/geocode/json?key={}&address={}"
+    geolocator = Nominatim()
     location=[]
     if type(name) != list:
-        loc=geolocator.geocode(name + ' '+country_txt,exactly_one=False,timeout=10)
-        if loc is not None:
-            location.append(loc)
-    else:
-        for entry in name:
-            loc = geolocator.geocode(entry + ' '+country_txt,exactly_one=False,timeout=10)
-            if loc is not None:
-                location.append(loc)
-    location= list(itertools.chain(*location)) #flatten list
-    data=[]
-    for entry in location:
-        data.append([entry.latitude,entry.longitude])
-    convertGpsToHTML(data,0,'templates/predictionHeatmap.html')
+        name = [name]
+    for entry in name:
+        address = urllib.parse.quote(entry + ' ' + country_txt)
+        r = requests.get(gmaps_url.format(gmaps_key, address))
+        resp = r.json()
+        if resp['status'] == 'OK':
+            for res in resp['results']:
+                coords = res['geometry']['location']
+                location.append([coords['lat'], coords['lng']])
+        else:
+            print("WTFFFFFF WAI NUUUUUU")
+    convertGpsToHTML(location,0,'templates/predictionHeatmap.html')
 #Writes GPS coordinates into a HTML file.
 """
  Input: List of lists of GPS coordinates.
@@ -285,5 +288,3 @@ def run():
 
 if __name__ == '__main__':
     run()
-    
-    
