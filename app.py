@@ -94,7 +94,7 @@ def inputFunc():
         propdmg,probability = cp.findPropertyDamage(inputs)
         nperps = cp.numPerps(pred)
         if not nperps:
-            nperps = "Unknown" # change to 1?
+            nperps = "> 1" # change to 1?
         cp.plotRiskyLocations(location,country_txt)
 
     else:
