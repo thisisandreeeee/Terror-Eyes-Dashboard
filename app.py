@@ -22,32 +22,6 @@ def main():
 	# return render_template('index.html')
 	return render_template('landing.html')
 
-# @app.route("/dashboard")
-# def dashboard():
-# 	pred = cp.predictTerroristGroup()
-# 	if pred != 'Unknown':
-# 		mult = float(cp.multipleAttacks(pred))*100
-# 		location = cp.typeFreqPlaceAttacked(pred)
-# 		casualties = cp.numOfCasualties(pred)
-# 		weaptype = cp.findTypeOfWeapon(pred)
-# 		propdmg = float(cp.findPropertyDamage(pred))*100
-# 		nperps = cp.numPerps(pred)
-# 		if not nperps:
-# 			nperps = "Unknown"
-# 		cp.plotRiskyLocations(location)
-# 	else:
-# 		location,mult,casualties,weaptype,propdmg,nperps="Police",9.4,2.3,"Explosives",52.8,3
-#
-# 	return render_template('dashboard.html',
-# 		prediction=pred,
-# 		location=location,
-# 		mult=mult,
-# 		casualties_num=casualties,
-# 		weaptype=weaptype,
-# 		propdmg_prob=propdmg,
-# 		numperps=nperps)
-
-
 @app.route("/coffeewheel.csv", methods=['GET', 'OPTIONS'])
 def send_file():
 	return send_from_directory('static', 'coffeewheel.csv',as_attachment=True)
@@ -111,7 +85,7 @@ def inputFunc():
 
     if pred != 'Unknown':
         mult = cp.multipleAttacks(inputs)
-        #location = cp.typeFreqPlaceAttacked(pred) # TODO: assoc rules here
+        #location = cp.typeFreqPlaceAttacked(pred)
         print(inputs)
         print(country_txt)
         location,use_association = cp.multipleAttackLocation(country_txt,inputs)
@@ -120,12 +94,12 @@ def inputFunc():
         propdmg,probability = cp.findPropertyDamage(inputs)
         nperps = cp.numPerps(pred)
         if not nperps:
-            nperps = "Unknown"
+            nperps = "Unknown" # change to 1?
         cp.plotRiskyLocations(location,country_txt)
 
     else:
         # Catch unknown group case. #TODO: Make it a proper unknown catcher
-        pred,location,mult,casualties,weaptype,propdmg,probability,nperps,use_association="Unknown","Police",9.4,2.3,"Explosives",52.8,0,3,False
+        pred,location,mult,casualties,weaptype,propdmg,probability,nperps,use_association="Taliban","Police",9.4,2.3,"Explosives",52.8,0,3,False
     return render_template('dashboard.html',
     		prediction=pred,
     		location=location,
