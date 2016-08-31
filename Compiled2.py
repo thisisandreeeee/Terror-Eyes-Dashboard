@@ -29,7 +29,7 @@ Output: [String] Terrorist Group name
 def predictTerroristGroup(dic = {}):
     keep = ['natlty1','targsubtype1','region','weapsubtype1','nwound','nkill','property','attacktype1','guncertain1','nkillter','suicide']#,'iday','imonth','iyear']
     def format_inputs():
-        df = pd.read_csv('csv-files/input.csv')
+        df = pd.read_csv('csv-files/taliban.csv')
         global country
         country = df['country_txt'][0]
         nontext_df,labels = separate_column_by_type(df)
@@ -224,7 +224,7 @@ def plotRiskyLocations(name,country_txt = ''):
 			'Maritime':['port','ferry'],
 			'Journalists & Media':'newspaper company',
 			'Other':['fire station','hospital'],#wtf do you code for this
-			'Private Citizens & Property':['shopping malls','markets'],
+			'Private Citizens & Property':['shopping malls','markets','theatre','shop','cafe'],
 		   'Religious Figures/Institutions':['temples','churches','mosques'],
 			'Terrorists/Non-State Militia':'militia',
 			'Transportation':['Train station','Bus stations'],
@@ -234,22 +234,39 @@ def plotRiskyLocations(name,country_txt = ''):
 			'Violent Political Party': 'political party' #and this
 	}
     name = dic[name]
-    gmaps_url = "https://maps.googleapis.com/maps/api/geocode/json?key={}&address={}"
-    geolocator = Nominatim()
+    geolocator = Nominatim() #swap for google.
     location=[]
     if type(name) != list:
-        name = [name]
-    for entry in name:
-        address = urllib.parse.quote(entry + ' ' + country_txt)
-        r = requests.get(gmaps_url.format(gmaps_key, address))
-        resp = r.json()
-        if resp['status'] == 'OK':
-            for res in resp['results']:
-                coords = res['geometry']['location']
-                location.append([coords['lat'], coords['lng']])
-        else:
-            print("WTFFFFFF WAI NUUUUUU")
-    convertGpsToHTML(location,0,'templates/predictionHeatmap.html')
+        loc=geolocator.geocode(name + ' '+country_txt,exactly_one=False,timeout=10)
+        if loc is not None:
+            location.append(loc)
+    else:
+        for entry in name:
+            loc = geolocator.geocode(entry + ' '+country_txt,exactly_one=False,timeout=10)
+            if loc is not None:
+                location.append(loc)
+    location= list(itertools.chain(*location)) #flatten list
+    data=[]
+    for entry in location:
+        data.append([entry.latitude,entry.longitude])
+    convertGpsToHTML(data,0,'templates/predictionHeatmap.html')
+#    name = dic[name]
+#    gmaps_url = "https://maps.googleapis.com/maps/api/geocode/json?key={}&address={}"
+#    geolocator = Nominatim()
+#    location=[]
+#    if type(name) != list:
+#        name = [name]
+#    for entry in name:
+#        address = urllib.parse.quote(entry + ' ' + country_txt)
+#        r = requests.get(gmaps_url.format(gmaps_key, address))
+#        resp = r.json()
+#        if resp['status'] == 'OK':
+#            for res in resp['results']:
+#                coords = res['geometry']['location']
+#                location.append([coords['lat'], coords['lng']])
+#        else:
+#            print("WTFFFFFF WAI NUUUUUU")
+#    convertGpsToHTML(location,0,'templates/predictionHeatmap.html')
 #Writes GPS coordinates into a HTML file.
 """
  Input: List of lists of GPS coordinates.

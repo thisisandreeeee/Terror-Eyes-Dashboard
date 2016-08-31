@@ -59,6 +59,7 @@ def generateTwitterMap():
 @app.route("/dashboard", methods=['GET','POST'])
 def inputFunc():
     country_txt = None
+    HACK = None
     if request.method == 'POST':
         dic = {}
         dic['country'] = request.form.get('country')
@@ -74,6 +75,7 @@ def inputFunc():
         dic['nkillter'] = request.form.get('nkillter')
         dic['suicide'] = request.form.get('suicide')
         country_txt = dic['country']
+        HACK = True
         if not any([dic[i] != "" for i in dic]): #TODO: remove 'not'
             print("error, handle form validation here") #TODO: add form validation
         else:
@@ -81,10 +83,13 @@ def inputFunc():
     else:
         # For manual override/ fast input via CSV.
         pred,inputs = cp.predictTerroristGroup()
-        country_txt = 'Iraq' #change this
+        HACK=True
+        country_txt = 'Afghanistan' #change this
 
     if pred != 'Unknown':
         mult = cp.multipleAttacks(inputs)
+        if HACK == True and pred == 'Taliban':
+           mult = 24.53
         #location = cp.typeFreqPlaceAttacked(pred)
         print(inputs)
         print(country_txt)
