@@ -51,6 +51,7 @@ def generateTwitterMap():
         with open('csv-files/terrortracking.csv','r') as f:
             reader = csv.reader(f)
             lst = list(reader)
+        f.close()
     except:
         return
     coords = [[x[4],x[5]] for x in lst[1:]]

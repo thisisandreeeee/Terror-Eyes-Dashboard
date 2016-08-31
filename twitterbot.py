@@ -9,15 +9,15 @@ class CustomStreamListener(tweepy.StreamListener):
         if os.path.isfile('csv-files/terrortracking.csv') == False:
             with open('csv-files/terrortracking.csv','w',newline='',encoding='utf-8') as f:
                 writer=csv.writer(f)
-                writer.writerow(['Screen name','Created At','Location','Lat','Long','Media link'])
+                writer.writerow(['Screen name','Created At','Status','Location','Lat','Long','Media link'])
                 f.close()
 
         with open('csv-files/terrortracking.csv', 'a',newline="") as f:
             if '@terrorbgone'in status.text.lower():#hack to filter
                 writer = csv.writer(f)
                 try:
-                    lat=status.coordinates['coordinates'][0]
-                    long=status.coordinates['coordinates'][1]
+                    lat=status.coordinates['coordinates'][1] #FIXME: 1, 0
+                    long=status.coordinates['coordinates'][0]
                 except:
                     lat=''
                     long=''
