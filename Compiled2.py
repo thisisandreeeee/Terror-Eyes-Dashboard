@@ -210,6 +210,8 @@ def plotRiskyLocations(name,country_txt = ''):
         return
     if country_txt == '':
         country_txt = country
+    print('PLOTTING LOCATION FOR '+country_txt)
+
 	#Consider saving this to pickle file.
     dic={'Business':['Business','Gas','mall','restaurant','cafe','hotel'],
 		 'Government (General)':['Government buildings','Ministry'],

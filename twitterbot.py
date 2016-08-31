@@ -10,6 +10,7 @@ class CustomStreamListener(tweepy.StreamListener):
             with open('csv-files/terrortracking.csv','w',newline='',encoding='utf-8') as f:
                 writer=csv.writer(f)
                 writer.writerow(['Screen name','Created At','Location','Lat','Long','Media link'])
+                f.close()
 
         with open('csv-files/terrortracking.csv', 'a',newline="") as f:
             if '@terrorbgone'in status.text.lower():#hack to filter
@@ -30,8 +31,9 @@ class CustomStreamListener(tweepy.StreamListener):
                     #name=str(status.created_at)+'_'+status.author.screen_name
                     #name += self.extensionFinder(media)
                     wgetter.download(media,outdir="TerrorAttachment")
-
                 writer.writerow([status.author.screen_name, status.created_at, status.text,geo,lat,long,media])
+            f.close()
+            
     def on_error(self, status_code):
         print ( sys.stderr, 'Encountered error with status code:', status_code)
         return True # Don't kill the stream
