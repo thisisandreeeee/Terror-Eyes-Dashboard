@@ -17,6 +17,7 @@ import operator
 import requests
 import urllib
 from HTMLText import *
+import iso3166
 
 country = None
 heatmapVariable=None
@@ -234,21 +235,22 @@ def plotRiskyLocations(name,country_txt = ''):
 			'Violent Political Party': 'political party' #and this
 	}
     name = dic[name]
-    gmaps_url = "https://maps.googleapis.com/maps/api/geocode/json?key={}&address={}"
+    gmaps_url = "https://maps.googleapis.com/maps/api/geocode/json?key={}&address={}&components=country:{}"
     geolocator = Nominatim()
     location=[]
     if type(name) != list:
         name = [name]
     for entry in name:
         address = urllib.parse.quote(entry + ' ' + country_txt)
-        r = requests.get(gmaps_url.format(gmaps_key, address))
+        alpha2 = iso3166.countries_by_name[country_txt.upper()].alpha2
+        r = requests.get(gmaps_url.format(gmaps_key, address, alpha2))
         resp = r.json()
         if resp['status'] == 'OK':
             for res in resp['results']:
                 coords = res['geometry']['location']
                 location.append([coords['lat'], coords['lng']])
         else:
-            print("WTFFFFFF WAI NUUUUUU")
+            print("WTFFFFFF WAI NUUUUUU: Unable to get 200 response from google geocode API")
     convertGpsToHTML(location,0,'templates/predictionHeatmap.html')
 #Writes GPS coordinates into a HTML file.
 """
