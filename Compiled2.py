@@ -12,7 +12,10 @@ from sklearn.externals import joblib
 from Classifier_v2 import separate_column_by_type, process_nontext
 from scipy import stats
 from geopy.geocoders import Nominatim
+from gmaps_creds import gmaps_key
 import operator
+import requests
+import urllib
 from HTMLText import *
 
 country = None
@@ -24,9 +27,9 @@ Input: Features of attack, from file input.csv
 Output: [String] Terrorist Group name
 """
 def predictTerroristGroup(dic = {}):
-    keep = ['natlty1','targsubtype1','region','weapsubtype1','nwound','nkill','property','attacktype1','guncertain1','nkillter','suicide']
+    keep = ['natlty1','targsubtype1','region','weapsubtype1','nwound','nkill','property','attacktype1','guncertain1','nkillter','suicide']#,'iday','imonth','iyear']
     def format_inputs():
-        df = pd.read_csv('input.csv')
+        df = pd.read_csv('csv-files/taliban.csv')
         global country
         country = df['country_txt'][0]
         nontext_df,labels = separate_column_by_type(df)
@@ -35,7 +38,8 @@ def predictTerroristGroup(dic = {}):
 
     def predict_group(features):
          labelHash = joblib.load('labelHashxgb.pkl')
-         classifier = joblib.load('xgboost76.pkl')
+         classifier = joblib.load('xgboostSITF.pkl')
+#         classifier = joblib.load('xgboost76.pkl') #old one before sitf finals
 #         labelHash = joblib.load('dics/labelHashRF.pkl') #temporary hack to get this shit working
 #         classifier = joblib.load('classifiers/randomforest.pkl')
          pred = classifier.predict(features)#[0]
@@ -57,15 +61,36 @@ def predictTerroristGroup(dic = {}):
         inputs = pd.DataFrame(inputs,columns=keep)
     else:
         inputs = format_inputs()
+        inputs = inputs[keep]
+
+    inputs = inputs.apply(pd.to_numeric)
     prediction = predict_group(inputs)
+    inputs = addPredToInputs(inputs,prediction)
     print('Likely terrorist group: '+prediction)
-    return prediction
+    return prediction,inputs
+
+def addPredToInputs(inputs,prediction):
+    labelHash = joblib.load('labelHashxgb.pkl')
+    inputs['gname'] = labelHash[prediction]
+    return inputs
 
 def makeWeapVisual(name):
     df = pd.read_csv('csv-files/weapons.csv',encoding='Latin-1')
     df = df[df['gname'] == name]
     newdf = df.drop('gname',axis=1)
     newdf.to_csv('static/currentWeapon.csv',index=False,header=False)
+
+
+def makeLocationVisual(name=None):
+    df = pd.read_csv('csv-files/locations.csv',encoding='Latin-1')
+    if not name:
+        return df.drop('gname',axis=1)
+        
+    df = df[df['gname'] == name]
+    newdf = df.drop('gname',axis=1)
+    newdf.to_csv('static/currentLocation.csv',index=False,header=False)
+
+
 
 """
 Input: [String] Terrorist Group name
@@ -85,16 +110,42 @@ def printTerroristDetails(name):
     numPerps(name)
     return location #return risky location!
 
-def multipleAttacks(name):
-    locProb = "csv-files/prob_mult.csv"
-    df2 = pd.read_csv(locProb,encoding='Latin-1')
-    value = round(float(df2[df2['gname']==name]['prob_mult']),3)
-    if value > 0.5:
+## MODIFIED
+def multipleAttacks(inputs):
+    classifier = joblib.load('classifiers/multiple_attacksXgboost_88.pkl')
+    value = float(classifier.predict_proba(inputs)[0][0])
+    value*=100
+    value = round(value,2)
+    if value > 50:
         print('MULTIPLE ATTACKS LIKELY with probability: '+str(value))
     else:
-        print('Multiple attacks are unlikely with probability: '+str(1-value))
+        print('Multiple attacks are unlikely with probability: '+str(100-value))
     return value
 
+def multipleAttackLocation(country,inputs):
+    association = True
+    #input is an INT. need to convert back and forth walao.
+    def convertToTargType(targsubtype1):
+        converter = joblib.load('dics/targsubtype_to_targsubtype_txt.pkl')
+        targsubtype1_txt = converter[targsubtype1]
+        dic = joblib.load('dics/targsubtype_to_targtype.pkl')
+        return dic[targsubtype1_txt]
+
+    labelHash = joblib.load('labelHashxgb.pkl')
+    labelHash_invert = {v:k for k,v in labelHash.items()}
+    gname = labelHash_invert[inputs['gname'].iloc[0]]
+    targtype1 = convertToTargType(inputs['targsubtype1'].iloc[0])
+    dic = joblib.load('dics/other_place_attacked_association.pkl')
+    try:
+        places = dic[country][gname][targtype1] # should be a dictionary.
+        place = max(places, key = places.get)
+    except:
+        association = False
+        place = typeFreqPlaceAttacked(gname)
+        print(place)
+    return place,association
+
+## DEPRECATED. NOT IN USE.
 def typeFreqPlaceAttacked(name):
     dic= pickle.load(open('dics/typeOfPlace','rb'))
     if name in dic.keys():
@@ -145,26 +196,34 @@ def numPerps(name):
     print('Likely size of attackers unknown.')
     return False
 
-def findPropertyDamage(name):
-    dic = pickle.load(open('dics/propertyDamage','rb'))
+## MODIFIED
+def findPropertyDamage(inputs):
+    dic = {1 : 'Catastrophic (likely > $1 billion)',
+            2 : 'Major (likely > $1 million but < $1 billion)',
+            3 : 'Minor (likely < $1 million)',
+            4 : 'Unknown'}
+    classifier = joblib.load('classifiers/propertyDamageXgboost_87.pkl')
     try:
-        currGroup=dic[name]
+        value = classifier.predict(inputs)[0]
+        probability = classifier.predict_proba(inputs)[0]
+        probability = probability[probability.argmax()]
     except:
-        print(name + 'will likely NOT have property damage with probability 1')
-        return
-    probability=currGroup[0] / sum(currGroup)
+        value = 4
+        probability = 'NIL'
+    value = dic[value]
     print("\n")
-    if (probability) > 0.5:
-        print(name +' will likely have property damage of estimated < $1 Millon with probability '+str(round(probability,3)))
-    else:
-        print(name + 'will likely NOT have property damage with probability '+str(round(probability,3)))
-    return round(probability,2)
+    return value,probability
 
  ##Modified for dashboard --> return data instead of plotting it in gmaps.
-def plotRiskyLocations(name):
+def plotRiskyLocations(name,country_txt = ''):
     global country
     if name == None:
+        print('Location is None! check your code / location and try again')
         return
+    if country_txt == '':
+        country_txt = country
+    print('PLOTTING LOCATION FOR '+country_txt)
+
 	#Consider saving this to pickle file.
     dic={'Business':['Business','Gas','mall','restaurant','cafe','hotel'],
 		 'Government (General)':['Government buildings','Ministry'],
@@ -179,7 +238,7 @@ def plotRiskyLocations(name):
 			'Maritime':['port','ferry'],
 			'Journalists & Media':'newspaper company',
 			'Other':['fire station','hospital'],#wtf do you code for this
-			'Private Citizens & Property':['shopping malls','markets'],
+			'Private Citizens & Property':['shopping malls','markets','theatre','shop','cafe'],
 		   'Religious Figures/Institutions':['temples','churches','mosques'],
 			'Terrorists/Non-State Militia':'militia',
 			'Transportation':['Train station','Bus stations'],
@@ -192,12 +251,12 @@ def plotRiskyLocations(name):
     geolocator = Nominatim() #swap for google.
     location=[]
     if type(name) != list:
-        loc=geolocator.geocode(name + ' '+country,exactly_one=False,timeout=10)
+        loc=geolocator.geocode(name + ' '+country_txt,exactly_one=False,timeout=10)
         if loc is not None:
             location.append(loc)
     else:
         for entry in name:
-            loc = geolocator.geocode(entry + ' '+country,exactly_one=False,timeout=10)
+            loc = geolocator.geocode(entry + ' '+country_txt,exactly_one=False,timeout=10)
             if loc is not None:
                 location.append(loc)
     location= list(itertools.chain(*location)) #flatten list
@@ -205,6 +264,23 @@ def plotRiskyLocations(name):
     for entry in location:
         data.append([entry.latitude,entry.longitude])
     convertGpsToHTML(data,0,'templates/predictionHeatmap.html')
+#    name = dic[name]
+#    gmaps_url = "https://maps.googleapis.com/maps/api/geocode/json?key={}&address={}"
+#    geolocator = Nominatim()
+#    location=[]
+#    if type(name) != list:
+#        name = [name]
+#    for entry in name:
+#        address = urllib.parse.quote(entry + ' ' + country_txt)
+#        r = requests.get(gmaps_url.format(gmaps_key, address))
+#        resp = r.json()
+#        if resp['status'] == 'OK':
+#            for res in resp['results']:
+#                coords = res['geometry']['location']
+#                location.append([coords['lat'], coords['lng']])
+#        else:
+#            print("WTFFFFFF WAI NUUUUUU")
+#    convertGpsToHTML(location,0,'templates/predictionHeatmap.html')
 #Writes GPS coordinates into a HTML file.
 """
  Input: List of lists of GPS coordinates.
@@ -244,5 +320,3 @@ def run():
 
 if __name__ == '__main__':
     run()
-    
-    

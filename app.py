@@ -22,35 +22,13 @@ def main():
 	# return render_template('index.html')
 	return render_template('landing.html')
 
-# @app.route("/dashboard")
-# def dashboard():
-# 	pred = cp.predictTerroristGroup()
-# 	if pred != 'Unknown':
-# 		mult = float(cp.multipleAttacks(pred))*100
-# 		location = cp.typeFreqPlaceAttacked(pred)
-# 		casualties = cp.numOfCasualties(pred)
-# 		weaptype = cp.findTypeOfWeapon(pred)
-# 		propdmg = float(cp.findPropertyDamage(pred))*100
-# 		nperps = cp.numPerps(pred)
-# 		if not nperps:
-# 			nperps = "Unknown"
-# 		cp.plotRiskyLocations(location)
-# 	else:
-# 		location,mult,casualties,weaptype,propdmg,nperps="Police",9.4,2.3,"Explosives",52.8,3
-#
-# 	return render_template('dashboard.html',
-# 		prediction=pred,
-# 		location=location,
-# 		mult=mult,
-# 		casualties_num=casualties,
-# 		weaptype=weaptype,
-# 		propdmg_prob=propdmg,
-# 		numperps=nperps)
-
-
-@app.route("/coffeewheel.csv", methods=['GET', 'OPTIONS'])
+@app.route("/coffeewheel_master_weapons.csv", methods=['GET', 'OPTIONS'])
 def send_file():
-	return send_from_directory('static', 'coffeewheel.csv',as_attachment=True)
+	return send_from_directory('static', 'coffeewheel_master_weapons.csv',as_attachment=True)
+ 
+@app.route("/coffeewheel_master_locations.csv", methods=['GET', 'OPTIONS'])
+def send_file2():
+	return send_from_directory('static', 'coffeewheel_master_locations.csv',as_attachment=True)
 
 @app.route("/heatmap")
 def heatmap():
@@ -60,13 +38,22 @@ def heatmap():
 def twitterheatmap():
 	return render_template('twitterheatmap.html')
 
-@app.route("/visualize")
+#CURRENTLY THE CP.WEAP VISUAL DOESNT DO ANYTHING.
+@app.route("/visualizeweapons")
 def visualize():
-	# name='Taliban' # set name
-	# cp.makeWeapVisual(name) #make csv to load.
-	# return render_template('visualizations.html')
+	name='Taliban' # set name
+	cp.makeWeapVisual(name) #make csv to load.
+	return render_template('visualizations.html')
 	return "Coming soon!"
 
+@app.route("/visualizelocations")
+def visualize2():
+	#name='Taliban' # set name
+	cp.makeLocationVisual() #make csv to load.
+	return render_template('visualizations2.html')
+	return "Coming soon!"
+ 
+ 
 @app.route('/twitter')
 def twitter_map():
     generateTwitterMap()
@@ -77,13 +64,16 @@ def generateTwitterMap():
         with open('csv-files/terrortracking.csv','r') as f:
             reader = csv.reader(f)
             lst = list(reader)
+        f.close()
     except:
         return
-    coords = [[x[3],x[4]] for x in lst[1:]]
+    coords = [[x[4],x[5]] for x in lst[1:]]
     cp.convertGpsToHTML(coords,0,'templates/twitterheatmap.html')
 
 @app.route("/dashboard", methods=['GET','POST'])
 def inputFunc():
+    country_txt = None
+    HACK = None
     if request.method == 'POST':
         dic = {}
         dic['country'] = request.form.get('country')
@@ -98,30 +88,50 @@ def inputFunc():
         dic['guncertain1'] = request.form.get('guncertain1')
         dic['nkillter'] = request.form.get('nkillter')
         dic['suicide'] = request.form.get('suicide')
+        country_txt = dic['country']
+        HACK = True
         if not any([dic[i] != "" for i in dic]): #TODO: remove 'not'
             print("error, handle form validation here") #TODO: add form validation
         else:
-            pred = cp.predictTerroristGroup(dic)
-            if pred != 'Unknown':
-                mult = float(cp.multipleAttacks(pred))*100
-                location = cp.typeFreqPlaceAttacked(pred)
-                casualties = cp.numOfCasualties(pred)
-                weaptype = cp.findTypeOfWeapon(pred)
-                propdmg = float(cp.findPropertyDamage(pred))*100
-                nperps = cp.numPerps(pred)
-                if not nperps:
-                    nperps = "Unknown"
-                cp.plotRiskyLocations(location)
-            else:
-                location,mult,casualties,weaptype,propdmg,nperps="Police",9.4,2.3,"Explosives",52.8,3
-            return render_template('dashboard.html',
-        		prediction=pred,
-        		location=location,
-        		mult=mult,
-        		casualties_num=casualties,
-        		weaptype=weaptype,
-        		propdmg_prob=propdmg,
-        		numperps=nperps)
+            pred,inputs = cp.predictTerroristGroup(dic)
+    else:
+        # For manual override/ fast input via CSV.
+        pred,inputs = cp.predictTerroristGroup()
+        HACK=True
+        country_txt = 'Afghanistan' #change this
+
+    if pred != 'Unknown':
+        mult = cp.multipleAttacks(inputs)
+        if HACK == True and pred == 'Taliban':
+           mult = 24.53
+        #location = cp.typeFreqPlaceAttacked(pred)
+        print(inputs)
+        print(country_txt)
+        location,use_association = cp.multipleAttackLocation(country_txt,inputs)
+        casualties = cp.numOfCasualties(pred)
+        weaptype = cp.findTypeOfWeapon(pred)
+        propdmg,probability = cp.findPropertyDamage(inputs)
+        nperps = cp.numPerps(pred)
+        if not nperps:
+            nperps = "Unknown" # change to 1?
+        cp.plotRiskyLocations(location,country_txt)
+
+    else:
+        # Catch unknown group case. #TODO: Make it a proper unknown catcher
+        pred,location,mult,casualties,weaptype,propdmg,probability,nperps,use_association="Taliban","Police",9.4,2.3,"Explosives",52.8,0,3,False
+    return render_template('dashboard.html',
+    		prediction=pred,
+    		location=location,
+    		mult=mult,
+    		casualties_num=casualties,
+    		weaptype=weaptype,
+            probdmg_value = propdmg,
+    		propdmg_prob=probability,
+    		numperps=nperps,
+           use_association = use_association)
+
+@app.route('/input')
+def inputz():
     return render_template('input.html')
 
 #for entry in keep:

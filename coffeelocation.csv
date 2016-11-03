@@ -1,0 +1,211 @@
+location,counts,location2
+Transportation,70,NA
+Government (General),286,Government (General)
+Utilities,114,Utilities
+Business,13,Government (General)
+NGO,1,NGO
+Unknown,1,Journalists & Media
+Government (Diplomatic),2,Unknown
+Police,10,Educational Institution
+Government (Diplomatic),1,Private Citizens & Property
+Telecommunication,9,Government (General)
+Utilities,1,Unknown
+Journalists & Media,472,NA
+Maritime,22,NA
+Government (Diplomatic),2,Government (General)
+Other,1,Business
+Tourists,44,NA
+Transportation,4,Unknown
+Government (General),8,Educational Institution
+Journalists & Media,1,Business
+Police,538,Police
+Other,2,Government (General)
+Military,28,Government (General)
+Educational Institution,1,Transportation
+Unknown,1,Educational Institution
+NGO,2,Business
+Military,1,Telecommunication
+Police,49,Military
+Unknown,24,Private Citizens & Property
+Military,2,Airports & Aircraft
+Terrorists/NonState Militia,1,Government (General)
+Business,3,Food or Water Supply
+Private Citizens & Property,94,Police
+Military,1,Other
+Military,5,Transportation
+Unknown,4,Government (General)
+Educational Institution,1,Telecommunication
+Utilities,5,Military
+Government (General),8,Government (Diplomatic)
+Educational Institution,996,NA
+Government (General),16,Unknown
+Educational Institution,1,Violent Political Party
+Other,1,Airports & Aircraft
+Military,7,Unknown
+Violent Political Party,3,Police
+Business,2461,NA
+Government (General),1,Utilities
+Utilities,1,Transportation
+Airports & Aircraft,4,Private Citizens & Property
+Business,1,Maritime
+Airports & Aircraft,3,Police
+Government (General),3,Terrorists/NonState Militia
+Military,513,Military
+Police,53,Business
+Military,3,Educational Institution
+Religious Figures/Institutions,95,Religious Figures/Institutions
+Other,3,Military
+Educational Institution,7,Government (General)
+Military,3,Terrorists/NonState Militia
+Government (Diplomatic),18,Government (Diplomatic)
+Other,112,NA
+Private Citizens & Property,57,Business
+Unknown,1535,NA
+Business,2,Other
+Business,199,Business
+Police,5,Journalists & Media
+Transportation,2,Educational Institution
+Police,6,Transportation
+Government (General),7,Transportation
+Food or Water Supply,45,NA
+Military,1,Journalists & Media
+Business,1,Journalists & Media
+Business,1,Terrorists/NonState Militia
+NGO,1,Military
+Unknown,2,Transportation
+Government (Diplomatic),1,Transportation
+Private Citizens & Property,1,Airports & Aircraft
+Other,1,Other
+Business,5,Telecommunication
+Telecommunication,3,Unknown
+Airports & Aircraft,1,Government (Diplomatic)
+Utilities,1,Police
+Terrorists/NonState Militia,2,Private Citizens & Property
+Private Citizens & Property,46,Military
+Police,5,Telecommunication
+NGO,204,NA
+Business,10,Unknown
+Terrorists/NonState Militia,884,NA
+Private Citizens & Property,6,Other
+Police,45,Government (General)
+Business,9,Educational Institution
+Transportation,4,Government (General)
+Educational Institution,5,Business
+Journalists & Media,1,Government (General)
+Airports & Aircraft,1,Business
+Private Citizens & Property,33,Government (General)
+Journalists & Media,2,Private Citizens & Property
+Private Citizens & Property,4,Telecommunication
+Private Citizens & Property,17,Religious Figures/Institutions
+Government (Diplomatic),1,Airports & Aircraft
+Religious Figures/Institutions,1,Journalists & Media
+Educational Institution,107,Educational Institution
+Military,1,Violent Political Party
+Military,2,Food or Water Supply
+Private Citizens & Property,2,Journalists & Media
+Violent Political Party,16,Violent Political Party
+Business,6,Religious Figures/Institutions
+Private Citizens & Property,20,Transportation
+Government (General),8,Religious Figures/Institutions
+Violent Political Party,390,NA
+Religious Figures/Institutions,6,Business
+NGO,1,Journalists & Media
+Airports & Aircraft,1,Government (General)
+Unknown,67,Unknown
+Police,24,Religious Figures/Institutions
+Food or Water Supply,1,Food or Water Supply
+Private Citizens & Property,12,Educational Institution
+Government (General),68,Police
+Police,46,Private Citizens & Property
+Tourists,2,Business
+Private Citizens & Property,7779,NA
+Transportation,2,Business
+Government (General),33,Military
+Transportation,3,Military
+Utilities,1,Educational Institution
+Airports & Aircraft,5,Military
+Educational Institution,6,Military
+Telecommunication,93,NA
+Transportation,5,Police
+Police,6181,NA
+Business,10,Utilities
+NGO,1,Government (General)
+Educational Institution,5,Religious Figures/Institutions
+Private Citizens & Property,2,Utilities
+Military,48,Business
+Utilities,685,NA
+Military,58,Private Citizens & Property
+Journalists & Media,27,Journalists & Media
+Private Citizens & Property,1215,Private Citizens & Property
+Business,9,Transportation
+Religious Figures/Institutions,2,Government (General)
+Terrorists/NonState Militia,1,Military
+Government (General),4,Telecommunication
+Telecommunication,1,Private Citizens & Property
+Violent Political Party,1,Religious Figures/Institutions
+Government (Diplomatic),1,Other
+Police,1,Maritime
+Religious Figures/Institutions,6,Police
+Unknown,3,Military
+Police,1,Utilities
+Private Citizens & Property,6,Violent Political Party
+Private Citizens & Property,3,Food or Water Supply
+Business,14,Military
+Journalists & Media,4,Military
+Telecommunication,3,Police
+Business,75,Private Citizens & Property
+Police,2,Airports & Aircraft
+Religious Figures/Institutions,1,Military
+Violent Political Party,1,Journalists & Media
+Journalists & Media,1,Airports & Aircraft
+Educational Institution,14,Private Citizens & Property
+Violent Political Party,2,Government (General)
+Police,10,Unknown
+Religious Figures/Institutions,2,Educational Institution
+Government (General),2,Airports & Aircraft
+Military,2,Maritime
+Terrorists/NonState Militia,35,Terrorists/NonState Militia
+Airports & Aircraft,1,Unknown
+Airports & Aircraft,4,Airports & Aircraft
+Transportation,5,Violent Political Party
+Government (General),3933,NA
+Police,1,NGO
+Utilities,1,Private Citizens & Property
+Transportation,816,NA
+Government (General),52,Private Citizens & Property
+Private Citizens & Property,61,Unknown
+Military,59,Police
+Terrorists/NonState Militia,3,Police
+Police,3,Terrorists/NonState Militia
+Military,7105,NA
+Religious Figures/Institutions,2,Other
+Religious Figures/Institutions,5,Unknown
+Unknown,2,Business
+Abortion Related,1,NA
+Military,5,Religious Figures/Institutions
+Government (General),18,Business
+Government (General),3,Journalists & Media
+Transportation,1,Religious Figures/Institutions
+Educational Institution,9,Police
+Government (Diplomatic),4,NGO
+Airports & Aircraft,98,NA
+Transportation,22,Private Citizens & Property
+Government (General),11,Violent Political Party
+Unknown,6,Police
+Terrorists/NonState Militia,2,Unknown
+Other,2,Police
+NGO,2,Private Citizens & Property
+Religious Figures/Institutions,964,NA
+Business,55,Police
+Religious Figures/Institutions,23,Private Citizens & Property
+Private Citizens & Property,3,Government (Diplomatic)
+Maritime,1,Maritime
+Military,2,Utilities
+Private Citizens & Property,10,Terrorists/NonState Militia
+Police,5,Other
+Telecommunication,1,Business
+Educational Institution,3,Terrorists/NonState Militia
+Telecommunication,63,Telecommunication
+Educational Institution,1,Journalists & Media
+Government (Diplomatic),359,NA
+Government (General),2,Other

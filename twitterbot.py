@@ -2,6 +2,7 @@
 from keys import * #accesstoken
 import tweepy,wgetter
 import csv,os,sys
+import classify_image as ci
 
 class CustomStreamListener(tweepy.StreamListener):
     def on_status(self, status):
@@ -9,14 +10,15 @@ class CustomStreamListener(tweepy.StreamListener):
         if os.path.isfile('csv-files/terrortracking.csv') == False:
             with open('csv-files/terrortracking.csv','w',newline='',encoding='utf-8') as f:
                 writer=csv.writer(f)
-                writer.writerow(['Screen name','Created At','Location','Lat','Long','Media link'])
+                writer.writerow(['Screen name','Created At','Status','Location','Lat','Long','Media link'])
+                f.close()
 
         with open('csv-files/terrortracking.csv', 'a',newline="") as f:
             if '@terrorbgone'in status.text.lower():#hack to filter
                 writer = csv.writer(f)
                 try:
-                    lat=status.coordinates['coordinates'][0]
-                    long=status.coordinates['coordinates'][1]
+                    lat=status.coordinates['coordinates'][1] #FIXME: 1, 0
+                    long=status.coordinates['coordinates'][0]
                 except:
                     lat=''
                     long=''
@@ -30,8 +32,11 @@ class CustomStreamListener(tweepy.StreamListener):
                     #name=str(status.created_at)+'_'+status.author.screen_name
                     #name += self.extensionFinder(media)
                     wgetter.download(media,outdir="TerrorAttachment")
-
                 writer.writerow([status.author.screen_name, status.created_at, status.text,geo,lat,long,media])
+                print("Downloaded! Running classifier..")
+                ci.imageClassify("TerrorAttachment")
+            f.close()
+            
     def on_error(self, status_code):
         print ( sys.stderr, 'Encountered error with status code:', status_code)
         return True # Don't kill the stream
