@@ -80,6 +80,18 @@ def makeWeapVisual(name):
     newdf = df.drop('gname',axis=1)
     newdf.to_csv('static/currentWeapon.csv',index=False,header=False)
 
+
+def makeLocationVisual(name=None):
+    df = pd.read_csv('csv-files/locations.csv',encoding='Latin-1')
+    if not name:
+        return df.drop('gname',axis=1)
+        
+    df = df[df['gname'] == name]
+    newdf = df.drop('gname',axis=1)
+    newdf.to_csv('static/currentLocation.csv',index=False,header=False)
+
+
+
 """
 Input: [String] Terrorist Group name
 Output: [String] Risky Locations

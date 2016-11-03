@@ -1,0 +1,211 @@
+location,counts
+Transportation-Transportation,70
+Government (General)-Government (General),286
+Utilities-Utilities,114
+Business-Government (General),13
+NGO-NGO,1
+Unknown-Journalists & Media,1
+Government (Diplomatic)-Unknown,2
+Police-Educational Institution,10
+Government (Diplomatic)-Private Citizens & Property,1
+Telecommunication-Government (General),9
+Utilities-Unknown,1
+Journalists & Media,472
+Maritime,22
+Government (Diplomatic)-Government (General),2
+Other-Business,1
+Tourists,44
+Transportation-Unknown,4
+Government (General)-Educational Institution,8
+Journalists & Media-Business,1
+Police-Police,538
+Other-Government (General),2
+Military-Government (General),28
+Educational Institution-Transportation,1
+Unknown-Educational Institution,1
+NGO-Business,2
+Military-Telecommunication,1
+Police-Military,49
+Unknown-Private Citizens & Property,24
+Military-Airports & Aircraft,2
+Terrorists/NonState Militia-Government (General),1
+Business-Food or Water Supply,3
+Private Citizens & Property-Police,94
+Military-Other,1
+Military-Transportation,5
+Unknown-Government (General),4
+Educational Institution-Telecommunication,1
+Utilities-Military,5
+Government (General)-Government (Diplomatic),8
+Educational Institution,996
+Government (General)-Unknown,16
+Educational Institution-Violent Political Party,1
+Other-Airports & Aircraft,1
+Military-Unknown,7
+Violent Political Party-Police,3
+Business,2461
+Government (General)-Utilities,1
+Utilities-Transportation,1
+Airports & Aircraft-Private Citizens & Property,4
+Business-Maritime,1
+Airports & Aircraft-Police,3
+Government (General)-Terrorists/NonState Militia,3
+Military-Military,513
+Police-Business,53
+Military-Educational Institution,3
+Religious Figures/Institutions-Religious Figures/Institutions,95
+Other-Military,3
+Educational Institution-Government (General),7
+Military-Terrorists/NonState Militia,3
+Government (Diplomatic)-Government (Diplomatic),18
+Other,112
+Private Citizens & Property-Business,57
+Unknown,1535
+Business-Other,2
+Business-Business,199
+Police-Journalists & Media,5
+Transportation-Educational Institution,2
+Police-Transportation,6
+Government (General)-Transportation,7
+Food or Water Supply,45
+Military-Journalists & Media,1
+Business-Journalists & Media,1
+Business-Terrorists/NonState Militia,1
+NGO-Military,1
+Unknown-Transportation,2
+Government (Diplomatic)-Transportation,1
+Private Citizens & Property-Airports & Aircraft,1
+Other-Other,1
+Business-Telecommunication,5
+Telecommunication-Unknown,3
+Airports & Aircraft-Government (Diplomatic),1
+Utilities-Police,1
+Terrorists/NonState Militia-Private Citizens & Property,2
+Private Citizens & Property-Military,46
+Police-Telecommunication,5
+NGO,204
+Business-Unknown,10
+Terrorists/NonState Militia,884
+Private Citizens & Property-Other,6
+Police-Government (General),45
+Business-Educational Institution,9
+Transportation-Government (General),4
+Educational Institution-Business,5
+Journalists & Media-Government (General),1
+Airports & Aircraft-Business,1
+Private Citizens & Property-Government (General),33
+Journalists & Media-Private Citizens & Property,2
+Private Citizens & Property-Telecommunication,4
+Private Citizens & Property-Religious Figures/Institutions,17
+Government (Diplomatic)-Airports & Aircraft,1
+Religious Figures/Institutions-Journalists & Media,1
+Educational Institution-Educational Institution,107
+Military-Violent Political Party,1
+Military-Food or Water Supply,2
+Private Citizens & Property-Journalists & Media,2
+Violent Political Party-Violent Political Party,16
+Business-Religious Figures/Institutions,6
+Private Citizens & Property-Transportation,20
+Government (General)-Religious Figures/Institutions,8
+Violent Political Party,390
+Religious Figures/Institutions-Business,6
+NGO-Journalists & Media,1
+Airports & Aircraft-Government (General),1
+Unknown-Unknown,67
+Police-Religious Figures/Institutions,24
+Food or Water Supply-Food or Water Supply,1
+Private Citizens & Property-Educational Institution,12
+Government (General)-Police,68
+Police-Private Citizens & Property,46
+Tourists-Business,2
+Private Citizens & Property,7779
+Transportation-Business,2
+Government (General)-Military,33
+Transportation-Military,3
+Utilities-Educational Institution,1
+Airports & Aircraft-Military,5
+Educational Institution-Military,6
+Telecommunication,93
+Transportation-Police,5
+Police,6181
+Business-Utilities,10
+NGO-Government (General),1
+Educational Institution-Religious Figures/Institutions,5
+Private Citizens & Property-Utilities,2
+Military-Business,48
+Utilities,685
+Military-Private Citizens & Property,58
+Journalists & Media-Journalists & Media,27
+Private Citizens & Property-Private Citizens & Property,1215
+Business-Transportation,9
+Religious Figures/Institutions-Government (General),2
+Terrorists/NonState Militia-Military,1
+Government (General)-Telecommunication,4
+Telecommunication-Private Citizens & Property,1
+Violent Political Party-Religious Figures/Institutions,1
+Government (Diplomatic)-Other,1
+Police-Maritime,1
+Religious Figures/Institutions-Police,6
+Unknown-Military,3
+Police-Utilities,1
+Private Citizens & Property-Violent Political Party,6
+Private Citizens & Property-Food or Water Supply,3
+Business-Military,14
+Journalists & Media-Military,4
+Telecommunication-Police,3
+Business-Private Citizens & Property,75
+Police-Airports & Aircraft,2
+Religious Figures/Institutions-Military,1
+Violent Political Party-Journalists & Media,1
+Journalists & Media-Airports & Aircraft,1
+Educational Institution-Private Citizens & Property,14
+Violent Political Party-Government (General),2
+Police-Unknown,10
+Religious Figures/Institutions-Educational Institution,2
+Government (General)-Airports & Aircraft,2
+Military-Maritime,2
+Terrorists/NonState Militia-Terrorists/NonState Militia,35
+Airports & Aircraft-Unknown,1
+Airports & Aircraft-Airports & Aircraft,4
+Transportation-Violent Political Party,5
+Government (General),3933
+Police-NGO,1
+Utilities-Private Citizens & Property,1
+Transportation,816
+Government (General)-Private Citizens & Property,52
+Private Citizens & Property-Unknown,61
+Military-Police,59
+Terrorists/NonState Militia-Police,3
+Police-Terrorists/NonState Militia,3
+Military,7105
+Religious Figures/Institutions-Other,2
+Religious Figures/Institutions-Unknown,5
+Unknown-Business,2
+Abortion Related,1
+Military-Religious Figures/Institutions,5
+Government (General)-Business,18
+Government (General)-Journalists & Media,3
+Transportation-Religious Figures/Institutions,1
+Educational Institution-Police,9
+Government (Diplomatic)-NGO,4
+Airports & Aircraft,98
+Transportation-Private Citizens & Property,22
+Government (General)-Violent Political Party,11
+Unknown-Police,6
+Terrorists/NonState Militia-Unknown,2
+Other-Police,2
+NGO-Private Citizens & Property,2
+Religious Figures/Institutions,964
+Business-Police,55
+Religious Figures/Institutions-Private Citizens & Property,23
+Private Citizens & Property-Government (Diplomatic),3
+Maritime-Maritime,1
+Military-Utilities,2
+Private Citizens & Property-Terrorists/NonState Militia,10
+Police-Other,5
+Telecommunication-Business,1
+Educational Institution-Terrorists/NonState Militia,3
+Telecommunication-Telecommunication,63
+Educational Institution-Journalists & Media,1
+Government (Diplomatic),359
+Government (General)-Other,2

@@ -22,9 +22,13 @@ def main():
 	# return render_template('index.html')
 	return render_template('landing.html')
 
-@app.route("/coffeewheel.csv", methods=['GET', 'OPTIONS'])
+@app.route("/coffeewheel_master_weapons.csv", methods=['GET', 'OPTIONS'])
 def send_file():
-	return send_from_directory('static', 'coffeewheel.csv',as_attachment=True)
+	return send_from_directory('static', 'coffeewheel_master_weapons.csv',as_attachment=True)
+ 
+@app.route("/coffeewheel_master_locations.csv", methods=['GET', 'OPTIONS'])
+def send_file2():
+	return send_from_directory('static', 'coffeewheel_master_locations.csv',as_attachment=True)
 
 @app.route("/heatmap")
 def heatmap():
@@ -34,13 +38,22 @@ def heatmap():
 def twitterheatmap():
 	return render_template('twitterheatmap.html')
 
-@app.route("/visualize")
+#CURRENTLY THE CP.WEAP VISUAL DOESNT DO ANYTHING.
+@app.route("/visualizeweapons")
 def visualize():
-	# name='Taliban' # set name
-	# cp.makeWeapVisual(name) #make csv to load.
-	# return render_template('visualizations.html')
+	name='Taliban' # set name
+	cp.makeWeapVisual(name) #make csv to load.
+	return render_template('visualizations.html')
 	return "Coming soon!"
 
+@app.route("/visualizelocations")
+def visualize2():
+	#name='Taliban' # set name
+	cp.makeLocationVisual() #make csv to load.
+	return render_template('visualizations2.html')
+	return "Coming soon!"
+ 
+ 
 @app.route('/twitter')
 def twitter_map():
     generateTwitterMap()

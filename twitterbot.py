@@ -2,6 +2,7 @@
 from keys import * #accesstoken
 import tweepy,wgetter
 import csv,os,sys
+import classify_image as ci
 
 class CustomStreamListener(tweepy.StreamListener):
     def on_status(self, status):
@@ -32,6 +33,8 @@ class CustomStreamListener(tweepy.StreamListener):
                     #name += self.extensionFinder(media)
                     wgetter.download(media,outdir="TerrorAttachment")
                 writer.writerow([status.author.screen_name, status.created_at, status.text,geo,lat,long,media])
+                print("Downloaded! Running classifier..")
+                ci.imageClassify("TerrorAttachment")
             f.close()
             
     def on_error(self, status_code):
