@@ -67,7 +67,7 @@ def generateTwitterMap():
         f.close()
     except:
         return
-    coords = [[x[4],x[5]] for x in lst[1:]]
+    coords = [[x[4],x[5]] for x in lst[1:] if x[4] != ''] #only take non-empty gps coords
     cp.convertGpsToHTML(coords,0,'templates/twitterheatmap.html')
 
 @app.route("/dashboard", methods=['GET','POST'])
