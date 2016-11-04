@@ -97,13 +97,10 @@ def inputFunc():
     else:
         # For manual override/ fast input via CSV.
         pred,inputs = cp.predictTerroristGroup()
-        HACK=True
         country_txt = 'Afghanistan' #change this
 
     if pred != 'Unknown':
         mult = cp.multipleAttacks(inputs)
-        if HACK == True and pred == 'Taliban':
-           mult = 24.53
         #location = cp.typeFreqPlaceAttacked(pred)
         print(inputs)
         print(country_txt)
